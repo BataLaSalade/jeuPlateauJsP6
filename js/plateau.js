@@ -1,7 +1,7 @@
 var rows = 10;
 var columns = 10;
 var $row = $("<div />", {
-    class: 'row'
+    class: 'line'
 });
 var $square = $("<div />", {
     class: 'square'
