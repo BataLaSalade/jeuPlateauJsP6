@@ -5,16 +5,29 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Jeu Plateau</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" type="text/css" media="screen" href="css/style.css" />
-    <!--<script src="js/canvas.js"></script>-->
+    
 </head>
 <body>
-    <canvas id="myCanvas" width="500" height="500">
-        Mettez à jour votre navigateur pour afficher le canvas
-    </canvas>
+    <div class="container-fluid header">
+        <h1 id="mainTitle">Lorem ipsum</h1>
+        <p id="accroche">dolor sit amet consectetur adipisicing elit. Vero tenetur, veniam adipisci veritatis expedita inventore fuga quo sint, reprehenderit, enim tempore amet provident consequatur harum? Tenetur nisi libero corporis accusantium?</p>
+    </div>
+    <div class="container-fluid" id="gameUI">
+        <div class="row">
+            <div class="col">
+                <h3>Left side bar</h3>
+            </div>
+            <div class="col-6" id="wrapper"></div>
+            <div class="col">
+                    <h3>Right side bar</h3>
+            </div>
+        </div>
+    </div>
 
     
-    <script src="js/plateau.js"></script>
     <script src="js/jquery.js"></script>
+    <script src="js/plateau.js"></script>
 </body>
 </html>
