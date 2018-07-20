@@ -19,9 +19,37 @@ var map = {
     }
 };
 
+function getRandomPosition (min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min)) + min;
+}
+
+var Position = {
+    initPosition : function(colIndex, rowIndex){
+        this.colIndex = colIndex;
+        this.rowIndex = rowIndex;
+    }
+}
+
+var obstaclePosition = Object.create(Position);
+randomCol = getRandomPosition(0, map.columns-1)
+randomRow = getRandomPosition(0, map.rows-1)
+obstaclePosition.initPosition(randomCol, randomRow);
 
 
 
+var $obstable = $("<div />", {
+    class : "obstable"
+    
+});
+
+var obstable = {
+    nbObstables : 25,
+    position: obstaclePosition,
+   
+};
+console.log(obstable)
 
 $(function () {
     map.genMap();
