@@ -10,4 +10,8 @@
   height: 30%;
   background: #9863ca; }
 
+.obstacle {
+  background: green;
+  height: 100%; }
+
 /*# sourceMappingURL=style.css.map */
