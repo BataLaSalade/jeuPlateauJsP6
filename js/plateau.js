@@ -38,14 +38,21 @@ var Obstacle = {
         this.position = position
     }
 };
-/*var Player = {
-    init : function (nom, position){
-        this.nom = nom,
+var Player = {
+    init : function (position){
+        this.nom = "", // a saisir par l'utilisateur
         this.position = position,
         this.sante = 100
     }
     //visuel
-};*/
+};
+var Weapon = {
+    init : function (position) {
+        this.name = "",
+        this.position = position,
+        this.damage = 10
+    }
+};
 
 var map = {
     rows : 10,
@@ -80,7 +87,7 @@ function genListObstacle(nbObstacles, colMaxIndex, rowMaxIndex) {
     }
     return listObstacle;
 }
-/*function genListPlayer(nbPlayers, colMaxIndex, rowMaxIndex) {
+function genListPlayer(nbPlayers, colMaxIndex, rowMaxIndex) {
     var listPlayer = [];
     for (var j = 0; j < nbPlayers; j++) {
         var tmpPosition = Object.create(Position)     
@@ -90,12 +97,25 @@ function genListObstacle(nbObstacles, colMaxIndex, rowMaxIndex) {
         listPlayer.push(currentPlayer)
     }
     return listPlayer;
-}*/
+}
+function genListWeapon(nbWeapons, colMaxIndex, rowMaxIndex) {
+    var listWeapons = [];
+    for (var j = 0; j < nbWeapons; j++) {
+        var tmpPosition = Object.create(Position)     
+        var currentWeapon = Object.create(Weapon)
+        tmpPosition.initRandomPosition(colMaxIndex, rowMaxIndex);
+        currentWeapon.init(tmpPosition)
+        listWeapons.push(currentWeapon)
+    }
+    return listWeapons;
+}
 
 $(function () {
     map.genMap();
     var obstacles = genListObstacle(map.nbObstacles, map.columns-1, map.rows-1);
     map.display(obstacles, $obstacle);
-   // var players = genListPlayer(map.nbPlayers, map.columns-1, map.rows-1);
-   // map.display(players, $player)
+    var players = genListPlayer(map.nbPlayers, map.columns-1, map.rows-1);
+    map.display(players, $player);
+    var weapons = genListWeapon(map.nbWeapons, map.columns-1, map.rows-1);
+    map.display(weapons,$weapon);
 });

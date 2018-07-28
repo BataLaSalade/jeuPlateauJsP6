@@ -4,6 +4,7 @@
     height: 100%;
     background: grey;
     display: inline-block;
+    z-index: 1;
 }
 
 .line{
@@ -15,9 +16,16 @@
 .obstacle{
     background: green;
     height: 100%;
+    z-index: 2;
 }
 
 .player{
     background: red;
     height: 100%;
+    z-index: 4;
+}
+.weapon{
+    background: blue;
+    height: 100%;
+    z-index: 6;
 }
