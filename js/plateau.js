@@ -39,11 +39,12 @@ var Obstacle = {
     }
 };
 var Player = {
-    init : function (position, characterName){
+    init : function (position, characterName, weapon){
         this.nom = "", // a saisir par l'utilisateur
         this.position = position,
         this.sante = 100,
-        this.characterName = characterName
+        this.characterName = characterName,
+        this.weapon = weapon
         
     }
     //visuel
@@ -51,10 +52,10 @@ var Player = {
 var characterNames = ["Marc", "Polo"];
 
 var Weapon = {
-    init : function (position, name) {
+    init : function (position, name, damage) {
         this.name = name,
         this.position = position,
-        this.damage = 10
+        this.damage = damage
     }
 };
 var weaponNames = ["Pelle", "Pioche", "Hache", "Rateau"];
@@ -95,22 +96,27 @@ function genListObstacle(nbObstacles, colMaxIndex, rowMaxIndex) {
 function genListPlayer(nbPlayers, colMaxIndex, rowMaxIndex) {
     var listPlayer = [];
     for (var j = 0; j < nbPlayers; j++) {
-        var tmpPosition = Object.create(Position)     
+        var tmpPosition = Object.create(Position) 
         var currentPlayer = Object.create(Player)
+        var tmpWeapon = Object.create(Weapon)
         tmpPosition.initRandomPosition(colMaxIndex, rowMaxIndex);
-        currentPlayer.init(tmpPosition, characterNames[j])
+        tmpWeapon.init(tmpPosition, "Gourdin", 10)
+        currentPlayer.init(tmpPosition, characterNames[j], tmpWeapon)
         listPlayer.push(currentPlayer)
     }
     return listPlayer;
 }
 function genListWeapon(nbWeapons, colMaxIndex, rowMaxIndex) {
     var listWeapons = [];
+    var damage = 10
     for (var j = 0; j < nbWeapons; j++) {
         var tmpPosition = Object.create(Position)     
         var currentWeapon = Object.create(Weapon)
-        tmpPosition.initRandomPosition(colMaxIndex, rowMaxIndex);
-        currentWeapon.init(tmpPosition, weaponNames[j])
+        damage += 5
+        tmpPosition.initRandomPosition(colMaxIndex, rowMaxIndex)
+        currentWeapon.init(tmpPosition, weaponNames[j], damage)
         listWeapons.push(currentWeapon)
+        
     }
     return listWeapons;
 }
