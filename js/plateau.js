@@ -39,20 +39,25 @@ var Obstacle = {
     }
 };
 var Player = {
-    init : function (position){
+    init : function (position, characterName){
         this.nom = "", // a saisir par l'utilisateur
         this.position = position,
-        this.sante = 100
+        this.sante = 100,
+        this.characterName = characterName
+        
     }
     //visuel
 };
+var characterNames = ["Marc", "Polo"];
+
 var Weapon = {
-    init : function (position) {
-        this.name = "",
+    init : function (position, name) {
+        this.name = name,
         this.position = position,
         this.damage = 10
     }
 };
+var weaponNames = ["Pelle", "Pioche", "Hache", "Rateau"];
 
 var map = {
     rows : 10,
@@ -93,7 +98,7 @@ function genListPlayer(nbPlayers, colMaxIndex, rowMaxIndex) {
         var tmpPosition = Object.create(Position)     
         var currentPlayer = Object.create(Player)
         tmpPosition.initRandomPosition(colMaxIndex, rowMaxIndex);
-        currentPlayer.init(tmpPosition)
+        currentPlayer.init(tmpPosition, characterNames[j])
         listPlayer.push(currentPlayer)
     }
     return listPlayer;
@@ -104,7 +109,7 @@ function genListWeapon(nbWeapons, colMaxIndex, rowMaxIndex) {
         var tmpPosition = Object.create(Position)     
         var currentWeapon = Object.create(Weapon)
         tmpPosition.initRandomPosition(colMaxIndex, rowMaxIndex);
-        currentWeapon.init(tmpPosition)
+        currentWeapon.init(tmpPosition, weaponNames[j])
         listWeapons.push(currentWeapon)
     }
     return listWeapons;
