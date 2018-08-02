@@ -1,3 +1,6 @@
+body {
+    background: lightgray;
+}
 .square{
     border: 1px solid lightgray;
     width: 10%;
@@ -22,10 +25,10 @@
 .player{
     background: red;
     height: 100%;
-    z-index: 4;
+    z-index: 200;
 }
 .weapon{
     background: blue;
     height: 100%;
-    z-index: 6;
+    z-index: 100;
 }

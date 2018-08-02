@@ -49,7 +49,7 @@ var Player = {
     }
     //visuel
 };
-var characterNames = ["Marc", "Polo"];
+var characterNames = ["Marco", "Polo"];
 
 var Weapon = {
     init : function (position, name, damage) {
@@ -69,6 +69,7 @@ var map = {
     display : function (objets, container) {
         for (var j = 0; j < objets.length; j++) {
             $(".line:eq("+ objets[j].position.rowIndex +") .square:eq("+ objets[j].position.colIndex +")").append(container.clone());
+           
         }
     },
     genMap : function (){
@@ -116,17 +117,21 @@ function genListWeapon(nbWeapons, colMaxIndex, rowMaxIndex) {
         tmpPosition.initRandomPosition(colMaxIndex, rowMaxIndex)
         currentWeapon.init(tmpPosition, weaponNames[j], damage)
         listWeapons.push(currentWeapon)
-        
     }
     return listWeapons;
 }
 
+
+
 $(function () {
     map.genMap();
     var obstacles = genListObstacle(map.nbObstacles, map.columns-1, map.rows-1);
+    console.log(obstacles)
     map.display(obstacles, $obstacle);
     var players = genListPlayer(map.nbPlayers, map.columns-1, map.rows-1);
+    console.log(players)
     map.display(players, $player);
     var weapons = genListWeapon(map.nbWeapons, map.columns-1, map.rows-1);
+    console.log(weapons)
     map.display(weapons,$weapon);
 });
