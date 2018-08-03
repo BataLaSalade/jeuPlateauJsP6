@@ -32,7 +32,6 @@ var Position = {
         return Math.floor(Math.random() * (max - min)) + min;
     }
 }
-var listPositions = [];
 
 var Obstacle = {
     init: function (position){
@@ -85,61 +84,70 @@ var map = {
     }
 };
 
-function checkPosition (positionToCheck,colMaxIndex, rowMaxIndex) {   
-    for (var i = 0; i < listPositions.length; i++) {
-        if(positionToCheck.colIndex == listPositions[i].colIndex && positionToCheck.rowIndex == listPositions[i].rowIndex ){
-            positionToCheck.initRandomPosition(colMaxIndex, rowMaxIndex);
-            i=0;
-        }
-    };
-    return positionToCheck;
-}
+var listPositions = [];
+var errorCount = 0;
+
+function checkPosition (colMaxIndex, rowMaxIndex) {
+   var positionToCheck = Object.create(Position);
+   positionToCheck.initRandomPosition(colMaxIndex, rowMaxIndex);
+   
+   for (var i = 0; i < listPositions.length; i++) {
+       while(listPositions[i].colIndex == positionToCheck.colIndex && listPositions[i].rowIndex == positionToCheck.rowIndex ){
+           console.log( listPositions[i].colIndex + "/" + positionToCheck.colIndex  + "/" + listPositions[i].rowIndex  + "/" + positionToCheck.rowIndex)
+           errorCount ++;
+           i=0;
+           positionToCheck.initRandomPosition(colMaxIndex, rowMaxIndex);
+
+       }
+       
+   };
+   listPositions.push(positionToCheck);
+   return positionToCheck;
+};
 
 function genListObstacle(nbObstacles, colMaxIndex, rowMaxIndex) {
-    var listObstacle = [];
-    for (var j = 0; j < nbObstacles; j++) {
-        var tmpPosition = Object.create(Position);
-        var currentObstacle = Object.create(Obstacle);  
-        tmpPosition.initRandomPosition(colMaxIndex, rowMaxIndex);
-        checkPosition(tmpPosition,colMaxIndex, rowMaxIndex);
-        listPositions.push(tmpPosition);
-        currentObstacle.init(tmpPosition);
-        listObstacle.push(currentObstacle);
-    }
-    return listObstacle;
+   var listObstacle = [];
+
+   console.log("OBSTACLE")
+   for (var j = 0; j < nbObstacles; j++) {
+       var tmpPosition = checkPosition(colMaxIndex, rowMaxIndex);
+       var currentObstacle = Object.create(Obstacle); 
+       currentObstacle.init(tmpPosition)
+       listObstacle.push(currentObstacle)
+   }
+   return listObstacle;
 }
 function genListPlayer(nbPlayers, colMaxIndex, rowMaxIndex) {
-    var listPlayer = [];
-    for (var j = 0; j < nbPlayers; j++) {
-        var tmpPosition = Object.create(Position);
-        var currentPlayer = Object.create(Player);
-        var tmpWeapon = Object.create(Weapon);
-        tmpPosition.initRandomPosition(colMaxIndex, rowMaxIndex);
-        checkPosition(tmpPosition,colMaxIndex, rowMaxIndex);
-        listPositions.push(tmpPosition);
-        tmpWeapon.init(tmpPosition, "Gourdin", 10);
-        currentPlayer.init(tmpPosition, characterNames[j], tmpWeapon);
-        listPlayer.push(currentPlayer);
-    }
-    return listPlayer;
+   var listPlayer = [];
+       console.log("PLAYER")
+
+   for (var j = 0; j < nbPlayers; j++) {
+       var tmpPosition = checkPosition(colMaxIndex, rowMaxIndex);
+       var currentPlayer = Object.create(Player);
+       var tmpWeapon = Object.create(Weapon)
+       tmpWeapon.init(tmpPosition, "Gourdin", 10)
+       currentPlayer.init(tmpPosition, characterNames[j], tmpWeapon)
+       listPlayer.push(currentPlayer)
+   }
+   return listPlayer;
 }
 function genListWeapon(nbWeapons, colMaxIndex, rowMaxIndex) {
-    var listWeapons = [];
-    var damage = 10
-    for (var j = 0; j < nbWeapons; j++) {
-        var tmpPosition = Object.create(Position); 
-        var currentWeapon = Object.create(Weapon);
-        damage += 5;
-        tmpPosition.initRandomPosition(colMaxIndex, rowMaxIndex);
-        checkPosition(tmpPosition,colMaxIndex, rowMaxIndex);
-        listPositions.push(tmpPosition);
-        currentWeapon.init(tmpPosition, weaponNames[j], damage);
-        listWeapons.push(currentWeapon);
-    }
-    return listWeapons;
+   var listWeapons = [];
+   var damage = 10
+   
+   for (var j = 0; j < nbWeapons; j++) {
+       var tmpPosition = checkPosition(colMaxIndex, rowMaxIndex);
+       var currentWeapon = Object.create(Weapon)
+       damage += 5
+
+       currentWeapon.init(tmpPosition, weaponNames[j], damage)
+       listWeapons.push(currentWeapon)
+   }
+   return listWeapons;
 }
 
 
+console.log(errorCount);
 
 $(function ($) {
     map.genMap();
@@ -152,4 +160,5 @@ $(function ($) {
     var weapons = genListWeapon(map.nbWeapons, map.columns, map.rows);
     console.log(weapons)
     map.display(weapons,$weapon);
+    console.log("nb error : "+errorCount);
 });
