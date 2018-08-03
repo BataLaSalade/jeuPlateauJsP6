@@ -16,8 +16,8 @@ var $weapon = $("<div />", {
 });
 
 var Position = {
-    colIndex: 0,
-    rowIndex: 0,
+    colIndex : 0,
+    rowIndex : 0,
     setPosition: function(colIndex, rowIndex){
         this.colIndex = colIndex;
         this.rowIndex = rowIndex;
@@ -35,26 +35,26 @@ var Position = {
 
 var Obstacle = {
     init: function (position){
-        this.position = position
+        this.position = position;
     }
 };
 
 var Player = {
     init : function (position, characterName, weapon){
-        this.nom = "", // a saisir par l'utilisateur
-        this.position = position,
-        this.sante = 100,
-        this.characterName = characterName,
-        this.weapon = weapon 
+        this.nom = ""; // a saisir par l'utilisateur
+        this.position = position;
+        this.sante = 100;
+        this.characterName = characterName;
+        this.weapon = weapon;
     }
 };
 var characterNames = ["Marco", "Polo"];
 
 var Weapon = {
     init : function (position, name, damage) {
-        this.name = name,
-        this.position = position,
-        this.damage = damage
+        this.name = name;
+        this.position = position;
+        this.damage = damage;
     }
 };
 var weaponNames = ["Pelle", "Pioche", "Hache", "Rateau"];
@@ -71,7 +71,7 @@ var map = {
         }
         var checkNumberEmpty = $(".square:empty").length;
         var checkNumberFull = $(".square").contents().length;
-        console.log ("Nb cell vide : " + checkNumberEmpty +"\nNb cell pleine : " + checkNumberFull)
+        console.log ("Nb cell vide : " + checkNumberEmpty +"\nNb cell pleine : " + checkNumberFull);
     },
     genMap : function (){
         for (var i = 0; i < this.rows; i++) {
@@ -93,72 +93,85 @@ function checkPosition (colMaxIndex, rowMaxIndex) {
    
    for (var i = 0; i < listPositions.length; i++) {
        while(listPositions[i].colIndex == positionToCheck.colIndex && listPositions[i].rowIndex == positionToCheck.rowIndex ){
-           console.log( listPositions[i].colIndex + "/" + positionToCheck.colIndex  + "/" + listPositions[i].rowIndex  + "/" + positionToCheck.rowIndex)
            errorCount ++;
            i=0;
            positionToCheck.initRandomPosition(colMaxIndex, rowMaxIndex);
-
        }
-       
-   };
+   }
    listPositions.push(positionToCheck);
    return positionToCheck;
 };
 
 function genListObstacle(nbObstacles, colMaxIndex, rowMaxIndex) {
    var listObstacle = [];
-
-   console.log("OBSTACLE")
    for (var j = 0; j < nbObstacles; j++) {
        var tmpPosition = checkPosition(colMaxIndex, rowMaxIndex);
        var currentObstacle = Object.create(Obstacle); 
-       currentObstacle.init(tmpPosition)
-       listObstacle.push(currentObstacle)
+       currentObstacle.init(tmpPosition);
+       listObstacle.push(currentObstacle);
    }
    return listObstacle;
 }
 function genListPlayer(nbPlayers, colMaxIndex, rowMaxIndex) {
    var listPlayer = [];
-       console.log("PLAYER")
-
    for (var j = 0; j < nbPlayers; j++) {
        var tmpPosition = checkPosition(colMaxIndex, rowMaxIndex);
        var currentPlayer = Object.create(Player);
-       var tmpWeapon = Object.create(Weapon)
-       tmpWeapon.init(tmpPosition, "Gourdin", 10)
-       currentPlayer.init(tmpPosition, characterNames[j], tmpWeapon)
-       listPlayer.push(currentPlayer)
+       var tmpWeapon = Object.create(Weapon);
+       tmpWeapon.init(tmpPosition, "Gourdin", 10);
+       currentPlayer.init(tmpPosition, characterNames[j], tmpWeapon);
+       listPlayer.push(currentPlayer);
    }
    return listPlayer;
 }
 function genListWeapon(nbWeapons, colMaxIndex, rowMaxIndex) {
    var listWeapons = [];
-   var damage = 10
-   
+   var damage = 10;
    for (var j = 0; j < nbWeapons; j++) {
        var tmpPosition = checkPosition(colMaxIndex, rowMaxIndex);
-       var currentWeapon = Object.create(Weapon)
-       damage += 5
-
-       currentWeapon.init(tmpPosition, weaponNames[j], damage)
-       listWeapons.push(currentWeapon)
+       var currentWeapon = Object.create(Weapon);
+       damage += 5;
+       currentWeapon.init(tmpPosition, weaponNames[j], damage);
+       listWeapons.push(currentWeapon);
    }
    return listWeapons;
 }
 
+var listObjects = [];
 
-console.log(errorCount);
+function radar(objectPositionRow, objectPositionCol) {
+    for(var i = 0; i < 3; i++) {
+        if(objectPositionCol+i+1 <= 9) {
+            $(".line:eq("+ (objectPositionRow) +") .square:eq("+ (objectPositionCol+i+1) +")").css("border", "1px solid red");
+        };
+        if(objectPositionCol-i-1 >= 0) {
+            $(".line:eq("+ (objectPositionRow) +") .square:eq("+ (objectPositionCol-i-1) +")").css("border", "1px solid red");
+        };
+        if(objectPositionRow+i+1 <= 9) {
+            $(".line:eq("+ (objectPositionRow+i+1) +") .square:eq("+ (objectPositionCol) +")").css("border", "1px solid red");
+        };
+        if(objectPositionRow-i-1 >= 0) {
+            $(".line:eq("+ (objectPositionRow-i-1) +") .square:eq("+ (objectPositionCol) +")").css("border", "1px solid red");
+        };
+        
+    }
+}
+
 
 $(function ($) {
     map.genMap();
     var obstacles = genListObstacle(map.nbObstacles, map.columns, map.rows);
+    listObjects.push(obstacles);
     console.log(obstacles)
     map.display(obstacles, $obstacle);
     var players = genListPlayer(map.nbPlayers, map.columns, map.rows);
+    listObjects.push(players);
     console.log(players)
     map.display(players, $player);
+    radar(listObjects[1][1].position.rowIndex, listObjects[1][1].position.colIndex);
     var weapons = genListWeapon(map.nbWeapons, map.columns, map.rows);
+    listObjects.push(weapons);
     console.log(weapons)
     map.display(weapons,$weapon);
-    console.log("nb error : "+errorCount);
+    console.log("Duplicat position --> nb error : " + errorCount);
 });
