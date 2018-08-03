@@ -85,6 +85,7 @@ var map = {
 };
 
 var listPositions = [];
+var listObjects = [];
 var errorCount = 0;
 
 function checkPosition (colMaxIndex, rowMaxIndex) {
@@ -137,23 +138,20 @@ function genListWeapon(nbWeapons, colMaxIndex, rowMaxIndex) {
    return listWeapons;
 }
 
-var listObjects = [];
-
 function radar(objectPositionRow, objectPositionCol) {
     for(var i = 0; i < 3; i++) {
         if(objectPositionCol+i+1 <= 9) {
-            $(".line:eq("+ (objectPositionRow) +") .square:eq("+ (objectPositionCol+i+1) +")").css("border", "1px solid red");
+            $(".line:eq("+ (objectPositionRow) +") .square:eq("+ (objectPositionCol+i+1) +")").css("border-color", "red");
         };
         if(objectPositionCol-i-1 >= 0) {
-            $(".line:eq("+ (objectPositionRow) +") .square:eq("+ (objectPositionCol-i-1) +")").css("border", "1px solid red");
+            $(".line:eq("+ (objectPositionRow) +") .square:eq("+ (objectPositionCol-i-1) +")").css("border-color", "red");
         };
         if(objectPositionRow+i+1 <= 9) {
-            $(".line:eq("+ (objectPositionRow+i+1) +") .square:eq("+ (objectPositionCol) +")").css("border", "1px solid red");
+            $(".line:eq("+ (objectPositionRow+i+1) +") .square:eq("+ (objectPositionCol) +")").css("border-color", "red");
         };
         if(objectPositionRow-i-1 >= 0) {
-            $(".line:eq("+ (objectPositionRow-i-1) +") .square:eq("+ (objectPositionCol) +")").css("border", "1px solid red");
-        };
-        
+            $(".line:eq("+ (objectPositionRow-i-1) +") .square:eq("+ (objectPositionCol) +")").css("border-color", "red");
+        };  
     }
 }
 
