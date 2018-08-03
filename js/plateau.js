@@ -39,6 +39,7 @@ var Obstacle = {
         this.position = position
     }
 };
+
 var Player = {
     init : function (position, characterName, weapon){
         this.nom = "", // a saisir par l'utilisateur
@@ -47,7 +48,6 @@ var Player = {
         this.characterName = characterName,
         this.weapon = weapon 
     }
-    //visuel
 };
 var characterNames = ["Marco", "Polo"];
 
@@ -70,42 +70,6 @@ var map = {
         for (j = 0; j < objets.length; j++) {
             $(".line:eq("+ objets[j].position.rowIndex +") .square:eq("+ objets[j].position.colIndex +")").append(container.clone());
         }
-        
-        /*var j = 0;
-        for (j = 0; j < objets.length; j++) {
-            while ($(".line:eq("+ objets[j].position.rowIndex +") .square:eq("+ objets[j].position.colIndex +")").is(":empty") && j < objets.length) {
-                console.log ("Div is empty");
-                $(".line:eq("+ objets[j].position.rowIndex +") .square:eq("+ objets[j].position.colIndex +")").append(container.clone());
-                j++;
-            };
-           j=j;
-            while ($(".line:eq("+ objets[j].position.rowIndex +") .square:eq("+ objets[j].position.colIndex +")").contents().length!==0 && j < objets.length) {
-                console.log ("Div is NOT empty");
-                var newTmpPosition = Object.create(Position);
-                newTmpPosition.initRandomPosition(map.columns-1, map.rows-1);
-                objets[j].position = newTmpPosition;
-                $(".line:eq("+ objets[j].position.rowIndex +") .square:eq("+ objets[j].position.colIndex +")").append(container.clone());
-                j++;
-            };
-            j--
-        }*/
-        
-         //sinon je vais avoir des tour de boucle en moins avec le for
-        /*for (var j = 0; j < objets.length; j++) {
-            if( $(".line:eq("+ objets[j].position.rowIndex +") .square:eq("+ objets[j].position.colIndex +")").is(":empty") ) {
-                console.log ("Div is empty");
-                //$(".line:eq("+ objets[j].position.rowIndex +") .square:eq("+ objets[j].position.colIndex +")").text("x")
-                $(".line:eq("+ objets[j].position.rowIndex +") .square:eq("+ objets[j].position.colIndex +")").append(container.clone());
-            }
-            else {
-                console.log ("Div is NOT empty");
-                var newTmpPosition = Object.create(Position);
-                newTmpPosition.initRandomPosition(map.columns-1, map.rows-1);
-                objets[j].position = newTmpPosition;
-                //$(".line:eq("+ objets[j].position.rowIndex +") .square:eq("+ objets[j].position.colIndex +")").text("G")
-                $(".line:eq("+ objets[j].position.rowIndex +") .square:eq("+ objets[j].position.colIndex +")").append(container.clone());
-            }
-        }*/
         var checkNumberEmpty = $(".square:empty").length;
         var checkNumberFull = $(".square").contents().length;
         console.log ("Nb cell vide : " + checkNumberEmpty +"\nNb cell pleine : " + checkNumberFull)
@@ -121,16 +85,13 @@ var map = {
     }
 };
 
-function checkPosition (positionToCheck,colMaxIndex, rowMaxIndex) {
-        
+function checkPosition (positionToCheck,colMaxIndex, rowMaxIndex) {   
     for (var i = 0; i < listPositions.length; i++) {
         if(positionToCheck.colIndex == listPositions[i].colIndex && positionToCheck.rowIndex == listPositions[i].rowIndex ){
             positionToCheck.initRandomPosition(colMaxIndex, rowMaxIndex);
             i=0;
         }
-        
     };
-    
     return positionToCheck;
 }
 
