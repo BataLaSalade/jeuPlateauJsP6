@@ -1,32 +1,30 @@
 body {
   background: lightgray; }
 
-.square {
-  border: 1px solid lightgray;
-  width: 10%;
-  height: 100%;
-  background: grey;
-  display: inline-block;
-  z-index: 1; }
-
 .line {
   width: 100%;
-  height: 30%;
-  background: #9863ca; }
-
-.obstacle {
-  background: green;
-  height: 100%;
-  z-index: 2; }
-
-.player {
-  background: red;
-  height: 100%;
-  z-index: 200; }
-
-.weapon {
-  background: blue;
-  height: 100%;
-  z-index: 100; }
+  height: 90px;
+  background: #9863ca;
+  display: flex;
+  justify-content: center; }
+  .line .square {
+    border: 1px solid lightgray;
+    width: 90px;
+    height: 90px;
+    background: grey;
+    display: inline-block;
+    z-index: 1; }
+    .line .square .obstacle {
+      background: green;
+      height: 90px;
+      z-index: 2; }
+    .line .square .player {
+      background: red;
+      height: 90px;
+      z-index: 200; }
+    .line .square .weapon {
+      background: blue;
+      height: 90px;
+      z-index: 100; }
 
 /*# sourceMappingURL=style.css.map */

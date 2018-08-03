@@ -1,34 +1,42 @@
+///// ----- My var ----- /////
+$square : 90px;
+///////////////////////////////
+
+
 body {
     background: lightgray;
 }
-.square{
-    border: 1px solid lightgray;
-    width: 100px;
-    height: 100px;
-    background: grey;
-    display: inline-block;
-    z-index: 1;
-}
+
 
 .line{
     width: 100%;
-    height: 100px;
+    height: $square;
     background: rgb(152, 99, 202);
+    display: flex;
+    justify-content: center;
+    .square{
+        border: 1px solid lightgray;
+        width: $square;
+        height: $square;
+        background: grey;
+        display: inline-block;
+        z-index: 1;
+        .obstacle{
+            background: green;
+            height: $square;
+            z-index: 2;
+        }
+        
+        .player{
+            background: red;
+            height: $square;
+            z-index: 200;
+        }
+        .weapon{
+            background: blue;
+            height: $square;
+            z-index: 100;
+        }
+    }
 }
 
-.obstacle{
-    background: green;
-    height: 100%;
-    z-index: 2;
-}
-
-.player{
-    background: red;
-    height: 100%;
-    z-index: 200;
-}
-.weapon{
-    background: blue;
-    height: 100%;
-    z-index: 100;
-}

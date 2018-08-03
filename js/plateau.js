@@ -32,6 +32,7 @@ var Position = {
         return Math.floor(Math.random() * (max - min)) + min;
     }
 }
+var listPositions = [];
 
 var Obstacle = {
     init: function (position){
@@ -44,8 +45,7 @@ var Player = {
         this.position = position,
         this.sante = 100,
         this.characterName = characterName,
-        this.weapon = weapon
-        
+        this.weapon = weapon 
     }
     //visuel
 };
@@ -67,7 +67,11 @@ var map = {
     nbPlayers : 2,
     nbWeapons : 4,
     display : function (objets, container) {
-        var j = 0;
+        for (j = 0; j < objets.length; j++) {
+            $(".line:eq("+ objets[j].position.rowIndex +") .square:eq("+ objets[j].position.colIndex +")").append(container.clone());
+        }
+        
+        /*var j = 0;
         for (j = 0; j < objets.length; j++) {
             while ($(".line:eq("+ objets[j].position.rowIndex +") .square:eq("+ objets[j].position.colIndex +")").is(":empty") && j < objets.length) {
                 console.log ("Div is empty");
@@ -83,22 +87,10 @@ var map = {
                 $(".line:eq("+ objets[j].position.rowIndex +") .square:eq("+ objets[j].position.colIndex +")").append(container.clone());
                 j++;
             };
-        }
-        while ($(".line:eq("+ objets[j].position.rowIndex +") .square:eq("+ objets[j].position.colIndex +")").is(":empty") && j < objets.length) {
-            console.log ("Div is empty");
-            $(".line:eq("+ objets[j].position.rowIndex +") .square:eq("+ objets[j].position.colIndex +")").append(container.clone());
-            j++;
-        };
-       j=j;
-        while ($(".line:eq("+ objets[j].position.rowIndex +") .square:eq("+ objets[j].position.colIndex +")").contents().length!==0 && j < objets.length) {
-            console.log ("Div is NOT empty");
-            var newTmpPosition = Object.create(Position);
-            newTmpPosition.initRandomPosition(map.columns-1, map.rows-1);
-            objets[j].position = newTmpPosition;
-            $(".line:eq("+ objets[j].position.rowIndex +") .square:eq("+ objets[j].position.colIndex +")").append(container.clone());
-            j++;
-        };
-        j-- //sinon je vais avoir des tour de boucle en moins avec le for
+            j--
+        }*/
+        
+         //sinon je vais avoir des tour de boucle en moins avec le for
         /*for (var j = 0; j < objets.length; j++) {
             if( $(".line:eq("+ objets[j].position.rowIndex +") .square:eq("+ objets[j].position.colIndex +")").is(":empty") ) {
                 console.log ("Div is empty");
@@ -129,27 +121,44 @@ var map = {
     }
 };
 
+function checkPosition (positionToCheck,colMaxIndex, rowMaxIndex) {
+        
+    for (var i = 0; i < listPositions.length; i++) {
+        if(positionToCheck.colIndex == listPositions[i].colIndex && positionToCheck.rowIndex == listPositions[i].rowIndex ){
+            positionToCheck.initRandomPosition(colMaxIndex, rowMaxIndex);
+            i=0;
+        }
+        
+    };
+    
+    return positionToCheck;
+}
+
 function genListObstacle(nbObstacles, colMaxIndex, rowMaxIndex) {
     var listObstacle = [];
     for (var j = 0; j < nbObstacles; j++) {
-        var tmpPosition = Object.create(Position)     
-        var currentObstacle = Object.create(Obstacle)   
+        var tmpPosition = Object.create(Position);
+        var currentObstacle = Object.create(Obstacle);  
         tmpPosition.initRandomPosition(colMaxIndex, rowMaxIndex);
-        currentObstacle.init(tmpPosition)
-        listObstacle.push(currentObstacle)
+        checkPosition(tmpPosition,colMaxIndex, rowMaxIndex);
+        listPositions.push(tmpPosition);
+        currentObstacle.init(tmpPosition);
+        listObstacle.push(currentObstacle);
     }
     return listObstacle;
 }
 function genListPlayer(nbPlayers, colMaxIndex, rowMaxIndex) {
     var listPlayer = [];
     for (var j = 0; j < nbPlayers; j++) {
-        var tmpPosition = Object.create(Position) 
-        var currentPlayer = Object.create(Player)
-        var tmpWeapon = Object.create(Weapon)
+        var tmpPosition = Object.create(Position);
+        var currentPlayer = Object.create(Player);
+        var tmpWeapon = Object.create(Weapon);
         tmpPosition.initRandomPosition(colMaxIndex, rowMaxIndex);
-        tmpWeapon.init(tmpPosition, "Gourdin", 10)
-        currentPlayer.init(tmpPosition, characterNames[j], tmpWeapon)
-        listPlayer.push(currentPlayer)
+        checkPosition(tmpPosition,colMaxIndex, rowMaxIndex);
+        listPositions.push(tmpPosition);
+        tmpWeapon.init(tmpPosition, "Gourdin", 10);
+        currentPlayer.init(tmpPosition, characterNames[j], tmpWeapon);
+        listPlayer.push(currentPlayer);
     }
     return listPlayer;
 }
@@ -157,27 +166,29 @@ function genListWeapon(nbWeapons, colMaxIndex, rowMaxIndex) {
     var listWeapons = [];
     var damage = 10
     for (var j = 0; j < nbWeapons; j++) {
-        var tmpPosition = Object.create(Position)     
-        var currentWeapon = Object.create(Weapon)
-        damage += 5
-        tmpPosition.initRandomPosition(colMaxIndex, rowMaxIndex)
-        currentWeapon.init(tmpPosition, weaponNames[j], damage)
-        listWeapons.push(currentWeapon)
+        var tmpPosition = Object.create(Position); 
+        var currentWeapon = Object.create(Weapon);
+        damage += 5;
+        tmpPosition.initRandomPosition(colMaxIndex, rowMaxIndex);
+        checkPosition(tmpPosition,colMaxIndex, rowMaxIndex);
+        listPositions.push(tmpPosition);
+        currentWeapon.init(tmpPosition, weaponNames[j], damage);
+        listWeapons.push(currentWeapon);
     }
     return listWeapons;
 }
 
 
 
-$(function () {
+$(function ($) {
     map.genMap();
-    var obstacles = genListObstacle(map.nbObstacles, map.columns-1, map.rows-1);
+    var obstacles = genListObstacle(map.nbObstacles, map.columns, map.rows);
     console.log(obstacles)
     map.display(obstacles, $obstacle);
-    var players = genListPlayer(map.nbPlayers, map.columns-1, map.rows-1);
+    var players = genListPlayer(map.nbPlayers, map.columns, map.rows);
     console.log(players)
     map.display(players, $player);
-    var weapons = genListWeapon(map.nbWeapons, map.columns-1, map.rows-1);
+    var weapons = genListWeapon(map.nbWeapons, map.columns, map.rows);
     console.log(weapons)
     map.display(weapons,$weapon);
 });
