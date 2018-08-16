@@ -47,6 +47,7 @@ var Player = {
         this.characterName = characterName;
         this.weapon = weapon;
         this.listAvailablePosition = [/*0=col*/[], /*1=row*/[]];    // création d'un tableau pour stocker les positions disponibles = qui ne contiennent pas d'obstacles
+        this.listUnavailablePosition = [];
     },
     radar : function (objectPositionRow, objectPositionCol) {       // methode qui met en évidence les cases dispo pour les déplacements et qui empêche le joueur de sortir du tableau, peu importe qu'elles contiennent ou non des obstacles. C'est la version 1, elle fonctionne
         for(var i = 0; i < 3; i++) {
@@ -124,6 +125,68 @@ var Player = {
             }
             
         };
+    },
+    radar3 : function (objectPositionRow, objectPositionCol) {
+        for ( var i = 0; i < 3; i++) {
+            var currentCol = objectPositionCol;
+            var currentRow = objectPositionRow;
+            if(currentCol+i+1 <= 9) {
+                $(".line:eq("+ (currentRow) +") .square:eq("+ (currentCol+i+1) +")").css("border", "red 1px solid");
+            };
+            if(currentCol-i-1 >= 0) {
+                $(".line:eq("+ (currentRow) +") .square:eq("+ (currentCol-i-1) +")").css("border", "red 1px solid");
+            };
+            if(currentRow+i+1 <= 9) {
+                $(".line:eq("+ (currentRow+i+1) +") .square:eq("+ (currentCol) +")").css("border", "red 1px solid");
+            };
+            if(currentRow-i-1 >= 0) {
+                $(".line:eq("+ (currentRow-i-1) +") .square:eq("+ (currentCol) +")").css("border", "red 1px solid");
+            };
+            for (var j = 0; j < listObjects[0].length; j++) {
+                if (currentCol+i+1 == listObjects[0][j].position.colIndex && currentRow == listObjects[0][j].position.rowIndex) {
+                    var unavailablePosition = Object.create(Position);
+                    var unavailableCol = currentCol+i+1;
+                    var unavailableRow = currentRow;
+                    unavailablePosition.setPosition(unavailableCol, unavailableRow);
+                    this.listUnavailablePosition.push(unavailablePosition);
+                };
+                if (currentCol-i-1 == listObjects[0][j].position.colIndex && currentRow == listObjects[0][j].position.rowIndex) {
+                    var unavailablePosition = Object.create(Position);
+                    var unavailableCol = currentCol-i-1;
+                    var unavailableRow = currentRow;
+                    unavailablePosition.setPosition(unavailableCol, unavailableRow);
+                    this.listUnavailablePosition.push(unavailablePosition);
+                };
+                if (currentRow+i+1 == listObjects[0][j].position.rowIndex && currentCol == listObjects[0][j].position.colIndex) {
+                    var unavailablePosition = Object.create(Position);
+                    var unavailableCol = currentCol;
+                    var unavailableRow = currentRow+i+1;
+                    unavailablePosition.setPosition(unavailableCol, unavailableRow);
+                    this.listUnavailablePosition.push(unavailablePosition);
+                };
+                if (currentCol+i+1 == listObjects[0][j].position.colIndex && currentRow == listObjects[0][j].position.colIndex) {
+                    var unavailablePosition = Object.create(Position);
+                    var unavailableCol = currentCol;
+                    var unavailableRow = currentRow-i-1;
+                    unavailablePosition.setPosition(unavailableCol, unavailableRow);
+                    this.listUnavailablePosition.push(unavailablePosition);
+                };
+            }
+            for (var k = 0; k < this.listUnavailablePosition.length; k++) {
+                if(currentCol+i+1 == this.listUnavailablePosition[k].colIndex) {
+                    $(".line:eq("+ (currentRow) +") .square:eq("+ (currentCol+i+1) +")").css("border", "initial");
+                };
+                if(currentCol-i-1 == this.listUnavailablePosition[k].colIndex) {
+                    $(".line:eq("+ (currentRow) +") .square:eq("+ (currentCol-i-1) +")").css("border", "initial");
+                };
+                if(currentRow+i+1 == this.listUnavailablePosition[k].rowIndex) {
+                    $(".line:eq("+ (currentRow+i+1) +") .square:eq("+ (currentCol) +")").css("border", "initial");
+                };
+                if(currentRow-i-1 == this.listUnavailablePosition[k].rowIndex) {
+                    $(".line:eq("+ (currentRow-i-1) +") .square:eq("+ (currentCol) +")").css("border", "initial");
+                };
+            }
+        }
     }
 };
 var characterNames = ["Marco", "Polo"];
@@ -244,8 +307,8 @@ $(function ($) {
     listObjects.push(players);
     console.log(players)
     map.display(players, $player);
-    listObjects[1][0].radar2(listObjects[1][0].position.rowIndex, listObjects[1][0].position.colIndex);
-    listObjects[1][1].radar2(listObjects[1][1].position.rowIndex, listObjects[1][1].position.colIndex);
+    listObjects[1][0].radar3(listObjects[1][0].position.rowIndex, listObjects[1][0].position.colIndex);
+    listObjects[1][1].radar3(listObjects[1][1].position.rowIndex, listObjects[1][1].position.colIndex);
     var weapons = genListWeapon(map.nbWeapons, map.columns, map.rows);
     listObjects.push(weapons);
     console.log(weapons)
