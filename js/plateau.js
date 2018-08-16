@@ -46,87 +46,10 @@ var Player = {
         this.sante = 100;
         this.characterName = characterName;
         this.weapon = weapon;
-        this.listAvailablePosition = [/*0=col*/[], /*1=row*/[]];    // création d'un tableau pour stocker les positions disponibles = qui ne contiennent pas d'obstacles
         this.listUnavailablePosition = [];
     },
-    radar : function (objectPositionRow, objectPositionCol) {       // methode qui met en évidence les cases dispo pour les déplacements et qui empêche le joueur de sortir du tableau, peu importe qu'elles contiennent ou non des obstacles. C'est la version 1, elle fonctionne
-        for(var i = 0; i < 3; i++) {
-            if(objectPositionCol+i+1 <= 9) {
-                $(".line:eq("+ (objectPositionRow) +") .square:eq("+ (objectPositionCol+i+1) +")").css("border-color", "red");
-            };
-            if(objectPositionCol-i-1 >= 0) {
-                $(".line:eq("+ (objectPositionRow) +") .square:eq("+ (objectPositionCol-i-1) +")").css("border-color", "red");
-            };
-            if(objectPositionRow+i+1 <= 9) {
-                $(".line:eq("+ (objectPositionRow+i+1) +") .square:eq("+ (objectPositionCol) +")").css("border-color", "red");
-            };
-            if(objectPositionRow-i-1 >= 0) {
-                $(".line:eq("+ (objectPositionRow-i-1) +") .square:eq("+ (objectPositionCol) +")").css("border-color", "red");
-            };             
-        }
-    },
-    /* 
-    ----- radar v2 -----
-    L'idée est simple : si j'ai un obstacle sur une des trajectoires disponibles, je rends la case indisponible. Ce qui se traduit pour l'instant par une absence de mise en forme css
-    -- La methode prend en paramètre les coordonnées de l'object player.
-        Ses coordonnées sont définies par les attributs colIndex et rowIndex de son objet position
-    -- listObjects[0] = tableau contenant mes objects obstacles, définit par un object position qui possède les attributs "colIndex" et "rowIndex", le tout défini les coordonnées de mon object Obstacles
-    -- 1 --
-    Je parcours le tableau Obstacle et pour chaque obstacle :
-        je verifie si sur les 4 axes de déplacement, composés de 3 cases autour de la position actuelle, j'ai un obstacle, pour cela je compare 
-            les attributs colonnes : currentCol (Player) et listObjects[0][i].position.colIndex (obstacle)
-            les attributs lignes : currentRow (Player) et listObjects[0][i].position.rowIndex (Obstacle)
-            S'ils sont différents, alors la case est dispo --> je push dans le table [listAvailablePosition]
-    Pour chaque colonne disponible et 3 cases à droite et a gauche du joueur, j'ajoute mon CSS
-    Pour chaque ligne disponible et 3 cases en haut et en bas du joueur, j'ajoute mon CSS
-    */
-    radar2 : function (objectPositionRow, objectPositionCol) {
-        for (var i = 0; i < listObjects[0].length; i++) {                   // i = compteur --> parcourt tableau OBSTACLES
-            for (var j = 0; j < 3 ; j++) {                                  // j = compteur --> 3 cases selon position du joueur
-                var currentRow = objectPositionRow;
-                var currentCol = objectPositionCol;
-                var availableCell = 0;
-                if (currentCol+j+1 !== listObjects[0][i].position.colIndex) { // to the right
-                    availableCell = currentCol+j+1;
-                    this.listAvailablePosition[0].push(availableCell);
-                };
-                if (currentCol-j-1 !== listObjects[0][i].position.colIndex) { // to the left
-                    availableCell = currentCol-j-1;
-                    this.listAvailablePosition[0].push(availableCell);
-                }; 
-                if (currentRow+j+1 !== listObjects[0][i].position.rowIndex) { // to bottom
-                    availableCell = currentRow+j+1;
-                    this.listAvailablePosition[1].push(availableCell);
-                }; 
-                if (currentRow-j-1 !== listObjects[0][i].position.rowIndex) { // to top
-                    availableCell = currentRow-i-1;
-                    this.listAvailablePosition[1].push(availableCell);
-                }; 
-            }
-        }
-        for (var k = 0; k < this.listAvailablePosition[0].length; k++) {    // k = compteur --> parcourt tableau colonne disponible
-            for (j = 0; j < 3; j++) {
-                if(this.listAvailablePosition[0][k] <= 9 && objectPositionCol+j+1==this.listAvailablePosition[0][k]) {
-                    $(".line:eq("+ (objectPositionRow) +") .square:eq("+ (objectPositionCol+j+1) +")").css("border-color", "red");
-                };
-                if(this.listAvailablePosition[0][k] >= 0 && objectPositionCol-j-1 ==this.listAvailablePosition[0][k]) {
-                    $(".line:eq("+ (objectPositionRow) +") .square:eq("+ (objectPositionCol-j-1) +")").css("border-color", "red");
-                };
-            } 
-        }
-        for(var l = 0; l < this.listAvailablePosition[1].length; l++){ // l = compeur --> parcourt tableau ligne disponible
-            for (j = 0; j < 3; j++) {
-                if(this.listAvailablePosition[1][l] <= 9 && objectPositionRow+j+1 == this.listAvailablePosition[1][l]) {
-                    $(".line:eq("+ (objectPositionRow+j+1) +") .square:eq("+ (objectPositionCol) +")").css("border-color", "red");
-                };
-                if(this.listAvailablePosition[1][l] >= 0 && objectPositionRow-j-1== this.listAvailablePosition[1][l]) {
-                    $(".line:eq("+ (objectPositionRow-j-1) +") .square:eq("+ (objectPositionCol) +")").css("border-color", "red");
-                };
-            }
-            
-        };
-    },
-    radar3 : function (objectPositionRow, objectPositionCol) {
+    
+    radar : function (objectPositionRow, objectPositionCol) {
         for ( var i = 0; i < 3; i++) {
             var currentCol = objectPositionCol;
             var currentRow = objectPositionRow;
@@ -203,7 +126,7 @@ var weaponNames = ["Pelle", "Pioche", "Hache", "Rateau"];
 var map = {
     rows : 10,
     columns : 10,
-    nbObstacles : 25,
+    nbObstacles : 15,
     nbPlayers : 2,
     nbWeapons : 4,
     display : function (objets, container) {
@@ -279,23 +202,6 @@ function genListWeapon(nbWeapons, colMaxIndex, rowMaxIndex) {
    return listWeapons;
 }
 
-/*function radar(objectPositionRow, objectPositionCol) {
-    for(var i = 0; i < 3; i++) {
-        if(objectPositionCol+i+1 <= 9) {
-            $(".line:eq("+ (objectPositionRow) +") .square:eq("+ (objectPositionCol+i+1) +")").css("border-color", "red");
-        };
-        if(objectPositionCol-i-1 >= 0) {
-            $(".line:eq("+ (objectPositionRow) +") .square:eq("+ (objectPositionCol-i-1) +")").css("border-color", "red");
-        };
-        if(objectPositionRow+i+1 <= 9) {
-            $(".line:eq("+ (objectPositionRow+i+1) +") .square:eq("+ (objectPositionCol) +")").css("border-color", "red");
-        };
-        if(objectPositionRow-i-1 >= 0) {
-            $(".line:eq("+ (objectPositionRow-i-1) +") .square:eq("+ (objectPositionCol) +")").css("border-color", "red");
-        };  
-    }
-}*/
-
 
 $(function ($) {
     map.genMap();
@@ -307,8 +213,8 @@ $(function ($) {
     listObjects.push(players);
     console.log(players)
     map.display(players, $player);
-    listObjects[1][0].radar3(listObjects[1][0].position.rowIndex, listObjects[1][0].position.colIndex);
-    listObjects[1][1].radar3(listObjects[1][1].position.rowIndex, listObjects[1][1].position.colIndex);
+    listObjects[1][0].radar(listObjects[1][0].position.rowIndex, listObjects[1][0].position.colIndex);
+    listObjects[1][1].radar(listObjects[1][1].position.rowIndex, listObjects[1][1].position.colIndex);
     var weapons = genListWeapon(map.nbWeapons, map.columns, map.rows);
     listObjects.push(weapons);
     console.log(weapons)
