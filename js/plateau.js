@@ -46,9 +46,15 @@ var Player = {
         this.sante = 100;
         this.characterName = characterName;
         this.weapon = weapon;
-        this.listUnavailablePosition = [];
+        this.listAvailablePosition = [];
     },
     
+    genListAvailablePosition : function (playerPosition) {
+        for ( var i = -3; i < 3; i++) {
+            currentPos = Object.create(Position);
+            currentPos.setPosition(this.position.colIndex+i+1, this.position.rowIndex)
+        }
+    },
     radar : function (objectPositionRow, objectPositionCol) {
         for ( var i = 0; i < 3; i++) {
             var currentCol = objectPositionCol;
@@ -110,6 +116,30 @@ var Player = {
                 };
             }
         }
+    },
+    radar2 : function (objectPositionRow, objectPositionCol) {
+        for ( var i = 0; i < 3; i++) {
+            var currentCol = objectPositionCol;
+            var currentRow = objectPositionRow;
+            if(currentCol+i+1 <= 9) {
+                $(".line:eq("+ (currentRow) +") .square:eq("+ (currentCol+i+1) +")").css("border", "red 1px solid");
+            };
+            if(currentCol-i-1 >= 0) {
+                $(".line:eq("+ (currentRow) +") .square:eq("+ (currentCol-i-1) +")").css("border", "red 1px solid");
+            };
+            if(currentRow+i+1 <= 9) {
+                $(".line:eq("+ (currentRow+i+1) +") .square:eq("+ (currentCol) +")").css("border", "red 1px solid");
+            };
+            if(currentRow-i-1 >= 0) {
+                $(".line:eq("+ (currentRow-i-1) +") .square:eq("+ (currentCol) +")").css("border", "red 1px solid");
+            };
+        }
+        for(var j = 0; j < listAvailablePosition.length; j++) {
+            for(var k = 0; k < listObjects[0].length; k++) {
+                Object.is(listAvailablePosition[j], listObjects[0][k])
+            }
+        }
+
     }
 };
 var characterNames = ["Marco", "Polo"];
