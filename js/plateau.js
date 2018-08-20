@@ -220,4 +220,5 @@ $(function ($) {
     console.log(weapons)
     map.display(weapons,$weapon);
     console.log("Duplicat position --> nb error : " + errorCount);
+    console.log(listObjects[1][1].listUnavailablePosition);
 });
