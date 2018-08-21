@@ -30,6 +30,30 @@ var Position = {
         min = Math.ceil(min);
         max = Math.floor(max);
         return Math.floor(Math.random() * (max - min)) + min;
+    },
+    isSamePosition: function(positionToCompare) {
+        return this.colIndex == positionToCompare.colIndex && this.rowIndex == positionToCompare.rowIndex;
+    },
+    setPositionFromDirection : function(direction, currentPosition, index) {
+        switch (direction) {
+            case "R":
+                this.setPosition(currentPosition.colIndex + index, currentPosition.rowIndex);
+                break;
+            case "L":
+                this.setPosition(currentPosition.colIndex - index, currentPosition.rowIndex);
+                break;
+            case "T":
+                this.setPosition(currentPosition.colIndex, currentPosition.rowIndex + index);
+                break;
+            case "B":
+                this.setPosition(currentPosition.colIndex, currentPosition.rowIndex - index);
+                break;
+            default:
+                break;
+        }  
+    },
+    isOnTheMap : function () {
+        return this.colIndex >= 0 && this.colIndex < map.columns && this.rowIndex >= 0 && this.rowIndex < map.rows;
     }
 }
 
@@ -38,6 +62,7 @@ var Obstacle = {
         this.position = position;
     }
 };
+
 
 var Player = {
     init : function (position, characterName, weapon){
@@ -48,99 +73,62 @@ var Player = {
         this.weapon = weapon;
         this.listAvailablePosition = [];
     },
-    
-    genListAvailablePosition : function (playerPosition) {
-        for ( var i = -3; i < 3; i++) {
-            currentPos = Object.create(Position);
-            currentPos.setPosition(this.position.colIndex+i+1, this.position.rowIndex)
+    createPositionToMove0 : function (objectPositionRow, objectPositionCol) {
+        var nbMovements = 3;
+        for ( var i = -nbMovements; i < (nbMovements+1); i++) {
+            if (i != 0) {
+                if (objectPositionCol+i >= 0 && objectPositionCol+i <= map.columns-1) {
+                    var positionToMove = Object.create(Position);
+                    positionToMove.setPosition(objectPositionCol+i, objectPositionRow);
+                    this.listAvailablePosition.push(positionToMove);
+                }
+                if (objectPositionRow+i >= 0 && objectPositionRow+i <= map.rows-1) {
+                    positionToMove = Object.create(Position);
+                    positionToMove.setPosition(objectPositionCol, objectPositionRow+i);
+                    this.listAvailablePosition.push(positionToMove);
+                }
+            }
+        }
+        for (var j = 0; j < this.listAvailablePosition.length; j++) {
+            var border = "red 1px solid";
+            for (var k = 0; k < listObjects[0].length; k++) {
+                var hasObjectOnAvailablePosition = this.listAvailablePosition[j].isSamePosition(listObjects[0][k].position);
+                if (hasObjectOnAvailablePosition) {
+                    border = "initial";
+                    break;
+                };
+            }
+            $(".line:eq("+ (this.listAvailablePosition[j].rowIndex) +") .square:eq("+ (this.listAvailablePosition[j].colIndex) +")").css("border", border);
         }
     },
-    radar : function (objectPositionRow, objectPositionCol) {
-        for ( var i = 0; i < 3; i++) {
-            var currentCol = objectPositionCol;
-            var currentRow = objectPositionRow;
-            if(currentCol+i+1 <= 9) {
-                $(".line:eq("+ (currentRow) +") .square:eq("+ (currentCol+i+1) +")").css("border", "red 1px solid");
-            };
-            if(currentCol-i-1 >= 0) {
-                $(".line:eq("+ (currentRow) +") .square:eq("+ (currentCol-i-1) +")").css("border", "red 1px solid");
-            };
-            if(currentRow+i+1 <= 9) {
-                $(".line:eq("+ (currentRow+i+1) +") .square:eq("+ (currentCol) +")").css("border", "red 1px solid");
-            };
-            if(currentRow-i-1 >= 0) {
-                $(".line:eq("+ (currentRow-i-1) +") .square:eq("+ (currentCol) +")").css("border", "red 1px solid");
-            };
-            for (var j = 0; j < listObjects[0].length; j++) {
-                if (currentCol+i+1 == listObjects[0][j].position.colIndex && currentRow == listObjects[0][j].position.rowIndex) {
-                    var unavailablePosition = Object.create(Position);
-                    var unavailableCol = currentCol+i+1;
-                    var unavailableRow = currentRow;
-                    unavailablePosition.setPosition(unavailableCol, unavailableRow);
-                    this.listUnavailablePosition.push(unavailablePosition);
+    createPositionToMove : function (objectPosition) {
+        var moveMaxNumber = 3;
+        var currentPosition = objectPosition;
+        var directions = ["R","L","T","B"];
+        directions.forEach(function(direction) {
+            var i = 1;
+            var hasNoObjectOnTheWay = true;
+            while (i < moveMaxNumber + 1 && hasNoObjectOnTheWay) {
+                var positionToMove = Object.create(Position);
+                positionToMove.setPositionFromDirection(direction, currentPosition, i);
+                var positionOnTheMap = positionToMove.isOnTheMap();
+                if (positionOnTheMap) {
+                    var border = "red 1px solid";
+                    for (var k = 0; k < listObjects[0].length; k++) {
+                        var hasObjectOnAvailablePosition = positionToMove.isSamePosition(listObjects[0][k].position);
+                        if (hasObjectOnAvailablePosition) {
+                            border = "initial";
+                            hasNoObjectOnTheWay = false;
+                            break;
+                        };
+                    }
+                    $(".line:eq("+ (positionToMove.rowIndex) +") .square:eq("+ (positionToMove.colIndex) +")").css("border", border);
+                    
                 };
-                if (currentCol-i-1 == listObjects[0][j].position.colIndex && currentRow == listObjects[0][j].position.rowIndex) {
-                    var unavailablePosition = Object.create(Position);
-                    var unavailableCol = currentCol-i-1;
-                    var unavailableRow = currentRow;
-                    unavailablePosition.setPosition(unavailableCol, unavailableRow);
-                    this.listUnavailablePosition.push(unavailablePosition);
-                };
-                if (currentRow+i+1 == listObjects[0][j].position.rowIndex && currentCol == listObjects[0][j].position.colIndex) {
-                    var unavailablePosition = Object.create(Position);
-                    var unavailableCol = currentCol;
-                    var unavailableRow = currentRow+i+1;
-                    unavailablePosition.setPosition(unavailableCol, unavailableRow);
-                    this.listUnavailablePosition.push(unavailablePosition);
-                };
-                if (currentCol+i+1 == listObjects[0][j].position.colIndex && currentRow == listObjects[0][j].position.colIndex) {
-                    var unavailablePosition = Object.create(Position);
-                    var unavailableCol = currentCol;
-                    var unavailableRow = currentRow-i-1;
-                    unavailablePosition.setPosition(unavailableCol, unavailableRow);
-                    this.listUnavailablePosition.push(unavailablePosition);
-                };
+                i++
             }
-            for (var k = 0; k < this.listUnavailablePosition.length; k++) {
-                if(currentCol+i+1 == this.listUnavailablePosition[k].colIndex) {
-                    $(".line:eq("+ (currentRow) +") .square:eq("+ (currentCol+i+1) +")").css("border", "initial");
-                };
-                if(currentCol-i-1 == this.listUnavailablePosition[k].colIndex) {
-                    $(".line:eq("+ (currentRow) +") .square:eq("+ (currentCol-i-1) +")").css("border", "initial");
-                };
-                if(currentRow+i+1 == this.listUnavailablePosition[k].rowIndex) {
-                    $(".line:eq("+ (currentRow+i+1) +") .square:eq("+ (currentCol) +")").css("border", "initial");
-                };
-                if(currentRow-i-1 == this.listUnavailablePosition[k].rowIndex) {
-                    $(".line:eq("+ (currentRow-i-1) +") .square:eq("+ (currentCol) +")").css("border", "initial");
-                };
-            }
-        }
+        })
     },
-    radar2 : function (objectPositionRow, objectPositionCol) {
-        for ( var i = 0; i < 3; i++) {
-            var currentCol = objectPositionCol;
-            var currentRow = objectPositionRow;
-            if(currentCol+i+1 <= 9) {
-                $(".line:eq("+ (currentRow) +") .square:eq("+ (currentCol+i+1) +")").css("border", "red 1px solid");
-            };
-            if(currentCol-i-1 >= 0) {
-                $(".line:eq("+ (currentRow) +") .square:eq("+ (currentCol-i-1) +")").css("border", "red 1px solid");
-            };
-            if(currentRow+i+1 <= 9) {
-                $(".line:eq("+ (currentRow+i+1) +") .square:eq("+ (currentCol) +")").css("border", "red 1px solid");
-            };
-            if(currentRow-i-1 >= 0) {
-                $(".line:eq("+ (currentRow-i-1) +") .square:eq("+ (currentCol) +")").css("border", "red 1px solid");
-            };
-        }
-        for(var j = 0; j < listAvailablePosition.length; j++) {
-            for(var k = 0; k < listObjects[0].length; k++) {
-                Object.is(listAvailablePosition[j], listObjects[0][k])
-            }
-        }
-
-    }
 };
 var characterNames = ["Marco", "Polo"];
 
@@ -243,12 +231,12 @@ $(function ($) {
     listObjects.push(players);
     console.log(players)
     map.display(players, $player);
-    listObjects[1][0].radar(listObjects[1][0].position.rowIndex, listObjects[1][0].position.colIndex);
-    listObjects[1][1].radar(listObjects[1][1].position.rowIndex, listObjects[1][1].position.colIndex);
+    //listObjects[1][0].createPositionToMove0(listObjects[1][0].position.rowIndex, listObjects[1][0].position.colIndex);
+    //listObjects[1][1].createPositionToMove0(listObjects[1][1].position.rowIndex, listObjects[1][1].position.colIndex);
+    listObjects[1][0].createPositionToMove(listObjects[1][0].position);
+    listObjects[1][1].createPositionToMove(listObjects[1][1].position);
     var weapons = genListWeapon(map.nbWeapons, map.columns, map.rows);
     listObjects.push(weapons);
     console.log(weapons)
     map.display(weapons,$weapon);
-    console.log("Duplicat position --> nb error : " + errorCount);
-    console.log(listObjects[1][1].listUnavailablePosition);
 });
