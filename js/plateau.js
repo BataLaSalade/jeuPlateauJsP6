@@ -73,34 +73,7 @@ var Player = {
         this.weapon = weapon;
         this.listAvailablePosition = [];
     },
-    createPositionToMove0 : function (objectPositionRow, objectPositionCol) {
-        var nbMovements = 3;
-        for ( var i = -nbMovements; i < (nbMovements+1); i++) {
-            if (i != 0) {
-                if (objectPositionCol+i >= 0 && objectPositionCol+i <= map.columns-1) {
-                    var positionToMove = Object.create(Position);
-                    positionToMove.setPosition(objectPositionCol+i, objectPositionRow);
-                    this.listAvailablePosition.push(positionToMove);
-                }
-                if (objectPositionRow+i >= 0 && objectPositionRow+i <= map.rows-1) {
-                    positionToMove = Object.create(Position);
-                    positionToMove.setPosition(objectPositionCol, objectPositionRow+i);
-                    this.listAvailablePosition.push(positionToMove);
-                }
-            }
-        }
-        for (var j = 0; j < this.listAvailablePosition.length; j++) {
-            var border = "red 1px solid";
-            for (var k = 0; k < listObjects[0].length; k++) {
-                var hasObjectOnAvailablePosition = this.listAvailablePosition[j].isSamePosition(listObjects[0][k].position);
-                if (hasObjectOnAvailablePosition) {
-                    border = "initial";
-                    break;
-                };
-            }
-            $(".line:eq("+ (this.listAvailablePosition[j].rowIndex) +") .square:eq("+ (this.listAvailablePosition[j].colIndex) +")").css("border", border);
-        }
-    },
+
     createPositionToMove : function (objectPosition) {
         var moveMaxNumber = 3;
         var currentPosition = objectPosition;
