@@ -204,8 +204,6 @@ $(function ($) {
     listObjects.push(players);
     console.log(players)
     map.display(players, $player);
-    //listObjects[1][0].createPositionToMove0(listObjects[1][0].position.rowIndex, listObjects[1][0].position.colIndex);
-    //listObjects[1][1].createPositionToMove0(listObjects[1][1].position.rowIndex, listObjects[1][1].position.colIndex);
     listObjects[1][0].createPositionToMove(listObjects[1][0].position);
     listObjects[1][1].createPositionToMove(listObjects[1][1].position);
     var weapons = genListWeapon(map.nbWeapons, map.columns, map.rows);
