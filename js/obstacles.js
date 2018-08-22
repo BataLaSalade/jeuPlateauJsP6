@@ -5,13 +5,14 @@ var $obstacle = $("<div />", {
 var Obstacle = {
     init: function (position){
         this.position = position;
+        this.imageUrl = "./img/png/obstacle_buisson.png";
     }
 };
 
 function genListObstacle(nbObstacles, colMaxIndex, rowMaxIndex) {
     var listObstacle = [];
     for (var j = 0; j < nbObstacles; j++) {
-        var tmpPosition = checkPosition(colMaxIndex, rowMaxIndex);
+        var tmpPosition = getCheckedPosition(colMaxIndex, rowMaxIndex);
         var currentObstacle = Object.create(Obstacle); 
         currentObstacle.init(tmpPosition);
         listObstacle.push(currentObstacle);

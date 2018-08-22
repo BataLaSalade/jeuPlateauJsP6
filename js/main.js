@@ -14,6 +14,7 @@ $(function ($) {
     listObjects[1][1].createPositionToMove(listObjects[1][1].position);
     var weapons = genListWeapon(map.nbWeapons, map.columns, map.rows);
     listObjects.push(weapons);
-    console.log(weapons)
+    console.log(weapons);
     map.display(weapons,$weapon);
+    console.log("Duplicat position --> nb error : " + errorCount);
 });

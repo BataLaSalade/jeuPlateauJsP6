@@ -43,12 +43,12 @@ var Position = {
 var listPositions = [];
 var errorCount = 0;
 
-function checkPosition (colMaxIndex, rowMaxIndex) {
+function getCheckedPosition (colMaxIndex, rowMaxIndex) {
     var positionToCheck = Object.create(Position);
     positionToCheck.initRandomPosition(colMaxIndex, rowMaxIndex);
     
     for (var i = 0; i < listPositions.length; i++) {
-        while(listPositions[i].colIndex == positionToCheck.colIndex && listPositions[i].rowIndex == positionToCheck.rowIndex ){
+        while(positionToCheck.isSamePosition(listPositions[i])){
             errorCount ++;
             i=0;
             positionToCheck.initRandomPosition(colMaxIndex, rowMaxIndex);

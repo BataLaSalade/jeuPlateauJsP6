@@ -3,13 +3,14 @@ var $player = $("<div />", {
 });
 
 var Player = {
-    init : function (position, characterName, weapon){
+    init : function (position, characterName, weapon, url){
         this.nom = ""; // a saisir par l'utilisateur
         this.position = position;
         this.sante = 100;
         this.characterName = characterName;
         this.weapon = weapon;
         this.listAvailablePosition = [];
+        this.imageUrl = url != "" ? url : "../img/png/BlueCharacter_epeeBois.png";
     },
 
     createPositionToMove : function (objectPosition) {
@@ -24,7 +25,7 @@ var Player = {
                 positionToMove.setPositionFromDirection(direction, currentPosition, i);
                 var positionOnTheMap = positionToMove.isOnTheMap();
                 if (positionOnTheMap) {
-                    var border = "red 1px solid";
+                    var border = "#e8d952 1px solid";
                     for (var k = 0; k < listObjects[0].length; k++) {
                         var hasObjectOnAvailablePosition = positionToMove.isSamePosition(listObjects[0][k].position);
                         if (hasObjectOnAvailablePosition) {
@@ -40,19 +41,25 @@ var Player = {
             }
         })
     },
+    
 };
 
-var characterNames = ["Marco", "Polo"];
+var characterNames = ["Chevalier Bleu", "Chevalier Rouge"];
+var playerListUrl = 
+    [["./img/png/BlueCharacter_epeeBois.png", "./img/png/BlueCharacter_arc.png", "./img/png/BlueCharacter_baton.png", "./img/png/BlueCharacter_epee.png", "./img/png/BlueCharacter_lance.png"],
+    ["./img/png/RedCharacter_epeeBois.png", "./img/png/RedCharacter_arc.png", "./img/png/RedCharacter_baton.png", "./img/png/RedCharacter_epee.png",  "./img/png/RedCharacter_lance.png"]]
+
 
 function genListPlayer(nbPlayers, colMaxIndex, rowMaxIndex) {
     var listPlayer = [];
     for (var j = 0; j < nbPlayers; j++) {
-        var tmpPosition = checkPosition(colMaxIndex, rowMaxIndex);
+        var tmpPosition = getCheckedPosition(colMaxIndex, rowMaxIndex);
         var currentPlayer = Object.create(Player);
         var tmpWeapon = Object.create(Weapon);
-        tmpWeapon.init(tmpPosition, "Gourdin", 10);
-        currentPlayer.init(tmpPosition, characterNames[j], tmpWeapon);
+        tmpWeapon.init(tmpPosition, "Epée en bois", 10);
+        currentPlayer.init(tmpPosition, characterNames[j], tmpWeapon, playerListUrl[j][0]);
         listPlayer.push(currentPlayer);
     }
     return listPlayer;
 }
+

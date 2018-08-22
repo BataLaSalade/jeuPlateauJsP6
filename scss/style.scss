@@ -1,5 +1,5 @@
 ///// ----- My var ----- /////
-$square : 50px;
+$square : 70px;
 ///////////////////////////////
 
 
@@ -11,29 +11,28 @@ body {
 .line{
     width: 100%;
     height: $square;
-    background: rgb(152, 99, 202);
     display: flex;
     justify-content: center;
     .square{
         //border: 1px solid lightgray;
         width: $square;
         height: $square;
-        background: grey;
+        background:#8bc34a;
         display: inline-block;
         z-index: 1;
         .obstacle{
-            background: green;
+            background-size: cover;
             height: $square;
             z-index: 2;
         }
         
         .player{
-            background: red;
+            background-size: cover;
             height: $square;
             z-index: 200;
         }
         .weapon{
-            background: blue;
+            background-size: cover;
             height: $square;
             z-index: 100;
         }
