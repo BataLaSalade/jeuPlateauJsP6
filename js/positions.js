@@ -37,6 +37,9 @@ var Position = {
     },
     isOnTheMap : function () {
         return this.colIndex >= 0 && this.colIndex < map.columns && this.rowIndex >= 0 && this.rowIndex < map.rows;
+    },
+    isPlayerAround : function (positionToWatch) {
+        return this.colIndex+1 == positionToWatch.colIndex || this.colIndex-1 == positionToWatch.colIndex || this.rowIndex+1 == positionToWatch.rowIndex || this.rowIndex-1 == positionToWatch.rowIndex; 
     }
 }
 

@@ -45,21 +45,34 @@ var Player = {
 };
 
 var characterNames = ["Chevalier Bleu", "Chevalier Rouge"];
-var playerListUrl = 
-    [["./img/png/BlueCharacter_epeeBois.png", "./img/png/BlueCharacter_arc.png", "./img/png/BlueCharacter_baton.png", "./img/png/BlueCharacter_epee.png", "./img/png/BlueCharacter_lance.png"],
-    ["./img/png/RedCharacter_epeeBois.png", "./img/png/RedCharacter_arc.png", "./img/png/RedCharacter_baton.png", "./img/png/RedCharacter_epee.png",  "./img/png/RedCharacter_lance.png"]]
+var playerListUrl = [
+    ["./img/png/BlueCharacter_epeeBois.png", "./img/png/BlueCharacter_arc.png", "./img/png/BlueCharacter_baton.png", "./img/png/BlueCharacter_epee.png", "./img/png/BlueCharacter_lance.png"],
+    ["./img/png/RedCharacter_epeeBois.png", "./img/png/RedCharacter_arc.png", "./img/png/RedCharacter_baton.png", "./img/png/RedCharacter_epee.png",  "./img/png/RedCharacter_lance.png"]
+]
 
 
 function genListPlayer(nbPlayers, colMaxIndex, rowMaxIndex) {
     var listPlayer = [];
-    for (var j = 0; j < nbPlayers; j++) {
+    for (var i = 0; i < nbPlayers; i++) {
         var tmpPosition = getCheckedPosition(colMaxIndex, rowMaxIndex);
+        if ( i > 0 ) {
+            var sawPlayer = 0;
+            for ( var j = 0; j < listPlayer.length; j++) {
+                while (tmpPosition.isPlayerAround(listPlayer[j].position)) {
+                    sawPlayer++
+                    tmpPosition = getCheckedPosition(colMaxIndex, rowMaxIndex);
+                } 
+            }
+        };
+        
         var currentPlayer = Object.create(Player);
         var tmpWeapon = Object.create(Weapon);
         tmpWeapon.init(tmpPosition, "Epée en bois", 10);
-        currentPlayer.init(tmpPosition, characterNames[j], tmpWeapon, playerListUrl[j][0]);
+        currentPlayer.init(tmpPosition, characterNames[i], tmpWeapon, playerListUrl[i][0]);
         listPlayer.push(currentPlayer);
     }
+    console.log("PLAYER EN VUE : Nb de vue = " + sawPlayer);
+
     return listPlayer;
 }
 
