@@ -2,14 +2,18 @@ var $player = $("<div />", {
     class : "player"
 });
 
+var characterNames = ["Chevalier Bleu", "Chevalier Rouge"];
+var playerListUrl = [
+    ["./img/png/BlueCharacter_epeeBois.png", "./img/png/BlueCharacter_arc.png", "./img/png/BlueCharacter_baton.png", "./img/png/BlueCharacter_epee.png", "./img/png/BlueCharacter_lance.png"],
+    ["./img/png/RedCharacter_epeeBois.png", "./img/png/RedCharacter_arc.png", "./img/png/RedCharacter_baton.png", "./img/png/RedCharacter_epee.png",  "./img/png/RedCharacter_lance.png"]
+];
+
 var Player = {
     init : function (position, characterName, weapon, url){
-        this.nom = ""; // a saisir par l'utilisateur
         this.position = position;
         this.sante = 100;
         this.characterName = characterName;
         this.weapon = weapon;
-        this.listAvailablePosition = [];
         this.imageUrl = url != "" ? url : "../img/png/BlueCharacter_epeeBois.png";
     },
 
@@ -42,12 +46,6 @@ var Player = {
         })
     }
 };
-
-var characterNames = ["Chevalier Bleu", "Chevalier Rouge"];
-var playerListUrl = [
-    ["./img/png/BlueCharacter_epeeBois.png", "./img/png/BlueCharacter_arc.png", "./img/png/BlueCharacter_baton.png", "./img/png/BlueCharacter_epee.png", "./img/png/BlueCharacter_lance.png"],
-    ["./img/png/RedCharacter_epeeBois.png", "./img/png/RedCharacter_arc.png", "./img/png/RedCharacter_baton.png", "./img/png/RedCharacter_epee.png",  "./img/png/RedCharacter_lance.png"]
-]
 
 function genListPlayer (nbPlayers) {
     var listPlayer = [];
