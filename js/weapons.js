@@ -20,15 +20,11 @@ function genListWeapon (nbWeapons) {
     var listWeapons = [];
     var damage = 10;
     for (var i = 1; i < nbWeapons; i++) {
-        var randomIndex = getRandomIndexPosition(0, listAllPositions.length);
-        var randomAvailablePosition = listAllPositions[randomIndex];
-        var tmpPosition = Object.create(Position);
-        tmpPosition.setPosition(randomAvailablePosition.colIndex, randomAvailablePosition.rowIndex);
+        var tmpPosition = getRandomPosition();
         var currentWeapon = Object.create(Weapon);
         damage += 5
         currentWeapon.init(tmpPosition, weaponNames[i], damage, weaponListUrl[i]);
         listWeapons.push(currentWeapon);
-        listAllPositions.splice(randomIndex,1);
     }
     return listWeapons;
 }
