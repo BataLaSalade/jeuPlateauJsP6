@@ -68,3 +68,13 @@ function getIndexToFind (currentPosition) {
     }
     return findIndex;
 }
+
+function getRandomPosition () {
+    var randomIndex = getRandomIndexPosition(0, listAllPositions.length);
+    var randomAvailablePosition = listAllPositions[randomIndex];
+    var tmpPosition = Object.create(Position);
+    tmpPosition.setPosition(randomAvailablePosition.colIndex, randomAvailablePosition.rowIndex);
+    listAllPositions.splice(randomIndex,1);
+
+    return tmpPosition;
+}

@@ -52,17 +52,12 @@ var playerListUrl = [
 function genListPlayer (nbPlayers) {
     var listPlayer = [];
     for (var i = 0; i < nbPlayers; i++) {
-        var randomIndex = getRandomIndexPosition(0, listAllPositions.length);
-        var randomAvailablePosition = listAllPositions[randomIndex];
-        var tmpPosition = Object.create(Position);
-        tmpPosition.setPosition(randomAvailablePosition.colIndex, randomAvailablePosition.rowIndex);
+        var tmpPosition = getRandomPosition();
         var currentPlayer = Object.create(Player);
         var tmpWeapon = Object.create(Weapon);
         tmpWeapon.init(tmpPosition, "Epée en bois", 10);
         currentPlayer.init(tmpPosition, characterNames[i], tmpWeapon, playerListUrl[i][0]);
         listPlayer.push(currentPlayer);
-
-        listAllPositions.splice(randomIndex,1);
         var directions = ["R","L","T","B"];
         directions.forEach(function(direction) {
             var positionAroundPlayer = Object.create(Position);
