@@ -9,13 +9,17 @@ var Obstacle = {
     }
 };
 
-function genListObstacle(nbObstacles, colMaxIndex, rowMaxIndex) {
+function genListObstacle (nbObstacles) {
     var listObstacle = [];
-    for (var j = 0; j < nbObstacles; j++) {
-        var tmpPosition = getCheckedPosition(colMaxIndex, rowMaxIndex);
-        var currentObstacle = Object.create(Obstacle); 
+    for (var i = 0; i < nbObstacles; i++) {
+        var randomIndex = getRandomIndexPosition(0, listAllPositions.length);
+        var randomAvailablePosition = listAllPositions[randomIndex];
+        var tmpPosition = Object.create(Position);
+        tmpPosition.setPosition(randomAvailablePosition.colIndex, randomAvailablePosition.rowIndex);
+        var currentObstacle = Object.create(Obstacle);
         currentObstacle.init(tmpPosition);
         listObstacle.push(currentObstacle);
+        listAllPositions.splice(randomIndex,1);
     }
     return listObstacle;
 }
