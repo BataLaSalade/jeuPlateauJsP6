@@ -14,9 +14,6 @@ var Position = {
         max = Math.floor(max);
         return Math.floor(Math.random() * (max - min)) + min;
     },
-    isSamePosition: function(positionToCompare) {
-        return this.colIndex == positionToCompare.colIndex && this.rowIndex == positionToCompare.rowIndex;
-    },
     setPositionFromDirection : function(direction, currentPosition, index) {
         switch (direction) {
             case "R":
@@ -35,41 +32,18 @@ var Position = {
                 break;
         }  
     },
+    isSamePosition: function(positionToCompare) {
+        return this.colIndex == positionToCompare.colIndex && this.rowIndex == positionToCompare.rowIndex;
+    },
     isOnTheMap : function () {
         return this.colIndex >= 0 && this.colIndex < map.columns && this.rowIndex >= 0 && this.rowIndex < map.rows;
     },
     isPlayerAround : function (positionToWatch) {
         return this.colIndex+1 == positionToWatch.colIndex || this.colIndex-1 == positionToWatch.colIndex || this.rowIndex+1 == positionToWatch.rowIndex || this.rowIndex-1 == positionToWatch.rowIndex; 
     }
-    
 }
-
-var listPositions = [];
-var errorCount = 0;
-
-function getCheckedPosition (colMaxIndex, rowMaxIndex) {
-    var positionToCheck = Object.create(Position);
-    positionToCheck.initRandomPosition(colMaxIndex, rowMaxIndex);
-    
-    for (var i = 0; i < listPositions.length; i++) {
-        while(positionToCheck.isSamePosition(listPositions[i])){
-            errorCount ++;
-            i=0;
-            positionToCheck.initRandomPosition(colMaxIndex, rowMaxIndex);
-        }
-    }
-    listPositions.push(positionToCheck);
-    return positionToCheck;
-};
 
 var listAllPositions = [];
-
-function getRandomIndexPosition (min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min)) + min;
-}
-
 function createAllPositionsObject(nbCol, nbRow) {
     for (var i = 0; i < nbCol; i++) {
         for (var j = 0; j < nbRow; j++) {
@@ -78,6 +52,12 @@ function createAllPositionsObject(nbCol, nbRow) {
             listAllPositions.push(newCell);
         }   
     }    
+}
+
+function getRandomIndexPosition (min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min)) + min;
 }
 
 function getIndexToFind (currentPosition) {

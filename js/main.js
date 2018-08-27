@@ -25,5 +25,4 @@ $(function ($) {
     map.display(weapons,$weapon);
     console.log(listAllPositions.length);
     
-    console.log("Duplicat position --> nb error : " + errorCount);
 });
