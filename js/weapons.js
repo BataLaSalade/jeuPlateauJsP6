@@ -2,6 +2,9 @@ var $weapon = $("<div />", {
     class : "weapon"
 });
 
+var weaponNames = ["Epée en bois","Baton", "Arc", "Epée", "Lance"];
+var weaponListUrl = ["./img/png/weapon_epeeBois.png","./img/png/weapon_baton.png", "./img/png/weapon_arc.png", "./img/png/weapon_epee.png", "./img/png/weapon_lance.png"];
+
 var Weapon = {
     init : function (position, name, damage, url) {
         this.name = name;
@@ -10,11 +13,6 @@ var Weapon = {
         this.imageUrl = url != "" ? url : "../img/png/weapon_baton.png";
     }
 };
-
-var weaponNames = ["Epée en bois","Baton", "Arc", "Epée", "Lance"];
-var weaponListUrl = ["./img/png/weapon_epeeBois.png","./img/png/weapon_baton.png", "./img/png/weapon_arc.png", "./img/png/weapon_epee.png", "./img/png/weapon_lance.png"]
-
-
 
 function genListWeapon (nbWeapons) {
     var listWeapons = [];
