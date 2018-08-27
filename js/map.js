@@ -9,11 +9,10 @@ var $square = $("<div />", {
 var map = {
     rows : 10,
     columns : 10,
-    nbObstacles : 15,
+    nbObstacles : 25,
     nbPlayers : 2,
     nbWeapons : 5,
     display : function (objets, container) {
-        
         for (j = 0; j < objets.length; j++) {
             $(".line:eq("+ objets[j].position.rowIndex +") .square:eq("+ objets[j].position.colIndex +")").append(container.clone().css("background-image", "url("+ objets[j].imageUrl +")"));
             
@@ -32,4 +31,3 @@ var map = {
         }
     }
 };
-
