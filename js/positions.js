@@ -41,6 +41,7 @@ var Position = {
     isPlayerAround : function (positionToWatch) {
         return this.colIndex+1 == positionToWatch.colIndex || this.colIndex-1 == positionToWatch.colIndex || this.rowIndex+1 == positionToWatch.rowIndex || this.rowIndex-1 == positionToWatch.rowIndex; 
     }
+    
 }
 
 var listPositions = [];
@@ -60,3 +61,30 @@ function getCheckedPosition (colMaxIndex, rowMaxIndex) {
     listPositions.push(positionToCheck);
     return positionToCheck;
 };
+
+var listAllPositions = [];
+
+function getRandomIndexPosition (min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min)) + min;
+}
+
+function createAllPositionsObject(nbCol, nbRow) {
+    for (var i = 0; i < nbCol; i++) {
+        for (var j = 0; j < nbRow; j++) {
+            var newCell = Object.create(Position);
+            newCell.setPosition(i,j);
+            listAllPositions.push(newCell);
+        }   
+    }    
+}
+
+function getIndexToFind (currentPosition) {
+    for (var i = 0; i < listAllPositions.length; i++) {
+        if (currentPosition.isSamePosition(listAllPositions[i])) {
+            var findIndex = i;
+        }
+    }
+    return findIndex;
+}
