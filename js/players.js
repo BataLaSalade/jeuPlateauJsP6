@@ -40,8 +40,7 @@ var Player = {
                 i++
             }
         })
-    },
-    
+    }
 };
 
 var characterNames = ["Chevalier Bleu", "Chevalier Rouge"];
@@ -50,29 +49,27 @@ var playerListUrl = [
     ["./img/png/RedCharacter_epeeBois.png", "./img/png/RedCharacter_arc.png", "./img/png/RedCharacter_baton.png", "./img/png/RedCharacter_epee.png",  "./img/png/RedCharacter_lance.png"]
 ]
 
-
-function genListPlayer(nbPlayers, colMaxIndex, rowMaxIndex) {
+function genListPlayer (nbPlayers) {
     var listPlayer = [];
     for (var i = 0; i < nbPlayers; i++) {
-        var tmpPosition = getCheckedPosition(colMaxIndex, rowMaxIndex);
-        if ( i > 0 ) {
-            var sawPlayer = 0;
-            for ( var j = 0; j < listPlayer.length; j++) {
-                while (tmpPosition.isPlayerAround(listPlayer[j].position)) {
-                    sawPlayer++
-                    tmpPosition = getCheckedPosition(colMaxIndex, rowMaxIndex);
-                } 
-            }
-        };
-        
+        var randomIndex = getRandomIndexPosition(0, listAllPositions.length);
+        var randomAvailablePosition = listAllPositions[randomIndex];
+        var tmpPosition = Object.create(Position);
+        tmpPosition.setPosition(randomAvailablePosition.colIndex, randomAvailablePosition.rowIndex);
         var currentPlayer = Object.create(Player);
         var tmpWeapon = Object.create(Weapon);
         tmpWeapon.init(tmpPosition, "Epée en bois", 10);
         currentPlayer.init(tmpPosition, characterNames[i], tmpWeapon, playerListUrl[i][0]);
         listPlayer.push(currentPlayer);
-    }
-    console.log("PLAYER EN VUE : Nb de vue = " + sawPlayer);
 
+        listAllPositions.splice(randomIndex,1);
+        var directions = ["R","L","T","B"];
+        directions.forEach(function(direction) {
+            var positionAroundPlayer = Object.create(Position);
+            positionAroundPlayer.setPositionFromDirection(direction, tmpPosition, 1);
+            var indexToFind = getIndexToFind(positionAroundPlayer);
+            listAllPositions.splice(indexToFind,1)
+        });
+    }
     return listPlayer;
 }
-
