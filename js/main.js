@@ -2,19 +2,28 @@ var listObjects = [];
 
 $(function ($) {
     map.genMap();
-    var obstacles = genListObstacle(map.nbObstacles, map.columns, map.rows);
+    createAllPositionsObject(map.columns, map.rows);
+    console.log(listAllPositions.length);
+
+    var obstacles = genListObstacle(map.nbObstacles);
     listObjects.push(obstacles);
     console.log(obstacles)
     map.display(obstacles, $obstacle);
-    var players = genListPlayer(map.nbPlayers, map.columns, map.rows);
+    console.log(listAllPositions.length);
+
+    var players = genListPlayer(map.nbPlayers);
     listObjects.push(players);
     console.log(players)
     map.display(players, $player);
+    console.log(listAllPositions.length);
     listObjects[1][0].createPositionToMove(listObjects[1][0].position);
     listObjects[1][1].createPositionToMove(listObjects[1][1].position);
-    var weapons = genListWeapon(map.nbWeapons, map.columns, map.rows);
+    
+    var weapons = genListWeapon(map.nbWeapons);
     listObjects.push(weapons);
     console.log(weapons);
     map.display(weapons,$weapon);
+    console.log(listAllPositions.length);
+    
     console.log("Duplicat position --> nb error : " + errorCount);
 });
