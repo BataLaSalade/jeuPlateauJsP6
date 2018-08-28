@@ -24,5 +24,10 @@ $(function ($) {
     console.log(weapons);
     map.display(weapons,$weapon);
     console.log(listAllPositions.length);
+
+    $(".goToCell").click(function() {
+        console.log("click");
+    });
+
     
 });

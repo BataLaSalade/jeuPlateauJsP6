@@ -38,7 +38,7 @@ var Player = {
                             break;
                         };
                     }
-                    $(".line:eq("+ (positionToMove.rowIndex) +") .square:eq("+ (positionToMove.colIndex) +")").css("border", border);
+                    $(".line:eq("+ (positionToMove.rowIndex) +") .square:eq("+ (positionToMove.colIndex) +")").css("border", border).addClass("goToCell");
                     
                 };
                 i++
