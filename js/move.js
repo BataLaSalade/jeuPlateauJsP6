@@ -1,3 +1,15 @@
+function moveDisable (position) {
+    for (var k = 0; k < listObjects[0].length; k++) {
+        var hasObjectOnAvailablePosition = position.isSamePosition(listObjects[0][k].position);
+        if (hasObjectOnAvailablePosition) {
+            border = "#85bb46 1px solid";
+            goOrDont = "Disable"
+            hasNoObjectOnTheWay = false;
+            break;
+        };
+    }
+}
+
 function moveToCell (objets, container, attribute, value) {
     var colIndex = objets.position.colIndex;
     var rowIndex = objets.position.rowIndex;
@@ -14,3 +26,4 @@ function remove (objets) {
     }
     objets.listOfPositionToMove = [];
 }
+

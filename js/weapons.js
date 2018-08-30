@@ -26,3 +26,8 @@ function genListWeapon (nbWeapons) {
     }
     return listWeapons;
 }
+
+function managePlayerWeapon(params) {
+    
+    
+}

@@ -25,34 +25,18 @@ $(function ($) {
     map.display(weapons,$weapon, "weapon");
     console.log(listAllPositions.length);
 
-    
-    /*$(".goToCell").on("click", function(e) {
-        remove(listObjects[1][0]);
-        console.log("click", e.target);
-        var colIndex = Number($(e.target).attr("colindex"));
-        var rowIndex = Number($(e.target).attr("rowindex"));
-        console.log("colIndex : " + colIndex);
-        console.log("rowIndex : " + rowIndex);
-        listObjects[1][0].position.setPosition(colIndex, rowIndex);
-        listObjects[1][0].createPositionToMove(listObjects[1][0].position);
-        moveToCell(listObjects[1][0], $player, "player",0);
-        
-    });*/
-    
    $(".square").on("click", function(e) {
         if($(e.target).hasClass("goToCell")) {
             remove(listObjects[1][0]);
-            console.log("click", e.target);
+            //console.log("click", e.target);
             var colIndex = Number($(e.target).attr("colindex"));
             var rowIndex = Number($(e.target).attr("rowindex"));
-            console.log("colIndex : " + colIndex);
-            console.log("rowIndex : " + rowIndex);
+            //console.log("colIndex : " + colIndex);
+            //console.log("rowIndex : " + rowIndex);
             listObjects[1][0].position.setPosition(colIndex, rowIndex);
             listObjects[1][0].createPositionToMove(listObjects[1][0].position);
             moveToCell(listObjects[1][0], $player, "player",0);
         }
     });
-    /*$(".square").on("click", function(e){
-        console.log("click", e.target);
-    });*/
+    
 });
