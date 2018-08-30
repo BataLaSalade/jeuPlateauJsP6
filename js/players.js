@@ -15,12 +15,14 @@ var Player = {
         this.characterName = characterName;
         this.weapon = weapon;
         this.imageUrl = url != "" ? url : "../img/png/BlueCharacter_epeeBois.png";
+        this.listOfPositionToMove = [];
     },
 
     createPositionToMove : function (objectPosition) {
         var moveMaxNumber = 3;
         var currentPosition = objectPosition;
         var directions = ["R","L","T","B"];
+        var scope = this;
         directions.forEach(function(direction) {
             var i = 1;
             var hasNoObjectOnTheWay = true;
@@ -29,19 +31,21 @@ var Player = {
                 positionToMove.setPositionFromDirection(direction, currentPosition, i);
                 var positionOnTheMap = positionToMove.isOnTheMap();
                 if (positionOnTheMap) {
+                    scope.listOfPositionToMove.push(positionToMove);
                     var border = "#e8d952 1px solid";
+                    var goOrDont = "goToCell";
                     for (var k = 0; k < listObjects[0].length; k++) {
                         var hasObjectOnAvailablePosition = positionToMove.isSamePosition(listObjects[0][k].position);
                         if (hasObjectOnAvailablePosition) {
-                            border = "initial";
+                            border = "#85bb46 1px solid";
+                            goOrDont = "Disable"
                             hasNoObjectOnTheWay = false;
                             break;
                         };
                     }
-                    $(".line:eq("+ (positionToMove.rowIndex) +") .square:eq("+ (positionToMove.colIndex) +")").css("border", border).addClass("goToCell");
-                    
+                    $(".line:eq("+ (positionToMove.rowIndex) +") .square:eq("+ (positionToMove.colIndex) +")").css("border", border).addClass(goOrDont); 
                 };
-                i++
+                i++;
             }
         })
     }

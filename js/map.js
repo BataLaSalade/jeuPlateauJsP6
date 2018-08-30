@@ -12,9 +12,9 @@ var map = {
     nbObstacles : 25,
     nbPlayers : 2,
     nbWeapons : 5,
-    display : function (objets, container) {
+    display : function (objets, container, attribute) {
         for (j = 0; j < objets.length; j++) {
-            $(".line:eq("+ objets[j].position.rowIndex +") .square:eq("+ objets[j].position.colIndex +")").append(container.clone().css("background-image", "url("+ objets[j].imageUrl +")"));
+            $(".line:eq("+ objets[j].position.rowIndex +") .square:eq("+ objets[j].position.colIndex +")").append(container.clone().css("background-image", "url("+ objets[j].imageUrl +")").attr(attribute, j+1));
             
         }
         var checkNumberEmpty = $(".square:empty").length;
