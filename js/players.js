@@ -57,7 +57,7 @@ function genListPlayer (nbPlayers) {
         var tmpPosition = getRandomPosition();
         var currentPlayer = Object.create(Player);
         var tmpWeapon = Object.create(Weapon);
-        tmpWeapon.init(tmpPosition, "Epée en bois", 10);
+        tmpWeapon.init(tmpPosition, "Epée en bois", 10, weaponListUrl[0]);
         currentPlayer.init(tmpPosition, characterNames[i], tmpWeapon, playerListUrl[i][0]);
         listPlayer.push(currentPlayer);
         var directions = ["R","L","T","B"];

@@ -1,5 +1,6 @@
 ///// ----- My var ----- /////
 $square : 50px;
+$childSize : 25px;
 ///////////////////////////////
 
 
@@ -11,29 +12,30 @@ body {
 .line{
     width: 100%;
     height: $square;
+    background: #8bc34a;
     display: flex;
     justify-content: center;
     .square{
         border: 1px solid #85bb46;
         width: $square;
         height: $square;
-        background:#8bc34a;
+        //background:#8bc34a;
         display: inline-block;
-        z-index: 1;
+        z-index: 300;
         .obstacle{
             background-size: cover;
-            height: $square;
+            height: $childSize ;
             z-index: 2;
         }
         
         .player{
             background-size: cover;
-            height: $square;
+            height: $childSize;
             z-index: 200;
         }
         .weapon{
             background-size: cover;
-            height: $square;
+            height: $childSize;
             z-index: 100;
         }
     }

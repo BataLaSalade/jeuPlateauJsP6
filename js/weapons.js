@@ -27,7 +27,12 @@ function genListWeapon (nbWeapons) {
     return listWeapons;
 }
 
-function managePlayerWeapon(params) {
-    
+function managePlayerWeapon(position, player) {
+    for(var i = 0; i < listObjects[2].length; i++) {
+        var hasWeaponOnAvailablePosition = position.isSamePosition(listObjects[2][i].position);
+        if (hasWeaponOnAvailablePosition) {
+            
+        }
+    }
     
 }
