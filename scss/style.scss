@@ -1,6 +1,6 @@
 ///// ----- My var ----- /////
 $square : 50px;
-$childSize : 25px;
+$childSize : 50px;
 ///////////////////////////////
 
 
@@ -31,7 +31,7 @@ body {
         .player{
             background-size: cover;
             height: $childSize;
-            z-index: 200;
+            z-index: 500;
         }
         .weapon{
             background-size: cover;

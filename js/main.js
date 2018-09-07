@@ -25,8 +25,8 @@ $(function ($) {
     map.display(weapons,$weapon, "weapon");
     console.log(listAllPositions.length);
 
-   $(".square").on("click", function(e) {
-        if($(e.target).hasClass("goToCell")) {
+   $(".square").children().on("click", function(e) {
+        if($(e.target).hasClass("goToCell") || $(e.target>div).hasClass("weapon")) {
             remove(listObjects[1][0]);
             console.log("click", e.target);
             var colIndex = Number($(e.target).attr("colindex"));
