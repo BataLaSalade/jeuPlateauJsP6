@@ -51,6 +51,7 @@ function createAllPositionsObject(nbCol, nbRow) {
             newCell.setPosition(i,j);
             listAllPositions.push(newCell);
             $(".line:eq("+ j +") .square:eq("+ i +")").attr({"colIndex": i,"rowIndex":j});
+
         }   
     }    
 }

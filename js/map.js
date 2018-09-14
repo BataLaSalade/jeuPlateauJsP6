@@ -14,8 +14,18 @@ var map = {
     nbWeapons : 5,
     display : function (objets, container, attribute) {
         for (j = 0; j < objets.length; j++) {
-            $(".line:eq("+ objets[j].position.rowIndex +") .square:eq("+ objets[j].position.colIndex +")").append(container.clone().css("background-image", "url("+ objets[j].imageUrl +")").attr(attribute, j+1));
-            
+            console.log(attribute);
+            var typeObject = attribute;
+            var colIndex = "colIndex";
+            var rowIndex = "rowIndex";
+            var relayAttribute = {};
+            relayAttribute[typeObject] = j+1;
+            relayAttribute[colIndex] = objets[j].position.colIndex;
+            relayAttribute[rowIndex] = objets[j].position.rowIndex;
+            $(".line:eq("+ objets[j].position.rowIndex +") .square:eq("+ objets[j].position.colIndex +")")
+            .append(container.clone().css("background-image", "url("+ objets[j].imageUrl +")")
+            .attr(relayAttribute)
+            );
         }
         var checkNumberEmpty = $(".square:empty").length;
         var checkNumberFull = $(".square").contents().length;
