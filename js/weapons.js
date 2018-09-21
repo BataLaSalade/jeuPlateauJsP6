@@ -27,12 +27,28 @@ function genListWeapon (nbWeapons) {
     return listWeapons;
 }
 
-function managePlayerWeapon(position, player) {
+function managePlayerWeapon(player) {
     for(var i = 0; i < listObjects[2].length; i++) {
-        var hasWeaponOnAvailablePosition = position.isSamePosition(listObjects[2][i].position);
+        var hasWeaponOnAvailablePosition = player.position.isSamePosition(listObjects[2][i].position);
         if (hasWeaponOnAvailablePosition) {
-            
+            player.inventory.push(listObjects[2][i]);
+            var currentCaseElement = $(".line:eq("+ player.position.rowIndex +") .square:eq("+ player.position.colIndex +") .weapon");
+            currentCaseElement.css("background-image", "url("+ player.inventory[0].imageUrl +")");
+            currentCaseElement.hide();
+            player.weapon = listObjects[2][i];
+            player.inventory[0].position = player.weapon.position
+            console.log("keke");
+            var indexToRemove = i;
+            break
         }
     }
-    
+    listObjects[2].push(player.inventory[0]);
+    player.inventory.splice(0,1);
+    listObjects[2].splice(indexToRemove, 1);
+}
+
+function showAllWeapon() {
+    for(var i = 0; i < listObjects[2].length; i++) {
+        $(".line:eq("+ listObjects[2][i].position.rowIndex +") .square:eq("+ listObjects[2][i].position.colIndex +") .weapon").show();
+    }
 }

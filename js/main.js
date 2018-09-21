@@ -28,12 +28,17 @@ $(function ($) {
     $("#wrapper").on("click", ".Enable", function(e) {
         remove(listObjects[1][0]);
         console.log("click", e.target);
-        var colIndex = Number($(e.target).attr("colindex"));
-        var rowIndex = Number($(e.target).attr("rowindex"));
-        listObjects[1][0].position.setPosition(colIndex, rowIndex);
+        var colIndexNextMove = Number($(e.target).attr("colindex"));
+        var rowIndexNextMove = Number($(e.target).attr("rowindex"));
+        listObjects[1][0].position.setPosition(colIndexNextMove, rowIndexNextMove);
         listObjects[1][0].createPositionToMove(listObjects[1][0].position);
         moveToCell(listObjects[1][0], $player, "player",0);
-        console.log("click");
+        showAllWeapon();
+        if ($(e.target).hasClass("weapon")) {
+            console.log("une arme !!");
+            managePlayerWeapon(listObjects[1][0]);
+        }
+        
     });
     
 });

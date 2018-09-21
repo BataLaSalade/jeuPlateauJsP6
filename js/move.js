@@ -1,4 +1,4 @@
-function moveDisable (position) {
+/*function moveDisable (position) {
     for (var k = 0; k < listObjects[0].length; k++) {
         var hasObjectOnAvailablePosition = position.isSamePosition(listObjects[0][k].position);
         if (hasObjectOnAvailablePosition) {
@@ -8,7 +8,7 @@ function moveDisable (position) {
             break;
         };
     }
-}
+}*/
 
 function moveToCell (objets, container, attribute, value) {
     var colIndex = objets.position.colIndex;

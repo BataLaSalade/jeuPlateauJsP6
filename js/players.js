@@ -14,12 +14,13 @@ var Player = {
         this.sante = 100;
         this.characterName = characterName;
         this.weapon = weapon;
+        this.inventory = [weapon]
         this.imageUrl = url != "" ? url : "../img/png/BlueCharacter_epeeBois.png";
         this.listOfPositionToMove = [];
     },
 
     createPositionToMove : function (objectPosition) {
-        var moveMaxNumber = 3;
+        var moveMaxNumber = 1;
         var currentPosition = objectPosition;
         var directions = ["R","L","T","B"];
         var scope = this;
