@@ -25,7 +25,7 @@ $(function ($) {
     map.display(weapons,$weapon, "weapon");
     console.log(listAllPositions.length);
 
-    $("#wrapper").on("click", ".goToCell", function(e) {
+    $("#wrapper").on("click", ".Enable", function(e) {
         remove(listObjects[1][0]);
         console.log("click", e.target);
         var colIndex = Number($(e.target).attr("colindex"));

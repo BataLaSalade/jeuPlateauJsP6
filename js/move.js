@@ -3,7 +3,7 @@ function moveDisable (position) {
         var hasObjectOnAvailablePosition = position.isSamePosition(listObjects[0][k].position);
         if (hasObjectOnAvailablePosition) {
             border = "#85bb46 1px solid";
-            goOrDont = "Disable"
+            cellAccess = "Disable"
             hasNoObjectOnTheWay = false;
             break;
         };
@@ -22,7 +22,7 @@ function remove (objets) {
     var rowIndex = objets.position.rowIndex;
     $(".line:eq("+ rowIndex +") .square:eq("+ colIndex +") .player").remove();
     for (var i = 0; i < objets.listOfPositionToMove.length; i++) {
-        $(".line:eq("+ (objets.listOfPositionToMove[i].rowIndex) +") .square:eq("+ (objets.listOfPositionToMove[i].colIndex) +")").css("border-color", "#85bb46").removeClass("goToCell");
+        $(".line:eq("+ (objets.listOfPositionToMove[i].rowIndex) +") .square:eq("+ (objets.listOfPositionToMove[i].colIndex) +")").css("border-color", "#85bb46").removeClass("Enable");
     }
     objets.listOfPositionToMove = [];
 }

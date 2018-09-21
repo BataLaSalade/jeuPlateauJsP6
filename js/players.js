@@ -33,17 +33,26 @@ var Player = {
                 if (positionOnTheMap) {
                     scope.listOfPositionToMove.push(positionToMove);
                     var border = "#e8d952 1px solid";
-                    var goOrDont = "goToCell";
-                    for (var k = 0; k < listObjects[0].length; k++) {
-                        var hasObjectOnAvailablePosition = positionToMove.isSamePosition(listObjects[0][k].position);
+                    var cellAccess = "Enable";
+                    for (var j = 0; j < listObjects[0].length; j++) {
+                        var hasObjectOnAvailablePosition = positionToMove.isSamePosition(listObjects[0][j].position);
                         if (hasObjectOnAvailablePosition) {
                             border = "#85bb46 1px solid";
-                            goOrDont = "Disable"
+                            cellAccess = "Disable"
                             hasNoObjectOnTheWay = false;
                             break;
                         };
                     }
-                    $(".line:eq("+ (positionToMove.rowIndex) +") .square:eq("+ (positionToMove.colIndex) +")").css("border", border).addClass(goOrDont); 
+                    for (var k = 0; k < listObjects[1].length; k++) {
+                        var hasObjectOnAvailablePosition = positionToMove.isSamePosition(listObjects[1][k].position);
+                        if (hasObjectOnAvailablePosition) {
+                            border = "#85bb46 1px solid";
+                            cellAccess = "Disable"
+                            hasNoObjectOnTheWay = false;
+                            break;
+                        };
+                    }
+                    $(".line:eq("+ (positionToMove.rowIndex) +") .square:eq("+ (positionToMove.colIndex) +")").css("border", border).addClass(cellAccess); 
                 };
                 i++;
             }
