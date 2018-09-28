@@ -10,7 +10,7 @@ var playerListUrl = [
 
 var Player = {
     init : function (id, position, characterName, weapon, url){
-        this.id = id
+        this.id = id;
         this.position = position;
         this.sante = 100;
         this.characterName = characterName;
