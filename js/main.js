@@ -1,32 +1,29 @@
 var listObjects = [];
-var list = {};
+var mapContainer = {};
 
 $(function ($) {
     map.genMap();
     createAllPositionsObject(map.columns, map.rows);
     console.log(listAllPositions.length);
 
-    var obstacles = genListObstacle(map.nbObstacles);
-    list.obstacles = obstacles;
-    listObjects.push(obstacles);
-    console.log(obstacles)
-    map.display(obstacles, $obstacle, "obstacle");
+    mapContainer.obstacles = genListObstacle(map.nbObstacles);
+    listObjects.push(mapContainer.obstacles);
+    console.log(mapContainer.obstacles)
+    map.display(mapContainer.obstacles, $obstacle, "obstacle");
     console.log(listAllPositions.length);
 
-    var players = genListPlayer(map.nbPlayers);
-    list.players = players;
-    listObjects.push(players);
-    console.log(players)
-    map.display(players, $player, "player");
+    mapContainer.players = genListPlayer(map.nbPlayers);
+    listObjects.push(mapContainer.players);
+    console.log(mapContainer.players)
+    map.display(mapContainer.players, $player, "player");
     console.log(listAllPositions.length);
     listObjects[1][0].createPositionToMove(listObjects[1][0].position);
     listObjects[1][1].createPositionToMove(listObjects[1][1].position);
     
-    var weapons = genListWeapon(map.nbWeapons);
-    list.weapons = weapons;
-    listObjects.push(weapons);
-    console.log(weapons);
-    map.display(weapons,$weapon, "weapon");
+    mapContainer.weapons = genListWeapon(map.nbWeapons);
+    listObjects.push(mapContainer.weapons);
+    console.log(mapContainer.weapons);
+    map.display(mapContainer.weapons,$weapon, "weapon");
     console.log(listAllPositions.length);
 
     $("#wrapper").on("click", ".Enable", function(e) {

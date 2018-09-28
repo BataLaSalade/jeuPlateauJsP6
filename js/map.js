@@ -6,27 +6,35 @@ var $square = $("<div />", {
     class: 'square'
 });
 
+
+function getObejt(id) {
+    var armeEnBois;
+    listObstacle[0].forEach(arme => {
+        if(arme.id == id)
+            armeEnBois = arme;
+    });
+    return armeEnBois;
+}
+
 var map = {
     rows : 10,
     columns : 10,
     nbObstacles : 25,
     nbPlayers : 2,
     nbWeapons : 5,
-    display : function (objets, container, attribute) {
-        for (j = 0; j < objets.length; j++) {
+    display : function (mapObjects, container, attribute) {
+        mapObjects.forEach(function(mapElement, index) {
             console.log(attribute);
             var typeObject = attribute;
             var colIndex = "colIndex";
             var rowIndex = "rowIndex";
             var relayAttribute = {};
-            relayAttribute[typeObject] = j+1;
-            relayAttribute[colIndex] = objets[j].position.colIndex;
-            relayAttribute[rowIndex] = objets[j].position.rowIndex;
-            $(".line:eq("+ objets[j].position.rowIndex +") .square:eq("+ objets[j].position.colIndex +")")
-            .append(container.clone().css("background-image", "url("+ objets[j].imageUrl +")")
-            .attr(relayAttribute)
-            );
-        }
+            relayAttribute[typeObject] = index+1;
+            relayAttribute[colIndex] = mapElement.position.colIndex;
+            relayAttribute[rowIndex] = mapElement.position.rowIndex;
+            var currentCell = $(".line:eq("+ mapElement.position.rowIndex +") .square:eq("+ mapElement.position.colIndex +")");
+            currentCell.append(container.clone().css("background-image", "url("+ mapElement.imageUrl +")").attr(relayAttribute));
+        })
         var checkNumberEmpty = $(".square:empty").length;
         var checkNumberFull = $(".square").contents().length;
         console.log ("Nb cell vide : " + checkNumberEmpty +"\nNb cell pleine : " + checkNumberFull);
