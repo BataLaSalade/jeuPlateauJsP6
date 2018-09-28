@@ -36,24 +36,22 @@ var Player = {
                     scope.listOfPositionToMove.push(positionToMove);
                     var border = "#e8d952 1px solid";
                     var cellAccess = "Enable";
-                    for (var j = 0; j < listObjects[0].length; j++) {
-                        var hasObjectOnAvailablePosition = positionToMove.isSamePosition(listObjects[0][j].position);
+                    mapContainer.obstacles.forEach(function(obstacle){
+                        var hasObjectOnAvailablePosition = positionToMove.isSamePosition(obstacle.position);
                         if (hasObjectOnAvailablePosition) {
                             border = "#85bb46 1px solid";
                             cellAccess = "Disable"
                             hasNoObjectOnTheWay = false;
-                            break;
                         };
-                    }
-                    for (var k = 0; k < listObjects[1].length; k++) {
-                        var hasObjectOnAvailablePosition = positionToMove.isSamePosition(listObjects[1][k].position);
+                    });
+                    mapContainer.players.forEach(function(player){
+                        var hasObjectOnAvailablePosition = positionToMove.isSamePosition(player.position);
                         if (hasObjectOnAvailablePosition) {
                             border = "#85bb46 1px solid";
                             cellAccess = "Disable"
                             hasNoObjectOnTheWay = false;
-                            break;
                         };
-                    }
+                    })
                     $(".line:eq("+ (positionToMove.rowIndex) +") .square:eq("+ (positionToMove.colIndex) +")").css("border", border).addClass(cellAccess); 
                 };
                 i++;
@@ -104,3 +102,25 @@ function genListPlayer (nbPlayers) {
     }
     return listPlayer;
 }
+
+function hasObjectOnAvailablePosition (isObjectOnPosition) {
+    if (isObjectOnPosition) {
+        border = "#85bb46 1px solid";
+        cellAccess = "Disable"
+        hasNoObjectOnTheWay = false;
+    }else{
+        return
+    };
+}
+
+
+/*
+mapContainer.obstacles.forEach(function(obstacle){
+    var isObstaclesOnAvailablePosition = positionToMove.isSamePosition(obstacle.position);
+    hasObjectOnAvailablePosition (isObstaclesOnAvailablePosition)
+});
+mapContainer.players.forEach(function(player){
+    var isPlayerOnAvailablePosition = positionToMove.isSamePosition(player.position);
+    hasObjectOnAvailablePosition (isPlayerOnAvailablePosition);
+});
+*/
