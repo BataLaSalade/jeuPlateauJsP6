@@ -58,6 +58,30 @@ var Player = {
                 i++;
             }
         })
+    },
+
+    playerWearWeapon : function () {
+        var currentWeapon = weaponsEnum.woodenSword
+        switch (currentWeapon) {
+            case weaponsEnum.woodenSword:
+                console.log(currentWeapon)
+                break;
+            case weaponsEnum.staff:
+                console.log(currentWeapon)
+                break;
+            case weaponsEnum.bow:
+                console.log(currentWeapon)
+                break;
+            case weaponsEnum.sword:
+                console.log(currentWeapon)
+                break;
+            case weaponsEnum.spear:
+                console.log(currentWeapon)
+                break;
+
+            default:
+                break;
+        }
     }
 };
 
