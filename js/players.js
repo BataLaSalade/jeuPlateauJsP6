@@ -9,7 +9,8 @@ var playerListUrl = [
 ];
 
 var Player = {
-    init : function (position, characterName, weapon, url){
+    init : function (id, position, characterName, weapon, url){
+        this.id = id
         this.position = position;
         this.sante = 100;
         this.characterName = characterName;
@@ -91,7 +92,7 @@ function genListPlayer (nbPlayers) {
         var currentPlayer = Object.create(Player);
         var tmpWeapon = Object.create(Weapon);
         tmpWeapon.init(tmpPosition, "Epée en bois", 10, weaponListUrl[0]);
-        currentPlayer.init(tmpPosition, characterNames[i], tmpWeapon, playerListUrl[i][0]);
+        currentPlayer.init(i, tmpPosition, characterNames[i], tmpWeapon, playerListUrl[i][0]);
         listPlayer.push(currentPlayer);
         var directions = ["R","L","T","B"];
         directions.forEach(function(direction) {
