@@ -78,7 +78,6 @@ var Player = {
             case weaponsEnum.spear:
                 console.log(currentWeapon)
                 break;
-
             default:
                 break;
         }
