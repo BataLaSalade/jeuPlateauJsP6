@@ -1,4 +1,5 @@
 var listObjects = [];
+var list = {};
 
 $(function ($) {
     map.genMap();
@@ -6,12 +7,14 @@ $(function ($) {
     console.log(listAllPositions.length);
 
     var obstacles = genListObstacle(map.nbObstacles);
+    list.obstacles = obstacles;
     listObjects.push(obstacles);
     console.log(obstacles)
     map.display(obstacles, $obstacle, "obstacle");
     console.log(listAllPositions.length);
 
     var players = genListPlayer(map.nbPlayers);
+    list.players = players;
     listObjects.push(players);
     console.log(players)
     map.display(players, $player, "player");
@@ -20,6 +23,7 @@ $(function ($) {
     listObjects[1][1].createPositionToMove(listObjects[1][1].position);
     
     var weapons = genListWeapon(map.nbWeapons);
+    list.weapons = weapons;
     listObjects.push(weapons);
     console.log(weapons);
     map.display(weapons,$weapon, "weapon");
