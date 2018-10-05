@@ -13,6 +13,7 @@ function remove (player) {
     var colIndex = player.position.colIndex;
     var rowIndex = player.position.rowIndex;
     var cell = $(".line:eq("+ rowIndex +") .square:eq("+ colIndex +") .player")
+    
     cell.remove();
     player.listOfPositionToMove.forEach(removeEnableClass);
     player.listOfPositionToMove = [];
