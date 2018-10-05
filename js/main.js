@@ -3,20 +3,20 @@ var mapContainer = {};
 
 $(function ($) {
     map.genMap();
-    createAllPositionsObject(map.columns, map.rows);
-    console.log(listAllPositions.length);
+    createCellPositionObject(map.columns, map.rows);
+    console.log(mapCellPositions.length);
 
     mapContainer.obstacles = genListObstacle(map.nbObstacles);
     listObjects.push(mapContainer.obstacles);
     console.log(mapContainer.obstacles)
     map.display(mapContainer.obstacles, $obstacle, "obstacle");
-    console.log(listAllPositions.length);
+    console.log(mapCellPositions.length);
 
     mapContainer.players = genListPlayer(map.nbPlayers);
     listObjects.push(mapContainer.players);
     console.log(mapContainer.players)
     map.display(mapContainer.players, $player, "player");
-    console.log(listAllPositions.length);
+    console.log(mapCellPositions.length);
     listObjects[1][0].createPositionToMove(listObjects[1][0].position);
     listObjects[1][1].createPositionToMove(listObjects[1][1].position);
     
@@ -24,7 +24,7 @@ $(function ($) {
     listObjects.push(mapContainer.weapons);
     console.log(mapContainer.weapons);
     map.display(mapContainer.weapons,$weapon, "weapon");
-    console.log(listAllPositions.length);
+    console.log(mapCellPositions.length);
 
     $("#wrapper").on("click", ".Enable", function(e) {
         remove(listObjects[1][0]);

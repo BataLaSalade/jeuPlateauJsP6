@@ -100,7 +100,7 @@ function genListPlayer (nbPlayers) {
             var positionAroundPlayer = Object.create(Position);
             positionAroundPlayer.setPositionFromDirection(direction, tmpPosition, 1);
             var indexToFind = getIndexToFind(positionAroundPlayer);
-            listAllPositions.splice(indexToFind,1)
+            mapCellPositions.splice(indexToFind,1)
         });
     }
     return listPlayer;

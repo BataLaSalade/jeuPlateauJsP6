@@ -43,14 +43,16 @@ var Position = {
     }
 }
 
-var listAllPositions = [];
+
+var mapCellPositions = [];
 function createAllPositionsObject(nbCol, nbRow) {
     for (var i = 0; i < nbCol; i++) {
         for (var j = 0; j < nbRow; j++) {
             var newCell = Object.create(Position);
             newCell.setPosition(i,j);
-            listAllPositions.push(newCell);
-            $(".line:eq("+ j +") .square:eq("+ i +")").attr({"colIndex": i,"rowIndex":j});
+            mapCellPositions.push(newCell);
+            var cell =  $(".line:eq("+ j +") .square:eq("+ i +")")
+            cell.attr({"colIndex": i,"rowIndex":j});
 
         }   
     }    
@@ -63,8 +65,8 @@ function getRandomIndexPosition (min, max) {
 }
 
 function getIndexToFind (currentPosition) {
-    for (var i = 0; i < listAllPositions.length; i++) {
-        if (currentPosition.isSamePosition(listAllPositions[i])) {
+    for (var i = 0; i < mapCellPositions.length; i++) {
+        if (currentPosition.isSamePosition(mapCellPositions[i])) {
             var findIndex = i;
         }
     }
@@ -72,11 +74,11 @@ function getIndexToFind (currentPosition) {
 }
 
 function getRandomPosition () {
-    var randomIndex = getRandomIndexPosition(0, listAllPositions.length);
-    var randomAvailablePosition = listAllPositions[randomIndex];
+    var randomIndex = getRandomIndexPosition(0, mapCellPositions.length);
+    var randomAvailablePosition = mapCellPositions[randomIndex];
     var tmpPosition = Object.create(Position);
     tmpPosition.setPosition(randomAvailablePosition.colIndex, randomAvailablePosition.rowIndex);
-    listAllPositions.splice(randomIndex,1);
+    mapCellPositions.splice(randomIndex,1);
 
     return tmpPosition;
 }
