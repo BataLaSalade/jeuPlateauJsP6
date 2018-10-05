@@ -1,5 +1,11 @@
 
-var mapContainer = {};
+var mapContainer = {
+    init : function () {
+        this.obstacles = genListObstacle(map.nbObstacles);
+        this.players = genListPlayer(map.nbPlayers);
+        this.weapons = genListWeapon(map.nbWeapons);
+    }
+};
 
 var blue = playerEnum.blue;
 var red = playerEnum.red;
@@ -9,22 +15,16 @@ $(function ($) {
     createCellPositionObject(map.columns, map.rows);
     console.log(mapCellPositions.length);
 
-    mapContainer.obstacles = genListObstacle(map.nbObstacles);
-    console.log(mapContainer.obstacles)
-    map.display(mapContainer.obstacles, $obstacle, "obstacle");
-    console.log(mapCellPositions.length);
+    mapContainer.init();
+    console.log(mapContainer.obstacles);
+    console.log(mapContainer.players);
+    console.log(mapContainer.weapons);
 
-    mapContainer.players = genListPlayer(map.nbPlayers);
-    console.log(mapContainer.players)
+    map.display(mapContainer.obstacles, $obstacle, "obstacle");
     map.display(mapContainer.players, $player, "player");
-    console.log(mapCellPositions.length);
     mapContainer.players[blue].createPositionToMove(mapContainer.players[blue].position);
     mapContainer.players[red].createPositionToMove(mapContainer.players[red].position);
-    
-    mapContainer.weapons = genListWeapon(map.nbWeapons);
-    console.log(mapContainer.weapons);
     map.display(mapContainer.weapons,$weapon, "weapon");
-    console.log(mapCellPositions.length);
 
     $("#wrapper").on("click", ".Enable", function(e) {
         remove(mapContainer.players[blue]);
