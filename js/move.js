@@ -9,16 +9,16 @@ function moveToCell (objets, container, attribute, value) {
 
 }
 
-function remove (objets) {
-    var colIndex = objets.position.colIndex;
-    var rowIndex = objets.position.rowIndex;
-    $(".line:eq("+ rowIndex +") .square:eq("+ colIndex +") .player").remove();
-    for (var i = 0; i < objets.listOfPositionToMove.length; i++) {
-        $(".line:eq("+ (objets.listOfPositionToMove[i].rowIndex) +") .square:eq("+ (objets.listOfPositionToMove[i].colIndex) +")").css("border-color", "#85bb46").removeClass("Enable");
-        console.log("Coucou du removeClass");
-        console.log(objets);
-        console.log(objets.listOfPositionToMove);
-    }
-    objets.listOfPositionToMove = [];
+function remove (player) {
+    var colIndex = player.position.colIndex;
+    var rowIndex = player.position.rowIndex;
+    var cell = $(".line:eq("+ rowIndex +") .square:eq("+ colIndex +") .player")
+    cell.remove();
+    player.listOfPositionToMove.forEach(removeEnableClass);
+    player.listOfPositionToMove = [];
 }
 
+function removeEnableClass (position) {
+    var cell = $(".line:eq("+ (position.rowIndex) +") .square:eq("+ (position.colIndex) +")");
+    cell.css("border-color", "#85bb46").removeClass("Enable");
+}
