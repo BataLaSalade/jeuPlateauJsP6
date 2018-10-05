@@ -39,20 +39,22 @@ var Player = {
                     mapContainer.obstacles.forEach(function(obstacle){
                         var hasObjectOnAvailablePosition = positionToMove.isSamePosition(obstacle.position);
                         if (hasObjectOnAvailablePosition) {
+                            console.log("coucou");
                             border = "#85bb46 1px solid";
                             cellAccess = "Disable"
                             hasNoObjectOnTheWay = false;
-                        };
+                        }
                     });
                     mapContainer.players.forEach(function(player){
                         var hasObjectOnAvailablePosition = positionToMove.isSamePosition(player.position);
                         if (hasObjectOnAvailablePosition) {
+                            console.log("coucou");
                             border = "#85bb46 1px solid";
                             cellAccess = "Disable"
                             hasNoObjectOnTheWay = false;
-                        };
-                    })
-                    $(".line:eq("+ (positionToMove.rowIndex) +") .square:eq("+ (positionToMove.colIndex) +")").css("border", border).addClass(cellAccess); 
+                        }
+                    });
+                    $(".line:eq("+ (positionToMove.rowIndex) +") .square:eq("+ (positionToMove.colIndex) +")").css("border", border).addClass(cellAccess);
                 };
                 i++;
             }
@@ -103,14 +105,19 @@ function genListPlayer (nbPlayers) {
     return listPlayer;
 }
 
-function hasObjectOnAvailablePosition (isObjectOnPosition) {
+function displayDisableCell (isObjectOnPosition, border, cellAccess, hasNoObjectOnTheWay, positionToMove) {
+    var border = border;
+    var cellAccess = cellAccess;
+    var hasNoObjectOnTheWay = hasNoObjectOnTheWay;
+    var positionToMove = positionToMove;
     if (isObjectOnPosition) {
+        console.log("coucou");
         border = "#85bb46 1px solid";
         cellAccess = "Disable"
         hasNoObjectOnTheWay = false;
-    }else{
-        return
-    };
+    }
+    //$(".line:eq("+ (positionToMove.rowIndex) +") .square:eq("+ (positionToMove.colIndex) +")").css("border", border).removeClass("Enable");
+    $(".line:eq("+ (positionToMove.rowIndex) +") .square:eq("+ (positionToMove.colIndex) +")").css("border", border).addClass(cellAccess);
 }
 
 

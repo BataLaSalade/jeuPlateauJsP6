@@ -23,6 +23,9 @@ function remove (objets) {
     $(".line:eq("+ rowIndex +") .square:eq("+ colIndex +") .player").remove();
     for (var i = 0; i < objets.listOfPositionToMove.length; i++) {
         $(".line:eq("+ (objets.listOfPositionToMove[i].rowIndex) +") .square:eq("+ (objets.listOfPositionToMove[i].colIndex) +")").css("border-color", "#85bb46").removeClass("Enable");
+        console.log("Coucou du removeClass");
+        console.log(objets);
+        console.log(objets.listOfPositionToMove);
     }
     objets.listOfPositionToMove = [];
 }
