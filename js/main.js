@@ -22,8 +22,8 @@ $(function ($) {
 
     map.display(mapContainer.obstacles, $obstacle, "obstacle");
     map.display(mapContainer.players, $player, "player");
-    mapContainer.players[blue].createPositionToMove(mapContainer.players[blue].position);
-    mapContainer.players[red].createPositionToMove(mapContainer.players[red].position);
+    mapContainer.players[blue].createPositionToMove();
+    mapContainer.players[red].createPositionToMove();
     map.display(mapContainer.weapons,$weapon, "weapon");
 
     $("#wrapper").on("click", ".Enable", function(e) {
@@ -32,7 +32,7 @@ $(function ($) {
         var colIndexNextMove = Number($(e.target).attr("colindex"));
         var rowIndexNextMove = Number($(e.target).attr("rowindex"));
         mapContainer.players[blue].position.setPosition(colIndexNextMove, rowIndexNextMove);
-        mapContainer.players[blue].createPositionToMove(mapContainer.players[blue].position);
+        mapContainer.players[blue].createPositionToMove();
         moveToCell(mapContainer.players[blue], $player, "player",0);
         showAllWeapon();
         if ($(e.target).hasClass("weapon")) {

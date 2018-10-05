@@ -20,9 +20,9 @@ var Player = {
         this.listOfPositionToMove = [];
     },
 
-    createPositionToMove : function (objectPosition) {
+    createPositionToMove : function () {
         var moveMaxNumber = 1;
-        var currentPosition = objectPosition;
+        var currentPosition = this.position;
         var directions = ["R","L","T","B"];
         var scope = this;
         directions.forEach(function(direction) {
