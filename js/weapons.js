@@ -29,27 +29,28 @@ function genListWeapon (nbWeapons) {
 }
 
 function managePlayerWeapon(player) {
-    for(var i = 0; i < listObjects[2].length; i++) {
-        var hasWeaponOnAvailablePosition = player.position.isSamePosition(listObjects[2][i].position);
+    for(var i = 0; i < mapContainer.weapons.length; i++) {
+        var hasWeaponOnAvailablePosition = player.position.isSamePosition(mapContainer.weapons[i].position);
         if (hasWeaponOnAvailablePosition) {
-            player.inventory.push(listObjects[2][i]);
+            player.inventory.push(mapContainer.weapons[i]);
             var currentCaseElement = $(".line:eq("+ player.position.rowIndex +") .square:eq("+ player.position.colIndex +") .weapon");
             currentCaseElement.css("background-image", "url("+ player.inventory[0].imageUrl +")");
             currentCaseElement.hide();
-            player.weapon = listObjects[2][i];
+            player.weapon = mapContainer.weapons[i];
             player.inventory[0].position = player.weapon.position
             console.log("keke");
             var indexToRemove = i;
             break
         }
     }
-    listObjects[2].push(player.inventory[0]);
+    mapContainer.weapons.push(player.inventory[0]);
     player.inventory.splice(0,1);
-    listObjects[2].splice(indexToRemove, 1);
+    mapContainer.weapons.splice(indexToRemove, 1);
 }
 
 function showAllWeapon() {
-    for(var i = 0; i < listObjects[2].length; i++) {
-        $(".line:eq("+ listObjects[2][i].position.rowIndex +") .square:eq("+ listObjects[2][i].position.colIndex +") .weapon").show();
+    for(var i = 0; i < mapContainer.weapons.length; i++) {
+        var weaponCell = $(".line:eq("+ mapContainer.weapons[i].position.rowIndex +") .square:eq("+ mapContainer.weapons[i].position.colIndex +") .weapon")
+        weaponCell.show();
     }
 }
