@@ -1,19 +1,11 @@
-/*function moveDisable (position) {
-    for (var k = 0; k < listObjects[0].length; k++) {
-        var hasObjectOnAvailablePosition = position.isSamePosition(listObjects[0][k].position);
-        if (hasObjectOnAvailablePosition) {
-            border = "#85bb46 1px solid";
-            cellAccess = "Disable"
-            hasNoObjectOnTheWay = false;
-            break;
-        };
-    }
-}*/
 
 function moveToCell (objets, container, attribute, value) {
     var colIndex = objets.position.colIndex;
     var rowIndex = objets.position.rowIndex;
-    $(".line:eq("+ rowIndex +") .square:eq("+ colIndex +")").append(container.clone().css("background-image", "url("+ playerListUrl[value][0] +")").attr(attribute, value+1));
+    var containerCell = $(".line:eq("+ rowIndex +") .square:eq("+ colIndex +")");
+    var cellToMove = container.clone().css("background-image", "url("+ playerListUrl[value][0] +")").attr(attribute, value+1);
+    
+    containerCell.append(cellToMove);
 
 }
 
