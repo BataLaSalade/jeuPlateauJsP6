@@ -21,6 +21,7 @@ function genListObstacle (nbObstacles) {
     return listObstacle;
 }
 
+// pour exemple
 function getArme(id) {
     var armeEnBois;
     listObstacle[0].forEach(arme => {

@@ -54,7 +54,8 @@ var Player = {
                             hasNoObjectOnTheWay = false;
                         }
                     });
-                    $(".line:eq("+ (positionToMove.rowIndex) +") .square:eq("+ (positionToMove.colIndex) +")").css("border", border).addClass(cellAccess);
+                    var cell = $(".line:eq("+ (positionToMove.rowIndex) +") .square:eq("+ (positionToMove.colIndex) +")")
+                    cell.css("border", border).addClass(cellAccess);
                 };
                 i++;
             }
@@ -120,14 +121,3 @@ function displayDisableCell (isObjectOnPosition, border, cellAccess, hasNoObject
     $(".line:eq("+ (positionToMove.rowIndex) +") .square:eq("+ (positionToMove.colIndex) +")").css("border", border).addClass(cellAccess);
 }
 
-
-/*
-mapContainer.obstacles.forEach(function(obstacle){
-    var isObstaclesOnAvailablePosition = positionToMove.isSamePosition(obstacle.position);
-    hasObjectOnAvailablePosition (isObstaclesOnAvailablePosition)
-});
-mapContainer.players.forEach(function(player){
-    var isPlayerOnAvailablePosition = positionToMove.isSamePosition(player.position);
-    hasObjectOnAvailablePosition (isPlayerOnAvailablePosition);
-});
-*/
