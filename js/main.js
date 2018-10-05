@@ -1,6 +1,9 @@
 
 var mapContainer = {};
 
+var blue = playerEnum.blue;
+var red = playerEnum.red;
+
 $(function ($) {
     map.genMap();
     createCellPositionObject(map.columns, map.rows);
@@ -15,8 +18,8 @@ $(function ($) {
     console.log(mapContainer.players)
     map.display(mapContainer.players, $player, "player");
     console.log(mapCellPositions.length);
-    mapContainer.players[0].createPositionToMove(mapContainer.players[0].position);
-    mapContainer.players[1].createPositionToMove(mapContainer.players[1].position);
+    mapContainer.players[blue].createPositionToMove(mapContainer.players[blue].position);
+    mapContainer.players[red].createPositionToMove(mapContainer.players[red].position);
     
     mapContainer.weapons = genListWeapon(map.nbWeapons);
     console.log(mapContainer.weapons);
@@ -24,17 +27,17 @@ $(function ($) {
     console.log(mapCellPositions.length);
 
     $("#wrapper").on("click", ".Enable", function(e) {
-        remove(mapContainer.players[0]);
+        remove(mapContainer.players[blue]);
         console.log("click", e.target);
         var colIndexNextMove = Number($(e.target).attr("colindex"));
         var rowIndexNextMove = Number($(e.target).attr("rowindex"));
-        mapContainer.players[0].position.setPosition(colIndexNextMove, rowIndexNextMove);
-        mapContainer.players[0].createPositionToMove(mapContainer.players[0].position);
-        moveToCell(mapContainer.players[0], $player, "player",0);
+        mapContainer.players[blue].position.setPosition(colIndexNextMove, rowIndexNextMove);
+        mapContainer.players[blue].createPositionToMove(mapContainer.players[blue].position);
+        moveToCell(mapContainer.players[blue], $player, "player",0);
         showAllWeapon();
         if ($(e.target).hasClass("weapon")) {
             console.log("une arme !!");
-            managePlayerWeapon(mapContainer.players[0]);
+            managePlayerWeapon(mapContainer.players[blue]);
         }
         
     });
