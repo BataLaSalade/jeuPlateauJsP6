@@ -36,26 +36,17 @@ var Player = {
                     scope.listOfPositionToMove.push(positionToMove);
                     var border = "#e8d952 1px solid";
                     var cellAccess = "Enable";
+                    var isDisable = false;
                     mapContainer.obstacles.forEach(function(obstacle){
-                        var hasObjectOnAvailablePosition = positionToMove.isSamePosition(obstacle.position);
-                        if (hasObjectOnAvailablePosition) {
-                            console.log("coucou");
-                            border = "#85bb46 1px solid";
-                            cellAccess = "Disable"
-                            hasNoObjectOnTheWay = false;
-                        }
+                        isDisable = doesAtLeatOneObjectOnPosition (positionToMove, obstacle, isDisable)
                     });
+                    displayDisableCell (positionToMove, isDisable, hasNoObjectOnTheWay, border, cellAccess);
                     mapContainer.players.forEach(function(player){
-                        var hasObjectOnAvailablePosition = positionToMove.isSamePosition(player.position);
-                        if (hasObjectOnAvailablePosition) {
-                            console.log("coucou");
-                            border = "#85bb46 1px solid";
-                            cellAccess = "Disable"
-                            hasNoObjectOnTheWay = false;
-                        }
+                       isDisable = doesAtLeatOneObjectOnPosition (positionToMove, player, isDisable);        
                     });
-                    var cell = $(".line:eq("+ (positionToMove.rowIndex) +") .square:eq("+ (positionToMove.colIndex) +")")
-                    cell.css("border", border).addClass(cellAccess);
+                    displayDisableCell (positionToMove, isDisable, hasNoObjectOnTheWay, border, cellAccess);
+                    //var cell = $(".line:eq("+ (positionToMove.rowIndex) +") .square:eq("+ (positionToMove.colIndex) +")")
+                    //cell.css("border", border).addClass(cellAccess);
                 };
                 i++;
             }
@@ -106,18 +97,29 @@ function genListPlayer (nbPlayers) {
     return listPlayer;
 }
 
-function displayDisableCell (isObjectOnPosition, border, cellAccess, hasNoObjectOnTheWay, positionToMove) {
+function doesAtLeatOneObjectOnPosition (positionToMove, objectToFind, cellStatus) {
+    var hasObjectOnAvailablePosition = positionToMove.isSamePosition(objectToFind.position);
+    var isDisable = cellStatus;
+    console.log("doesAtLeatOneObjectOnPosition : " + isDisable);
+    if (hasObjectOnAvailablePosition) {
+        isDisable = true;
+        console.log("hasObjectOnAvailablePosition : " + isDisable);
+    };
+    return isDisable
+}
+
+function displayDisableCell (positionToMove, cellStatus, hasNoObjectOnTheWay, border, cellAccess) {
+    var isDisable = cellStatus
+    var hasNoObjectOnTheWay = hasNoObjectOnTheWay
     var border = border;
     var cellAccess = cellAccess;
-    var hasNoObjectOnTheWay = hasNoObjectOnTheWay;
-    var positionToMove = positionToMove;
-    if (isObjectOnPosition) {
-        console.log("coucou");
-        border = "#85bb46 1px solid";
-        cellAccess = "Disable"
-        hasNoObjectOnTheWay = false;
+    if (isDisable == true) {
+        console.log("Cell disable");
+        var border = "#85bb46 1px solid";
+        var cellAccess = "Disable"
+        var hasNoObjectOnTheWay = false;
     }
-    //$(".line:eq("+ (positionToMove.rowIndex) +") .square:eq("+ (positionToMove.colIndex) +")").css("border", border).removeClass("Enable");
+    $(".line:eq("+ (positionToMove.rowIndex) +") .square:eq("+ (positionToMove.colIndex) +")").css("border", border).removeClass("Enable");
     $(".line:eq("+ (positionToMove.rowIndex) +") .square:eq("+ (positionToMove.colIndex) +")").css("border", border).addClass(cellAccess);
 }
 
