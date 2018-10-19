@@ -38,7 +38,7 @@ $(function ($) {
         if ($(e.target).hasClass("weapon")) {
             console.log("une arme !!");
             managePlayerWeapon(mapContainer.players[blue]);
-        }
+        };
         
     });
     

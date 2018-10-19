@@ -88,13 +88,11 @@ function genListPlayer (nbPlayers) {
     return listPlayer;
 }
 
-function doesAtLeatOneObjectOnPosition (positionToMove, objectToFind, cellStatus) {
+function doesAtLeastOneObjectOnPosition (positionToMove, objectToFind, cellStatus) {
     var hasObjectOnAvailablePosition = positionToMove.isSamePosition(objectToFind.position);
     var isDisable = cellStatus;
-    console.log("doesAtLeatOneObjectOnPosition : " + isDisable);
     if (hasObjectOnAvailablePosition) {
         isDisable = true;
-        console.log("hasObjectOnAvailablePosition : " + isDisable);
     };
     return isDisable
 }
@@ -105,7 +103,6 @@ function displayDisableCell (positionToMove, cellStatus, hasNoObjectOnTheWay, bo
     var border = border;
     var cellAccess = cellAccess;
     if (isDisable == true) {
-        console.log("Cell disable");
         var border = "#85bb46 1px solid";
         var cellAccess = "Disable"
         var hasNoObjectOnTheWay = false;
@@ -121,11 +118,11 @@ function displayAvailableCellAroundPlayer (listObstacles, listPlayer, positionTo
     var positionToMove = positionToMove;
     var hasNoObjectOnTheWay = hasNoObjectOnTheWay;
     listObstacles.forEach(function(obstacle){
-        isDisable = doesAtLeatOneObjectOnPosition (positionToMove, obstacle, isDisable)
+        isDisable = doesAtLeastOneObjectOnPosition (positionToMove, obstacle, isDisable)
     });
     displayDisableCell (positionToMove, isDisable, hasNoObjectOnTheWay, border, cellAccess);
     listPlayer.forEach(function(player){
-        isDisable = doesAtLeatOneObjectOnPosition (positionToMove, player, isDisable)
+        isDisable = doesAtLeastOneObjectOnPosition (positionToMove, player, isDisable)
     });
     displayDisableCell (positionToMove, isDisable, hasNoObjectOnTheWay, border, cellAccess);
 
