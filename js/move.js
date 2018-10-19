@@ -3,7 +3,12 @@ function moveToCell (objets, container, attribute, value) {
     var colIndex = objets.position.colIndex;
     var rowIndex = objets.position.rowIndex;
     var containerCell = $(".line:eq("+ rowIndex +") .square:eq("+ colIndex +")");
-    var cellToMove = container.clone().css("background-image", "url("+ playerListUrl[value][0] +")").attr(attribute, value+1);
+    if (objets.id == 0) {
+        var url = objets.playerWearWeapon(bluePlayerImageWeapon);
+    } else {
+        url = objets.playerWearWeapon(redPlayerImageWeapon);
+    }
+    var cellToMove = container.clone().css("background-image", "url("+ url +")").attr(attribute, value+1);
     
     containerCell.append(cellToMove);
 

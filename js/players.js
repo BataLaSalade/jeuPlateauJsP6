@@ -16,7 +16,7 @@ var Player = {
         this.characterName = characterName;
         this.weapon = weapon;
         this.inventory = [weapon]
-        this.imageUrl = url != "" ? url : "../img/png/BlueCharacter_epeeBois.png";
+        this.imageUrl = url != "" ? url : "./img/png/BlueCharacter_epeeBois.png";
         this.listOfPositionToMove = [];
     },
 
@@ -44,24 +44,29 @@ var Player = {
         });
     },
 
-    playerWearWeapon : function () {
-        var currentWeapon = weaponsEnum.woodenSword
-        switch (currentWeapon) {
-            case weaponsEnum.woodenSword:
-                console.log(currentWeapon)
-                break;
-            case weaponsEnum.staff:
-                console.log(currentWeapon)
-                break;
-            case weaponsEnum.bow:
-                console.log(currentWeapon)
-                break;
-            case weaponsEnum.sword:
-                console.log(currentWeapon)
-                break;
-            case weaponsEnum.spear:
-                console.log(currentWeapon)
-                break;
+    playerWearWeapon : function (playerEnumImage) {
+        var currentWeaponId = this.weapon.id;
+        switch (currentWeaponId) {
+            case weaponIdEnum.woodenSword:
+                console.log(this.weapon);
+                this.imageUrl = playerEnumImage.woodenSword;
+                return this.imageUrl;
+            case weaponIdEnum.staff:
+                console.log(this.weapon);
+                this.imageUrl = playerEnumImage.staff;
+                return this.imageUrl;
+            case weaponIdEnum.bow:
+                console.log(this.weapon);
+                this.imageUrl = playerEnumImage.bow;
+                return this.imageUrl;
+            case weaponIdEnum.sword:
+                console.log(this.weapon);
+                this.imageUrl = playerEnumImage.sword;
+                return this.imageUrl;
+            case weaponIdEnum.spear:
+                console.log(this.weapon);
+                this.imageUrl = playerEnumImage.spear;
+                return this.imageUrl;
             default:
                 break;
         }
@@ -74,7 +79,7 @@ function genListPlayer (nbPlayers) {
         var tmpPosition = getRandomPosition();
         var currentPlayer = Object.create(Player);
         var tmpWeapon = Object.create(Weapon);
-        tmpWeapon.init(0, tmpPosition, "Epée en bois", 10, weaponListUrl[0]);
+        tmpWeapon.init(0, tmpPosition, "Epée en bois", 10, weaponUrlEnum.woodenSword);
         currentPlayer.init(i, tmpPosition, characterNames[i], tmpWeapon, playerListUrl[i][0]);
         listPlayer.push(currentPlayer);
         var directions = ["R","L","T","B"];
