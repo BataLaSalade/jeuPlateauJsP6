@@ -35,3 +35,11 @@ var weaponUrlEnum = {
     sword : "./img/png/weapon_epee.png",
     spear : "./img/png/weapon_lance.png"
 }
+
+var gameActionConstants = {
+    blueButton = $('#runBlueDice'),
+    redButton = $('#runRedDice'),
+    clickCount = 0,
+    scoreDiceBluePlayer = 0,
+    scoreDiceRedPlayerRed = 0
+}
