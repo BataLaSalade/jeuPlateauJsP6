@@ -58,7 +58,7 @@ function createCellPositionObject(nbCol, nbRow) {
     }    
 }
 
-function getRandomIndexPosition (min, max) {
+function getRandomIndex (min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min)) + min;
@@ -74,7 +74,7 @@ function getIndexToFind (currentPosition) {
 }
 
 function getRandomPosition () {
-    var randomIndex = getRandomIndexPosition(0, mapCellPositions.length);
+    var randomIndex = getRandomIndex(0, mapCellPositions.length);
     var randomAvailablePosition = mapCellPositions[randomIndex];
     var tmpPosition = Object.create(Position);
     tmpPosition.setPosition(randomAvailablePosition.colIndex, randomAvailablePosition.rowIndex);
