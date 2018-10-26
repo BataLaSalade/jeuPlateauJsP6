@@ -37,12 +37,12 @@ var weaponUrlEnum = {
 }
 
 var gameActionConstants = {
-    blueButton = $('#runBlueDice'),
-    redButton = $('#runRedDice'),
-    instructionsParagraph = $('#instructions'),
-    scoreBlueDiceParagraph = $('#scoreBlueDice'),
-    scoreRedDiceParagraph = $('#scoreRedDice'),
-    clickCount = 0,
-    scoreDiceBluePlayer = 0,
-    scoreDiceRedPlayerRed = 0
+    blueButton : $('#runBlueDice'),
+    redButton : $('#runRedDice'),
+    instructionsParagraph : $('#instructions'),
+    scoreBlueDiceParagraph : $('#scoreBlueDice'),
+    scoreRedDiceParagraph : $('#scoreRedDice'),
+    clickCount : 0,
+    scoreDiceBluePlayer : 0,
+    scoreDiceRedPlayerRed : 0
 }

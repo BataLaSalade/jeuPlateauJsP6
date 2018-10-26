@@ -1,15 +1,20 @@
 // lancer de dé
-
+var gameActionConstants = {
+    blueButton : $('#runBlueDice'),
+    redButton : $('#runRedDice'),
+    instructionsParagraph : $('#instructions'),
+    scoreBlueDiceParagraph : $('#scoreBlueDice'),
+    scoreRedDiceParagraph : $('#scoreRedDice'),
+    clickCount : 0,
+    scoreDiceBluePlayer : 0,
+    scoreDiceRedPlayerRed : 0
+}
 
 
 $('#runGame').on('show.bs.modal', function (event) {
-    var blueButton = $('#runBlueDice');
-    var redButton = $('#runRedDice')
-    var recipient = "PROUT";
+    var recipient = "Prout";
     var modal = $(this);
-    var clickCount = 0;
-    var scoreDiceBluePlayer = 0;
-    var scoreDiceRedPlayerRed = 0;
+    
     console.log("RUN GAME");
 
     button.on('click', function(event){
