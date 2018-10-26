@@ -22,24 +22,11 @@ $(function ($) {
 
     map.display(mapContainer.obstacles, $obstacle, "obstacle");
     map.display(mapContainer.players, $player, "player");
+    map.display(mapContainer.weapons,$weapon, "weapon");
     mapContainer.players[blue].createPositionToMove();
     mapContainer.players[red].createPositionToMove();
-    map.display(mapContainer.weapons,$weapon, "weapon");
+    
 
-    $("#wrapper").on("click", ".Enable", function(e) {
-        remove(mapContainer.players[blue]);
-        console.log("click", e.target);
-        var colIndexNextMove = Number($(e.target).attr("colindex"));
-        var rowIndexNextMove = Number($(e.target).attr("rowindex"));
-        mapContainer.players[blue].position.setPosition(colIndexNextMove, rowIndexNextMove);
-        mapContainer.players[blue].createPositionToMove();
-        moveToCell(mapContainer.players[blue], $player, "player",0);
-        showAllWeapon();
-        if ($(e.target).hasClass("weapon")) {
-            console.log("une arme !!");
-            managePlayerWeapon(mapContainer.players[blue]);
-        };
-        
-    });
+    move(mapContainer.players[blue]);
     
 });

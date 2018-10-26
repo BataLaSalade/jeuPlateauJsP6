@@ -16,24 +16,25 @@
     </button>-->
       
     <!-- Modal -->
-    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalCenterTitle">Lancer les dés pour commencer le jeu</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
+    <div class="modal fade" id="runGame" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">Lancer les dés pour commencer le jeu</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Le joueur qui obtient le meilleur score commence.</p>
+                    <p>Joueur bleu : (score)</p>
+                    <p>Joueur rouge : (score)</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success btn-block">Lancer le dé</button>
+                </div>
+            </div>
         </div>
-        <div class="modal-body">
-            Le joueur qui obtient le meilleur score commence.
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-        </div>
-    </div>
     </div>
     <!-- main page -->
     <div class="container-fluid header">
@@ -44,7 +45,7 @@
         <div class="row">
             <div class="col">
                 <h3>Left side bar</h3>
-                <button type="button" id="runDice" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Lancer les dés</button>
+                <button type="button" id="runDice" class="btn btn-primary" data-toggle="modal" data-target="#runGame">Lancer les dés</button>
             </div>
             <div class="col-6" id="wrapper"></div>
             <div class="col">
@@ -52,12 +53,7 @@
             </div>
         </div>
     </div>
-    <div class="container-fluid">
-        <div class="row justify-content-center">
-            <button class="btn btn-primary">Lancer les dés</button>
-        </div>
-        
-    </div>
+    
 
     
     <!--<script src="js/jquery.js"></script>-->

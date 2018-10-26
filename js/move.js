@@ -28,3 +28,21 @@ function removeEnableClass (position) {
     var cell = $(".line:eq("+ (position.rowIndex) +") .square:eq("+ (position.colIndex) +")");
     cell.css("border-color", "#85bb46").removeClass("Enable");
 }
+
+function move (player) {
+    $("#wrapper").on("click", ".Enable", function(e) {
+        remove(player);
+        console.log("click", e.target);
+        var colIndexNextMove = Number($(e.target).attr("colindex"));
+        var rowIndexNextMove = Number($(e.target).attr("rowindex"));
+        player.position.setPosition(colIndexNextMove, rowIndexNextMove);
+        player.createPositionToMove();
+        moveToCell(player, $player, "player",0);
+        showAllWeapon();
+        if ($(e.target).hasClass("weapon")) {
+            console.log("une arme !!");
+            managePlayerWeapon(player);
+        };
+        
+    });
+}
