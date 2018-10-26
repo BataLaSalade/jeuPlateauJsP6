@@ -43,6 +43,5 @@ function move (player) {
             console.log("une arme !!");
             managePlayerWeapon(player);
         };
-        
     });
 }
