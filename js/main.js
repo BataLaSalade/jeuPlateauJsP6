@@ -31,13 +31,5 @@ $(function ($) {
     mapDisplayElements.init();
 
     playersRunDice();
-
-    
-    
-    mapContainer.players[blue].createPositionToMove();
-    mapContainer.players[red].createPositionToMove();
-    
-
-    move(mapContainer.players[blue]);
     
 });

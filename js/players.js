@@ -131,6 +131,5 @@ function displayAvailableCellAroundPlayer (listObstacles, listPlayer, positionTo
         isDisable = doesAtLeastOneObjectOnPosition (positionToMove, player, isDisable)
     });
     displayDisableCell (positionToMove, isDisable, hasNoObjectOnTheWay, border, cellAccess);
-
     return isDisable;
 }

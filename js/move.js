@@ -9,16 +9,13 @@ function moveToCell (objets, container, attribute, value) {
         url = objets.playerWearWeapon(redPlayerImageWeapon);
     }
     var cellToMove = container.clone().css("background-image", "url("+ url +")").attr(attribute, value+1);
-    
     containerCell.append(cellToMove);
-
 }
 
 function remove (player) {
     var colIndex = player.position.colIndex;
     var rowIndex = player.position.rowIndex;
     var cell = $(".line:eq("+ rowIndex +") .square:eq("+ colIndex +") .player")
-    
     cell.remove();
     player.listOfPositionToMove.forEach(removeEnableClass);
     player.listOfPositionToMove = [];
@@ -40,8 +37,23 @@ function move (player) {
         moveToCell(player, $player, "player",0);
         showAllWeapon();
         if ($(e.target).hasClass("weapon")) {
-            console.log("une arme !!");
             managePlayerWeapon(player);
         };
     });
+}
+
+function playerCanMove () {
+    var player1 = gameActionConstants.player1;
+    var player2 = gameActionConstants.player2;
+    if (player1.canMove) {
+        player1.createPositionToMove();
+        move(player1);
+        player1.canMove = false;
+        player2.canMove = true;
+    } else {
+        player2.createPositionToMove();
+        move(player2);
+        player2.canMove = false;
+        player1.canMove = true;
+    };
 }

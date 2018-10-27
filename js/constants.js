@@ -1,4 +1,3 @@
-
 var playerEnum = {
     blue : 0,
     red : 1
@@ -46,4 +45,13 @@ var gameActionConstants = {
     clickCount : 0,
     scoreDiceBluePlayer : 0,
     scoreDiceRedPlayer : 0
+}
+
+var gameMessages = {
+    bluePlayerScoreAdvert : "Score Joueur Bleu : ",
+    redPlayerScoreAdvert : "Score Joueur Rouge : ",
+    playersScoreEquals : "EGALITE ! Joueur Rouge : Relance le dé",
+    bluePlayerBegin : "Le joueur Bleu commence, Bravo !",
+    redPlayerBegin : "Le joueur Rouge commence, Bravo !"
+
 }
