@@ -1,11 +1,13 @@
 // lancer de dé
-$('#runGame').on('show.bs.modal', function (event) {
-    var readyButton = gameActionConstants.readyButton;
-    readyButton.hide()
-    bluePlayerRunDice();
-    redPlayerRunDice ();
-    $('#runDiceModal').hide();
-});
+function playersRunDice ( ) {
+    $('#runGame').on('show.bs.modal', function (event) {
+        var readyButton = gameActionConstants.readyButton;
+        readyButton.hide()
+        bluePlayerRunDice();
+        redPlayerRunDice ();
+        $('#runDiceModal').hide();
+    });
+};
 
 function bluePlayerRunDice () {
     var bluePlayerScoreDice = 0;
