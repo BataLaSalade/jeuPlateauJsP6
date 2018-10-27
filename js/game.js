@@ -4,6 +4,7 @@ $('#runGame').on('show.bs.modal', function (event) {
     readyButton.hide()
     bluePlayerRunDice();
     redPlayerRunDice ();
+    $('#runDiceModal').hide();
 });
 
 function bluePlayerRunDice () {
@@ -29,6 +30,7 @@ function redPlayerRunDice () {
             gameActionConstants.scoreRedDiceParagraph.text('Score Joueur rouge : ' + redPlayerScoreDice);
             bluePlayerBegin ? instructionsParagraph.text(bluePlayerMessage) : instructionsParagraph.text(redPlayerMessage);
             $(this).hide().off();
+            gameActionConstants.scoreDiceRedPlayer = redPlayerScoreDice;
             readyButton.show();
         } else {
             gameActionConstants.scoreRedDiceParagraph.text('EGALITE ! Joueur Rouge : Relance le dé');

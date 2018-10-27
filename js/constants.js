@@ -45,5 +45,5 @@ var gameActionConstants = {
     scoreRedDiceParagraph : $('#scoreRedDice'),
     clickCount : 0,
     scoreDiceBluePlayer : 0,
-    scoreDiceRedPlayerRed : 0
+    scoreDiceRedPlayer : 0
 }
