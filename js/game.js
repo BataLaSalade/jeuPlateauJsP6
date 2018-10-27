@@ -22,20 +22,30 @@ function bluePlayerRunDice () {
 function redPlayerRunDice () {
     $('#runRedDice').on('click', function(event){
         var bluePlayerScoreDice = gameActionConstants.scoreDiceBluePlayer;
-        var readyButton = gameActionConstants.readyButton;
-        var instructionsParagraph = gameActionConstants.instructionsParagraph;
-        var bluePlayerMessage = "Le joueur Bleu commence, Bravo !";
-        var redPlayerMessage = "Le joueur Rouge commence, Bravo !";
         var redPlayerScoreDice = getRandomIndex(1,6);
-        var bluePlayerBegin = bluePlayerScoreDice > redPlayerScoreDice;
-        if (bluePlayerScoreDice != redPlayerScoreDice) {
-            gameActionConstants.scoreRedDiceParagraph.text('Score Joueur rouge : ' + redPlayerScoreDice);
-            bluePlayerBegin ? instructionsParagraph.text(bluePlayerMessage) : instructionsParagraph.text(redPlayerMessage);
-            $(this).hide().off();
-            gameActionConstants.scoreDiceRedPlayer = redPlayerScoreDice;
-            readyButton.show();
-        } else {
-            gameActionConstants.scoreRedDiceParagraph.text('EGALITE ! Joueur Rouge : Relance le dé');
-        };
+        howBegin (bluePlayerScoreDice, redPlayerScoreDice);
     });
 };
+
+function howBegin (bluePlayerScoreDice, redPlayerScoreDice) {
+    var readyButton = gameActionConstants.readyButton;
+    var instructionsParagraph = gameActionConstants.instructionsParagraph;
+    var bluePlayerMessage = "Le joueur Bleu commence, Bravo !";
+    var redPlayerMessage = "Le joueur Rouge commence, Bravo !";
+    var bluePlayerBegin = bluePlayerScoreDice > redPlayerScoreDice;
+    if (bluePlayerScoreDice != redPlayerScoreDice) {
+        gameActionConstants.scoreRedDiceParagraph.text('Score Joueur rouge : ' + redPlayerScoreDice);
+        if (bluePlayerBegin) {
+            instructionsParagraph.text(bluePlayerMessage)
+        } else {
+            gameActionConstants.player1 = mapContainer.players[red];
+            gameActionConstants.player2 = mapContainer.players[blue];
+            instructionsParagraph.text(redPlayerMessage);
+        };        
+        $('#runRedDice').hide().off();
+        gameActionConstants.scoreDiceRedPlayer = redPlayerScoreDice;
+        readyButton.show();
+    } else {
+        gameActionConstants.scoreRedDiceParagraph.text('EGALITE ! Joueur Rouge : Relance le dé');
+    };
+}
