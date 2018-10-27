@@ -21,10 +21,15 @@ function redPlayerRunDice () {
     $('#runRedDice').on('click', function(event){
         var bluePlayerScoreDice = gameActionConstants.scoreDiceBluePlayer;
         var readyButton = gameActionConstants.readyButton;
+        var instructionsParagraph = gameActionConstants.instructionsParagraph;
+        var bluePlayerMessage = "Le joueur Bleu commence, Bravo !";
+        var redPlayerMessage = "Le joueur Rouge commence, Bravo !";
         var redPlayerScoreDice = getRandomIndex(1,6);
+        var bluePlayerBegin = bluePlayerScoreDice > redPlayerScoreDice;
         console.log("Score Joueur Rouge : " + redPlayerScoreDice );
         if (bluePlayerScoreDice != redPlayerScoreDice) {
             gameActionConstants.scoreRedDiceParagraph.text('Score Joueur rouge : ' + redPlayerScoreDice);
+            bluePlayerBegin ? instructionsParagraph.text(bluePlayerMessage) : instructionsParagraph.text(redPlayerMessage);
             $(this).hide().off();
             readyButton.show();
         } else {

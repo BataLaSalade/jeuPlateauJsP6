@@ -18,6 +18,7 @@ var Player = {
         this.inventory = [weapon]
         this.imageUrl = url != "" ? url : "./img/png/BlueCharacter_epeeBois.png";
         this.listOfPositionToMove = [];
+        this.canMove = false;
     },
 
     createPositionToMove : function () {
