@@ -10,7 +10,6 @@ function bluePlayerRunDice () {
     var bluePlayerScoreDice = 0;
     $('#runBlueDice').on('click', function(event){
         bluePlayerScoreDice = getRandomIndex(1,6);
-        console.log("Score Joueur Bleu : " + bluePlayerScoreDice );
         gameActionConstants.scoreBlueDiceParagraph.text('Score Joueur Bleu : ' + bluePlayerScoreDice);
         $(this).hide().off();
         gameActionConstants.scoreDiceBluePlayer = bluePlayerScoreDice
@@ -26,7 +25,6 @@ function redPlayerRunDice () {
         var redPlayerMessage = "Le joueur Rouge commence, Bravo !";
         var redPlayerScoreDice = getRandomIndex(1,6);
         var bluePlayerBegin = bluePlayerScoreDice > redPlayerScoreDice;
-        console.log("Score Joueur Rouge : " + redPlayerScoreDice );
         if (bluePlayerScoreDice != redPlayerScoreDice) {
             gameActionConstants.scoreRedDiceParagraph.text('Score Joueur rouge : ' + redPlayerScoreDice);
             bluePlayerBegin ? instructionsParagraph.text(bluePlayerMessage) : instructionsParagraph.text(redPlayerMessage);
