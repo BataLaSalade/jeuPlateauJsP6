@@ -1,33 +1,33 @@
-function playersRunDice () {
+function playersRunDice() {
     $('#runGame').on('show.bs.modal', function (event) {
         var readyButton = gameActionConstants.readyButton;
         readyButton.hide()
         bluePlayerRunDice();
-        redPlayerRunDice ();
+        redPlayerRunDice();
         $('#runDiceModal').hide();
     });
 };
 
-function bluePlayerRunDice () {
+function bluePlayerRunDice() {
     var bluePlayerScoreDice = 0;
-    $('#runBlueDice').on('click', function(event){
-        bluePlayerScoreDice = getRandomIndex(1,6);
+    $('#runBlueDice').on('click', function (event) {
+        bluePlayerScoreDice = getRandomIndex(1, 6);
         gameActionConstants.scoreBlueDiceParagraph.text(gameMessages.bluePlayerScoreAdvert + bluePlayerScoreDice);
         $(this).hide().off();
         gameActionConstants.scoreDiceBluePlayer = bluePlayerScoreDice
     });
 };
 
-function redPlayerRunDice () {
-    $('#runRedDice').on('click', function(event){
+function redPlayerRunDice() {
+    $('#runRedDice').on('click', function (event) {
         var bluePlayerScoreDice = gameActionConstants.scoreDiceBluePlayer;
-        var redPlayerScoreDice = getRandomIndex(1,6);
-        howBegin (bluePlayerScoreDice, redPlayerScoreDice);
-        playerCanMove ();
+        var redPlayerScoreDice = getRandomIndex(1, 6);
+        whoBegin(bluePlayerScoreDice, redPlayerScoreDice);
+        playerCanMove();
     });
 };
 
-function howBegin (bluePlayerScoreDice, redPlayerScoreDice) {
+function whoBegin(bluePlayerScoreDice, redPlayerScoreDice) {
     var readyButton = gameActionConstants.readyButton;
     var instructionsParagraph = gameActionConstants.instructionsParagraph;
     var bluePlayerMessage = gameMessages.bluePlayerBegin;
@@ -49,7 +49,7 @@ function howBegin (bluePlayerScoreDice, redPlayerScoreDice) {
             gameActionConstants.player2 = mapContainer.players[blue];
             instructionsParagraph.text(redPlayerMessage);
             console.log(redPlayerMessage);
-        };        
+        };
         $('#runRedDice').hide().off();
         gameActionConstants.scoreDiceRedPlayer = redPlayerScoreDice;
         readyButton.show();
