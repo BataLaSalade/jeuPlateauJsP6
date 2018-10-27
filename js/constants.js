@@ -39,6 +39,7 @@ var weaponUrlEnum = {
 var gameActionConstants = {
     blueButton : $('#runBlueDice'),
     redButton : $('#runRedDice'),
+    readyButton : $('#ready'),
     instructionsParagraph : $('#instructions'),
     scoreBlueDiceParagraph : $('#scoreBlueDice'),
     scoreRedDiceParagraph : $('#scoreRedDice'),
