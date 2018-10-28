@@ -53,5 +53,11 @@ var gameMessages = {
     playersScoreEquals : "EGALITE ! Joueur Rouge : Relance le dé",
     bluePlayerBegin : "Le joueur Bleu commence, Bravo !",
     redPlayerBegin : "Le joueur Rouge commence, Bravo !"
-
 }
+
+var scores = {
+    bluePlayerDice : 0,
+    redPlayerDice : 0
+}
+
+var whosNext = {}

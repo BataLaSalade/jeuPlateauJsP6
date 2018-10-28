@@ -14,13 +14,13 @@ function bluePlayerRunDice() {
         bluePlayerScoreDice = getRandomIndex(1, 6);
         gameActionConstants.scoreBlueDiceParagraph.text(gameMessages.bluePlayerScoreAdvert + bluePlayerScoreDice);
         $(this).hide().off();
-        gameActionConstants.scoreDiceBluePlayer = bluePlayerScoreDice
+        scores.bluePlayerDice = bluePlayerScoreDice;
     });
 };
 
 function redPlayerRunDice() {
     $('#runRedDice').on('click', function (event) {
-        var bluePlayerScoreDice = gameActionConstants.scoreDiceBluePlayer;
+        var bluePlayerScoreDice = scores.bluePlayerDice;
         var redPlayerScoreDice = getRandomIndex(1, 6);
         whoBegin(bluePlayerScoreDice, redPlayerScoreDice);
         playerCanMove();
@@ -36,17 +36,13 @@ function whoBegin(bluePlayerScoreDice, redPlayerScoreDice) {
     if (bluePlayerScoreDice != redPlayerScoreDice) {
         gameActionConstants.scoreRedDiceParagraph.text(gameMessages.redPlayerScoreAdvert + redPlayerScoreDice);
         if (bluePlayerBegin) {
-            mapContainer.players[blue].canMove = true;
-            gameActionConstants.player1 = mapContainer.players[blue];
-            mapContainer.players[red].canMove = false;
-            gameActionConstants.player2 = mapContainer.players[red];
+            whosNext.player1 = mapContainer.players[blue];
+            whosNext.player2 = mapContainer.players[red];
             instructionsParagraph.text(bluePlayerMessage);
             console.log(bluePlayerMessage);
         } else {
-            mapContainer.players[red].canMove = true;
-            gameActionConstants.player1 = mapContainer.players[red];
-            mapContainer.players[blue].canMove = false;
-            gameActionConstants.player2 = mapContainer.players[blue];
+            whosNext.player1 = mapContainer.players[red];
+            whosNext.player2 = mapContainer.players[blue];
             instructionsParagraph.text(redPlayerMessage);
             console.log(redPlayerMessage);
         };

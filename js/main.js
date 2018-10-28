@@ -31,5 +31,6 @@ $(function ($) {
     mapDisplayElements.init();
 
     playersRunDice();
+    //movement();
     
 });

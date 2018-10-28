@@ -27,9 +27,10 @@ function removeEnableClass (position) {
 }
 
 function move (player) {
+    
     $("#wrapper").on("click", ".Enable", function(e) {
+        
         remove(player);
-        console.log("click", e.target);
         var colIndexNextMove = Number($(e.target).attr("colindex"));
         var rowIndexNextMove = Number($(e.target).attr("rowindex"));
         player.position.setPosition(colIndexNextMove, rowIndexNextMove);
@@ -39,21 +40,40 @@ function move (player) {
         if ($(e.target).hasClass("weapon")) {
             managePlayerWeapon(player);
         };
+        cannotMove (player);
+    });
+}
+
+
+
+function cannotMove (player) {
+    var border = "#85bb46 1px solid";
+    var cellAccess = "Disable"
+    player.listOfPositionToMove.forEach(function(position){
+        $(".line:eq("+ (position.rowIndex) +") .square:eq("+ (position.colIndex) +")").css("border", border).removeClass("Enable").addClass(cellAccess);
     });
 }
 
 function playerCanMove () {
-    var player1 = gameActionConstants.player1;
-    var player2 = gameActionConstants.player2;
-    if (player1.canMove) {
-        player1.createPositionToMove();
-        move(player1);
-        player1.canMove = false;
-        player2.canMove = true;
-    } else {
-        player2.createPositionToMove();
-        move(player2);
-        player2.canMove = false;
-        player1.canMove = true;
-    };
+    var player1 = whosNext.player1;
+    var player2 = whosNext.player2;
+    player1.canMove = true;
+    player2.canMove = false;
+    // si je mets un while je bloque
+        if (player1.canMove) {
+           
+                player1.createPositionToMove();
+                move(player1);
+                cannotMove(player2);
+                player1.canMove = false;
+                player2.canMove = true;
+            
+        } else {
+            player2.createPositionToMove();
+            move(player2);
+            cannotMove(player1);
+            player2.canMove = false;
+            player1.canMove = true;
+        };
+
 }
