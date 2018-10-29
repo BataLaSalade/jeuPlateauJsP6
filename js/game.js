@@ -1,3 +1,12 @@
+function game () {
+    var clickCount = 0;
+    var player1;
+    var player2;
+    var currentPlayer;
+}
+
+
+
 function playersRunDice() {
     $('#runGame').on('show.bs.modal', function (event) {
         var readyButton = gameActionConstants.readyButton;
@@ -23,7 +32,7 @@ function redPlayerRunDice() {
         var bluePlayerScoreDice = scores.bluePlayerDice;
         var redPlayerScoreDice = getRandomIndex(1, 6);
         whoBegin(bluePlayerScoreDice, redPlayerScoreDice);
-        playerCanMove();
+        playerCanMove2 () 
     });
 };
 
@@ -38,11 +47,13 @@ function whoBegin(bluePlayerScoreDice, redPlayerScoreDice) {
         if (bluePlayerBegin) {
             whosNext.player1 = mapContainer.players[blue];
             whosNext.player2 = mapContainer.players[red];
+            whosNext.currentPlayer = whosNext.player1;
             instructionsParagraph.text(bluePlayerMessage);
             console.log(bluePlayerMessage);
         } else {
             whosNext.player1 = mapContainer.players[red];
             whosNext.player2 = mapContainer.players[blue];
+            whosNext.currentPlayer = whosNext.player1;
             instructionsParagraph.text(redPlayerMessage);
             console.log(redPlayerMessage);
         };

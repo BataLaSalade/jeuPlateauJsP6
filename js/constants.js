@@ -60,4 +60,6 @@ var scores = {
     redPlayerDice : 0
 }
 
-var whosNext = {}
+var whosNext = {
+    clickCount : 0
+}
