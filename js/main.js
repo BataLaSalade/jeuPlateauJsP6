@@ -1,4 +1,3 @@
-
 var mapContainer = {
     init : function () {
         this.obstacles = genListObstacle(map.nbObstacles);
@@ -31,6 +30,4 @@ $(function ($) {
     mapDisplayElements.init();
 
     playersRunDice();
-    
-    
 });

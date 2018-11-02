@@ -1,12 +1,3 @@
-function game () {
-    var clickCount = 0;
-    var player1;
-    var player2;
-    var currentPlayer;
-}
-
-
-
 function playersRunDice() {
     $('#runGame').on('show.bs.modal', function (event) {
         var readyButton = gameActionConstants.readyButton;
@@ -15,7 +6,7 @@ function playersRunDice() {
         redPlayerRunDice();
         $('#runDiceModal').hide();
     });
-};
+}
 
 function bluePlayerRunDice() {
     var bluePlayerScoreDice = 0;
@@ -25,16 +16,16 @@ function bluePlayerRunDice() {
         $(this).hide().off();
         scores.bluePlayerDice = bluePlayerScoreDice;
     });
-};
+}
 
 function redPlayerRunDice() {
     $('#runRedDice').on('click', function (event) {
         var bluePlayerScoreDice = scores.bluePlayerDice;
         var redPlayerScoreDice = getRandomIndex(1, 6);
         whoBegin(bluePlayerScoreDice, redPlayerScoreDice);
-        playerCanMove2 () 
+        playerCanMove () 
     });
-};
+}
 
 function whoBegin(bluePlayerScoreDice, redPlayerScoreDice) {
     var readyButton = gameActionConstants.readyButton;

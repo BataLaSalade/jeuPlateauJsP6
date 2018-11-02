@@ -53,7 +53,6 @@ function createCellPositionObject(nbCol, nbRow) {
             mapCellPositions.push(newCell);
             var cell =  $(".line:eq("+ j +") .square:eq("+ i +")")
             cell.attr({"colIndex": i,"rowIndex":j});
-
         }   
     }    
 }
@@ -79,6 +78,5 @@ function getRandomPosition () {
     var tmpPosition = Object.create(Position);
     tmpPosition.setPosition(randomAvailablePosition.colIndex, randomAvailablePosition.rowIndex);
     mapCellPositions.splice(randomIndex,1);
-
     return tmpPosition;
 }

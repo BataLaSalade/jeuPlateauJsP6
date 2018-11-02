@@ -31,6 +31,7 @@ function genListWeapon (nbWeapons) {
 function managePlayerWeapon(player) {
     for(var i = 0; i < mapContainer.weapons.length; i++) {
         var hasWeaponOnAvailablePosition = player.position.isSamePosition(mapContainer.weapons[i].position);
+        var currentCaseElement = $(".line:eq("+ player.position.rowIndex +") .square:eq("+ player.position.colIndex +") .weapon");
         if (hasWeaponOnAvailablePosition) {
             player.inventory.push(mapContainer.weapons[i]);
             var currentCaseElement = $(".line:eq("+ player.position.rowIndex +") .square:eq("+ player.position.colIndex +") .weapon");
@@ -51,6 +52,17 @@ function managePlayerWeapon(player) {
 function showAllWeapon() {
     for(var i = 0; i < mapContainer.weapons.length; i++) {
         var weaponCell = $(".line:eq("+ mapContainer.weapons[i].position.rowIndex +") .square:eq("+ mapContainer.weapons[i].position.colIndex +") .weapon")
-        weaponCell.show();
+        weaponCell.show();   
+    }
+}
+
+function hideWeapon() {
+    for (var i = 0; i < mapContainer.weapons.length; i++) {
+        var isPlayer1OnWeaponCell = whosNext.player1.position.isSamePosition(mapContainer.weapons[i].position);
+        var isPlayer2OnWeaponCell = whosNext.player2.position.isSamePosition(mapContainer.weapons[i].position);
+        if (isPlayer1OnWeaponCell || isPlayer2OnWeaponCell) {
+            var weaponCell = $(".line:eq("+ mapContainer.weapons[i].position.rowIndex +") .square:eq("+ mapContainer.weapons[i].position.colIndex +") .weapon")
+            weaponCell.hide();
+        }
     }
 }

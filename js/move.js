@@ -27,7 +27,6 @@ function removeEnableClass (position) {
 }
 
 function move (player) {
-    
     $("#wrapper").on("click", ".Enable", function(e) {
         player = whosNext.currentPlayer;
         remove(player);
@@ -43,11 +42,8 @@ function move (player) {
         console.log("joueur actuel : " + player);
         console.log("s'est déplacé vers : " + player.position);
         clickCount ();
-        
     });
 }
-
-
 
 function cannotMove (player) {
     var border = "#85bb46 1px solid";
@@ -57,7 +53,7 @@ function cannotMove (player) {
     });
 }
 
-function playerCanMove2 () {
+function playerCanMove () {
     var currentPlayer = whosNext.currentPlayer;
     currentPlayer.createPositionToMove();
     move(currentPlayer);
@@ -67,55 +63,19 @@ function clickCount () {
     whosNext.clickCount++;
     var clickCount = whosNext.clickCount;
     var currentPlayer = whosNext.currentPlayer;
-    var player1 = whosNext.player1;
-    var player2 = whosNext.player2;
     if (clickCount > 0) {
         cannotMove(currentPlayer);
-        if (currentPlayer == player1) {
+        hideWeapon();
+        if (currentPlayer == whosNext.player1) {
             whosNext.currentPlayer = whosNext.player2;
             whosNext.currentPlayer.createPositionToMove();
-            //move(whosNext.currentPlayer);
-
         } else {
             whosNext.currentPlayer = whosNext.player1;
             whosNext.currentPlayer.createPositionToMove();
-            //move(whosNext.currentPlayer);
         }
-        //currentPlayer == bluePlayer ? whosNext.currentPlayer == redPlayer : whosNext.currentPlayer == bluePlayer
         whosNext.clickCount = 0;
         console.log("CHANGEMENT PERSO :");
         console.log("C'est au tour de " + whosNext.currentPlayer.characterName);
         
     }
-}
-
-function playerCanMove () {
-    var clickCount = whosNext.clickCount;
-    var player1 = whosNext.player1;
-    var player2 = whosNext.player2;
-    var currentPlayer = whosNext.currentPlayer;
-    //player1.canMove = true;
-    //player2.canMove = false;
-
-    if (clickCount > 0) {
-
-    }
-
-    // si je mets un while je bloque
-        if (player1.canMove) {
-           
-                player1.createPositionToMove();
-                move(player1);
-                cannotMove(player2);
-                //player1.canMove = false;
-                //player2.canMove = true;
-            
-        } else {
-            player2.createPositionToMove();
-            move(player2);
-            cannotMove(player1);
-            //player2.canMove = false;
-            //player1.canMove = true;
-        };
-
 }
