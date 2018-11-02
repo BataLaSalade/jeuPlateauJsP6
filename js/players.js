@@ -71,6 +71,29 @@ var Player = {
             default:
                 break;
         }
+    },
+    findPlayer : function () {
+        var currentPlayer = this;
+        var otherPlayer;
+        var directions = ["R","L","T","B"];
+        directions.forEach(function(direction) {
+            switch (direction) {
+                case "R":
+                    currentPlayer.position.isPlayerAround();
+                    break;
+                case "L":
+                    this.setPosition(currentPosition.colIndex - index, currentPosition.rowIndex);
+                    break;
+                case "T":
+                    this.setPosition(currentPosition.colIndex, currentPosition.rowIndex + index);
+                    break;
+                case "B":
+                    this.setPosition(currentPosition.colIndex, currentPosition.rowIndex - index);
+                    break;
+                default:
+                    break;
+            }  
+        });
     }
 };
 
