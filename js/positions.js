@@ -39,7 +39,11 @@ var Position = {
         return this.colIndex >= 0 && this.colIndex < map.columns && this.rowIndex >= 0 && this.rowIndex < map.rows;
     },
     isPlayerAround : function (positionToWatch) {
-        return this.colIndex+1 == positionToWatch.colIndex || this.colIndex-1 == positionToWatch.colIndex || this.rowIndex+1 == positionToWatch.rowIndex || this.rowIndex-1 == positionToWatch.rowIndex; 
+        var isDownSide = this.colIndex+1 == positionToWatch.colIndex && this.rowIndex == positionToWatch.rowIndex
+        var isUpSide = this.colIndex-1 == positionToWatch.colIndex && this.rowIndex == positionToWatch.rowIndex
+        var isRightSide = this.rowIndex+1 == positionToWatch.rowIndex && this.colIndex == positionToWatch.colIndex
+        var isLeftSide = this.rowIndex-1 == positionToWatch.rowIndex && this.colIndex == positionToWatch.colIndex
+        return isDownSide || isUpSide || isRightSide || isLeftSide; 
     }
 }
 

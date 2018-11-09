@@ -71,30 +71,8 @@ var Player = {
             default:
                 break;
         }
-    },
-    findPlayer : function () {
-        var currentPlayer = this;
-        var otherPlayer;
-        var directions = ["R","L","T","B"];
-        directions.forEach(function(direction) {
-            switch (direction) {
-                case "R":
-                    currentPlayer.position.isPlayerAround();
-                    break;
-                case "L":
-                    this.setPosition(currentPosition.colIndex - index, currentPosition.rowIndex);
-                    break;
-                case "T":
-                    this.setPosition(currentPosition.colIndex, currentPosition.rowIndex + index);
-                    break;
-                case "B":
-                    this.setPosition(currentPosition.colIndex, currentPosition.rowIndex - index);
-                    break;
-                default:
-                    break;
-            }  
-        });
     }
+    
 };
 
 function genListPlayer (nbPlayers) {
@@ -155,4 +133,42 @@ function displayAvailableCellAroundPlayer (listObstacles, listPlayer, positionTo
     });
     displayDisableCell (positionToMove, isDisable, hasNoObjectOnTheWay, border, cellAccess);
     return isDisable;
+}
+
+ function findPlayer () {
+        
+    var currentPlayer = whosNext.currentPlayer;
+    var target;
+    var directions = ["R","L","T","B"];
+    var isPlayerAround = false;
+    if (currentPlayer == whosNext.player1) {
+        target = whosNext.player2;
+    } else {
+        target = whosNext.player1;
+    }
+
+    directions.forEach(function(direction) {
+        switch (direction) {
+            case "R":
+                isPlayerAround = currentPlayer.position.isPlayerAround(target.position);
+                whosNext.target = target;
+                break;
+            case "L":
+                isPlayerAround = currentPlayer.position.isPlayerAround(target.position);
+                whosNext.target = target;
+                break;
+            case "T":
+                isPlayerAround = currentPlayer.position.isPlayerAround(target.position);
+                whosNext.target = target;
+                break;
+            case "B":
+                isPlayerAround = currentPlayer.position.isPlayerAround(target.position);
+                whosNext.target = target;
+                break;
+            default:
+                break;
+        }  
+    });
+    console.log("Cible trouvé : " + whosNext.target);
+    return isPlayerAround;
 }

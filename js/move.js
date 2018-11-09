@@ -39,8 +39,8 @@ function move (player) {
         if ($(e.target).hasClass("weapon")) {
             managePlayerWeapon(player);
         };
-        console.log("joueur actuel : " + player);
-        console.log("s'est déplacé vers : " + player.position);
+        console.log("joueur actuel : ", player);
+        console.log("s'est déplacé vers : ", player.position);
         clickCount ();
     });
 }
@@ -55,27 +55,28 @@ function cannotMove (player) {
 
 function playerCanMove () {
     var currentPlayer = whosNext.currentPlayer;
-    currentPlayer.createPositionToMove();
+    currentPlayer.createPositionToMove(); 
     move(currentPlayer);
+
 }
 
 function clickCount () {
     whosNext.clickCount++;
     var clickCount = whosNext.clickCount;
     var currentPlayer = whosNext.currentPlayer;
-    if (clickCount > 0) {
+    var isCurrentPlayerCloseToTarget = findPlayer()
+    if (isCurrentPlayerCloseToTarget) {
+        console.log("FIGHT");
         cannotMove(currentPlayer);
         hideWeapon();
-        if (currentPlayer == whosNext.player1) {
-            whosNext.currentPlayer = whosNext.player2;
-            whosNext.currentPlayer.createPositionToMove();
-        } else {
-            whosNext.currentPlayer = whosNext.player1;
-            whosNext.currentPlayer.createPositionToMove();
-        }
+    } else if (clickCount > 0) {
+        cannotMove(currentPlayer);
+        hideWeapon();
+        whosNext.currentPlayer = (currentPlayer == whosNext.player1) ? whosNext.player2 : whosNext.player1;
+        whosNext.currentPlayer.createPositionToMove()
         whosNext.clickCount = 0;
         console.log("CHANGEMENT PERSO :");
         console.log("C'est au tour de " + whosNext.currentPlayer.characterName);
-        
     }
+    
 }
