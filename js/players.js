@@ -125,14 +125,14 @@ function displayAvailableCellAroundPlayer (listObstacles, listPlayer, positionTo
 }
 
  function findPlayer () {
-    var currentPlayer = whosNext.currentPlayer;
+    var currentPlayer = Game.currentPlayer;
     var directions = ["R","L","T","B"];
     var isPlayerAround = false;
-    var target = (currentPlayer == whosNext.player1) ? whosNext.player2 : whosNext.player1;
+    var target = (currentPlayer == Game.player1) ? Game.player2 : Game.player1;
     isPlayerAround = currentPlayer.position.isPlayerAround(target.position);
-    whosNext.target = target;
+    Game.target = target;
     if (isPlayerAround) {
-        console.log("Cible trouvé : ", whosNext.target);
+        console.log("Cible trouvé : ", Game.target);
     }
     return isPlayerAround;
 }

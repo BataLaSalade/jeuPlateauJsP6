@@ -23,7 +23,7 @@ function removeEnableClass (position) {
 
 function move (player) {
     $("#wrapper").on("click", ".Enable", function(e) {
-        player = whosNext.currentPlayer;
+        player = Game.currentPlayer;
         remove(player);
         var colIndexNextMove = Number($(e.target).attr("colindex"));
         var rowIndexNextMove = Number($(e.target).attr("rowindex"));
@@ -47,15 +47,15 @@ function cannotMove (player) {
 }
 
 function playerCanMove () {
-    var currentPlayer = whosNext.currentPlayer;
+    var currentPlayer = Game.currentPlayer;
     currentPlayer.createPositionToMove(); 
     move(currentPlayer);
 }
 
 function clickCount () {
-    whosNext.clickCount++;
-    var clickCount = whosNext.clickCount;
-    var currentPlayer = whosNext.currentPlayer;
+    Game.clickCount++;
+    var clickCount = Game.clickCount;
+    var currentPlayer = Game.currentPlayer;
     var isCurrentPlayerCloseToTarget = findPlayer();
     if (isCurrentPlayerCloseToTarget) {
         console.log("FIGHT");
@@ -64,8 +64,8 @@ function clickCount () {
     } else if (clickCount > 0) {
         cannotMove(currentPlayer);
         hideWeapon();
-        whosNext.currentPlayer = (currentPlayer == whosNext.player1) ? whosNext.player2 : whosNext.player1;
-        whosNext.currentPlayer.createPositionToMove()
-        whosNext.clickCount = 0;
+        Game.currentPlayer = (currentPlayer == Game.player1) ? Game.player2 : Game.player1;
+        Game.currentPlayer.createPositionToMove()
+        Game.clickCount = 0;
     }
 }

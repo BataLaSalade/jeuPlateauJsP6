@@ -58,8 +58,8 @@ function showAllWeapon() {
 
 function hideWeapon() {
     for (var i = 0; i < mapContainer.weapons.length; i++) {
-        var isPlayer1OnWeaponCell = whosNext.player1.position.isSamePosition(mapContainer.weapons[i].position);
-        var isPlayer2OnWeaponCell = whosNext.player2.position.isSamePosition(mapContainer.weapons[i].position);
+        var isPlayer1OnWeaponCell = Game.player1.position.isSamePosition(mapContainer.weapons[i].position);
+        var isPlayer2OnWeaponCell = Game.player2.position.isSamePosition(mapContainer.weapons[i].position);
         if (isPlayer1OnWeaponCell || isPlayer2OnWeaponCell) {
             var weaponCell = $(".line:eq("+ mapContainer.weapons[i].position.rowIndex +") .square:eq("+ mapContainer.weapons[i].position.colIndex +") .weapon")
             weaponCell.hide();

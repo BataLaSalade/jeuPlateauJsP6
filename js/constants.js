@@ -45,19 +45,18 @@ var weaponUrlEnum = {
     spear : "./img/png/weapon_lance.png"
 }
 
-var gameActionConstants = {
-    blueButton : $('#runBlueDice'),
-    redButton : $('#runRedDice'),
-    readyButton : $('#ready'),
-    instructionsParagraph : $('#instructions'),
-    scoreBlueDiceParagraph : $('#scoreBlueDice'),
-    scoreRedDiceParagraph : $('#scoreRedDice'),
-    clickCount : 0,
-    scoreDiceBluePlayer : 0,
-    scoreDiceRedPlayer : 0
+var GameUI = {
+    modalRunDice : $('#runGame'),
+    buttonOpenModalRunDice : $('#runDiceModal'),
+    buttonRunBlueDice : $('#runBlueDice'),
+    buttonRunRedDice : $('#runRedDice'),
+    buttonReady : $('#ready'),
+    textModalRunDiceInstructions : $('#instructions'),
+    textScoreBlueDice : $('#scoreBlueDice'),
+    textScoreRedDice : $('#scoreRedDice')
 }
 
-var gameMessages = {
+var GameMessages = {
     bluePlayerScoreAdvert : "Score Joueur Bleu : ",
     redPlayerScoreAdvert : "Score Joueur Rouge : ",
     playersScoreEquals : "EGALITE ! Joueur Rouge : Relance le dé",
@@ -65,11 +64,7 @@ var gameMessages = {
     redPlayerBegin : "Le joueur Rouge commence, Bravo !"
 }
 
-var scores = {
+var Scores = {
     bluePlayerDice : 0,
     redPlayerDice : 0
-}
-
-var whosNext = {
-    clickCount : 0
 }

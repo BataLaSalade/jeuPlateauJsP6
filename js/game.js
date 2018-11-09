@@ -1,61 +1,68 @@
+var Game = {
+    clickCount : 0
+    //player1
+    //player2
+    //currentPlayer
+    //target
+}
+
+    
+
+
 function playersRunDice() {
-    $('#runGame').on('show.bs.modal', function () {
-        var readyButton = gameActionConstants.readyButton;
-        readyButton.hide();
-        $('#runRedDice').hide();
+    GameUI.modalRunDice.on('show.bs.modal', function () {
+        GameUI.buttonReady.hide();
+        GameUI.buttonRunRedDice.hide();
         bluePlayerRunDice();
         redPlayerRunDice();
-        $('#runDiceModal').hide();
+        GameUI.buttonOpenModalRunDice.hide();
     });
 }
 
 function bluePlayerRunDice() {
     var bluePlayerScoreDice = 0;
-    $('#runBlueDice').on('click', function () {
+    GameUI.buttonRunBlueDice.on('click', function () {
         bluePlayerScoreDice = getRandomIndex(1, 6);
-        gameActionConstants.scoreBlueDiceParagraph.text(gameMessages.bluePlayerScoreAdvert + bluePlayerScoreDice);
+        GameUI.textScoreBlueDice.text(GameMessages.bluePlayerScoreAdvert + bluePlayerScoreDice);
         $(this).hide().off();
-        scores.bluePlayerDice = bluePlayerScoreDice;
-        $('#runRedDice').show();
+        Scores.bluePlayerDice = bluePlayerScoreDice;
+        GameUI.buttonRunRedDice.show();
     });
 }
 
 function redPlayerRunDice() {
-    $('#runRedDice').on('click', function () {
-        var bluePlayerScoreDice = scores.bluePlayerDice;
+    GameUI.buttonRunRedDice.on('click', function () {
+        var bluePlayerScoreDice = Scores.bluePlayerDice;
         var redPlayerScoreDice = getRandomIndex(1, 6);
         if (bluePlayerScoreDice != redPlayerScoreDice) {
             whoBegin(bluePlayerScoreDice, redPlayerScoreDice);
             playerCanMove();
         } else {
-            gameActionConstants.scoreRedDiceParagraph.text(gameMessages.playersScoreEquals);
+            GameUI.textScoreRedDice.text(GameMessages.playersScoreEquals);
         }
     });
 }
 
 function whoBegin(bluePlayerScoreDice, redPlayerScoreDice) {
-    var readyButton = gameActionConstants.readyButton;
-    var instructionsParagraph = gameActionConstants.instructionsParagraph;
-    var bluePlayerMessage = gameMessages.bluePlayerBegin;
-    var redPlayerMessage = gameMessages.redPlayerBegin;
+    var bluePlayerMessage = GameMessages.bluePlayerBegin;
+    var redPlayerMessage = GameMessages.redPlayerBegin;
     var bluePlayerBegin = bluePlayerScoreDice > redPlayerScoreDice;
-    
-    gameActionConstants.scoreRedDiceParagraph.text(gameMessages.redPlayerScoreAdvert + redPlayerScoreDice);
+    GameUI.textScoreRedDice.text(GameMessages.redPlayerScoreAdvert + redPlayerScoreDice);
     if (bluePlayerBegin) {
-        whosNext.player1 = mapContainer.players[blue];
-        whosNext.player2 = mapContainer.players[red];
-        whosNext.currentPlayer = whosNext.player1;
-        instructionsParagraph.text(bluePlayerMessage);
+        Game.player1 = mapContainer.players[blue];
+        Game.player2 = mapContainer.players[red];
+        Game.currentPlayer = Game.player1;
+        GameUI.textModalRunDiceInstructions.text(bluePlayerMessage);
         console.log(bluePlayerMessage);
     } else {
-        whosNext.player1 = mapContainer.players[red];
-        whosNext.player2 = mapContainer.players[blue];
-        whosNext.currentPlayer = whosNext.player1;
-        instructionsParagraph.text(redPlayerMessage);
+        Game.player1 = mapContainer.players[red];
+        Game.player2 = mapContainer.players[blue];
+        Game.currentPlayer = Game.player1;
+        GameUI.textModalRunDiceInstructions.text(redPlayerMessage);
         console.log(redPlayerMessage);
     };
-    $('#runRedDice').hide().off();
-    gameActionConstants.scoreDiceRedPlayer = redPlayerScoreDice;
-    readyButton.show();
+    GameUI.buttonRunRedDice.hide().off();
+    Scores.redPlayerDice = redPlayerScoreDice;
+    GameUI.buttonReady.show();
 
 }
