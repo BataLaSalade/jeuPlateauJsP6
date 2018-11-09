@@ -1,5 +1,5 @@
 function playersRunDice() {
-    $('#runGame').on('show.bs.modal', function (event) {
+    $('#runGame').on('show.bs.modal', function () {
         var readyButton = gameActionConstants.readyButton;
         readyButton.hide();
         $('#runRedDice').hide();
@@ -11,7 +11,7 @@ function playersRunDice() {
 
 function bluePlayerRunDice() {
     var bluePlayerScoreDice = 0;
-    $('#runBlueDice').on('click', function (event) {
+    $('#runBlueDice').on('click', function () {
         bluePlayerScoreDice = getRandomIndex(1, 6);
         gameActionConstants.scoreBlueDiceParagraph.text(gameMessages.bluePlayerScoreAdvert + bluePlayerScoreDice);
         $(this).hide().off();
@@ -21,16 +21,15 @@ function bluePlayerRunDice() {
 }
 
 function redPlayerRunDice() {
-    $('#runRedDice').on('click', function (event) {
+    $('#runRedDice').on('click', function () {
         var bluePlayerScoreDice = scores.bluePlayerDice;
         var redPlayerScoreDice = getRandomIndex(1, 6);
         if (bluePlayerScoreDice != redPlayerScoreDice) {
             whoBegin(bluePlayerScoreDice, redPlayerScoreDice);
-            playerCanMove () 
+            playerCanMove();
         } else {
             gameActionConstants.scoreRedDiceParagraph.text(gameMessages.playersScoreEquals);
         }
-        
     });
 }
 
