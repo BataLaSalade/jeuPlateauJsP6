@@ -1,3 +1,13 @@
+var $player = $("<div />", {
+    class : "player"
+});
+
+var characterNames = ["Chevalier Bleu", "Chevalier Rouge"];
+var playerListUrl = [
+    ["./img/png/BlueCharacter_epeeBois.png", "./img/png/BlueCharacter_arc.png", "./img/png/BlueCharacter_baton.png", "./img/png/BlueCharacter_epee.png", "./img/png/BlueCharacter_lance.png"],
+    ["./img/png/RedCharacter_epeeBois.png", "./img/png/RedCharacter_arc.png", "./img/png/RedCharacter_baton.png", "./img/png/RedCharacter_epee.png",  "./img/png/RedCharacter_lance.png"]
+];
+
 var playerEnum = {
     blue : 0,
     red : 1

@@ -1,13 +1,3 @@
-var $player = $("<div />", {
-    class : "player"
-});
-
-var characterNames = ["Chevalier Bleu", "Chevalier Rouge"];
-var playerListUrl = [
-    ["./img/png/BlueCharacter_epeeBois.png", "./img/png/BlueCharacter_arc.png", "./img/png/BlueCharacter_baton.png", "./img/png/BlueCharacter_epee.png", "./img/png/BlueCharacter_lance.png"],
-    ["./img/png/RedCharacter_epeeBois.png", "./img/png/RedCharacter_arc.png", "./img/png/RedCharacter_baton.png", "./img/png/RedCharacter_epee.png",  "./img/png/RedCharacter_lance.png"]
-];
-
 var Player = {
     init : function (id, position, characterName, weapon, url){
         this.id = id;
@@ -36,7 +26,7 @@ var Player = {
                 if (positionOnTheMap) {
                     scope.listOfPositionToMove.push(positionToMove);
                     var stopDisplay = displayAvailableCellAroundPlayer (mapContainer.obstacles, mapContainer.players, positionToMove, hasNoObjectOnTheWay);
-                };
+                }
                 if (stopDisplay) {
                     hasNoObjectOnTheWay = false;
                 }
@@ -72,7 +62,6 @@ var Player = {
                 break;
         }
     }
-    
 };
 
 function genListPlayer (nbPlayers) {
@@ -100,18 +89,18 @@ function doesAtLeastOneObjectOnPosition (positionToMove, objectToFind, cellStatu
     var isDisable = cellStatus;
     if (hasObjectOnAvailablePosition) {
         isDisable = true;
-    };
+    }
     return isDisable
 }
 
 function displayDisableCell (positionToMove, cellStatus, hasNoObjectOnTheWay, border, cellAccess) {
-    var isDisable = cellStatus
-    var hasNoObjectOnTheWay = hasNoObjectOnTheWay
+    var isDisable = cellStatus;
+    var hasNoObjectOnTheWay = hasNoObjectOnTheWay;
     var border = border;
     var cellAccess = cellAccess;
     if (isDisable == true) {
         var border = "#85bb46 1px solid";
-        var cellAccess = "Disable"
+        var cellAccess = "Disable";
         var hasNoObjectOnTheWay = false;
     }
     $(".line:eq("+ (positionToMove.rowIndex) +") .square:eq("+ (positionToMove.colIndex) +")").css("border", border).removeClass("Enable");
@@ -136,39 +125,14 @@ function displayAvailableCellAroundPlayer (listObstacles, listPlayer, positionTo
 }
 
  function findPlayer () {
-        
     var currentPlayer = whosNext.currentPlayer;
-    var target;
     var directions = ["R","L","T","B"];
     var isPlayerAround = false;
-    if (currentPlayer == whosNext.player1) {
-        target = whosNext.player2;
-    } else {
-        target = whosNext.player1;
+    var target = (currentPlayer == whosNext.player1) ? whosNext.player2 : whosNext.player1;
+    isPlayerAround = currentPlayer.position.isPlayerAround(target.position);
+    whosNext.target = target;
+    if (isPlayerAround) {
+        console.log("Cible trouvé : ", whosNext.target);
     }
-
-    directions.forEach(function(direction) {
-        switch (direction) {
-            case "R":
-                isPlayerAround = currentPlayer.position.isPlayerAround(target.position);
-                whosNext.target = target;
-                break;
-            case "L":
-                isPlayerAround = currentPlayer.position.isPlayerAround(target.position);
-                whosNext.target = target;
-                break;
-            case "T":
-                isPlayerAround = currentPlayer.position.isPlayerAround(target.position);
-                whosNext.target = target;
-                break;
-            case "B":
-                isPlayerAround = currentPlayer.position.isPlayerAround(target.position);
-                whosNext.target = target;
-                break;
-            default:
-                break;
-        }  
-    });
-    console.log("Cible trouvé : " + whosNext.target);
     return isPlayerAround;
 }
