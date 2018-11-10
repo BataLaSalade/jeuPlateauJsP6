@@ -1,10 +1,3 @@
-var $weapon = $("<div />", {
-    class : "weapon"
-});
-
-var weaponNames = ["Epée en bois","Baton", "Arc", "Epée", "Lance"];
-var weaponListUrl = ["./img/png/weapon_epeeBois.png","./img/png/weapon_baton.png", "./img/png/weapon_arc.png", "./img/png/weapon_epee.png", "./img/png/weapon_lance.png"];
-
 var Weapon = {
     init : function (id, position, name, damage, url) {
         this.id = id;
@@ -21,7 +14,7 @@ function genListWeapon (nbWeapons) {
     for (var i = 1; i < nbWeapons; i++) {
         var tmpPosition = getRandomPosition();
         var currentWeapon = Object.create(Weapon);
-        damage += 5
+        damage += 5;
         currentWeapon.init(i, tmpPosition, weaponNames[i], damage, weaponListUrl[i]);
         listWeapons.push(currentWeapon);
     }
@@ -38,8 +31,7 @@ function managePlayerWeapon(player) {
             currentCaseElement.css("background-image", "url("+ player.inventory[0].imageUrl +")");
             currentCaseElement.hide();
             player.weapon = mapContainer.weapons[i];
-            player.inventory[0].position = player.weapon.position
-            console.log("keke");
+            player.inventory[0].position = player.weapon.position;
             var indexToRemove = i;
             break
         }
@@ -51,7 +43,7 @@ function managePlayerWeapon(player) {
 
 function showAllWeapon() {
     for(var i = 0; i < mapContainer.weapons.length; i++) {
-        var weaponCell = $(".line:eq("+ mapContainer.weapons[i].position.rowIndex +") .square:eq("+ mapContainer.weapons[i].position.colIndex +") .weapon")
+        var weaponCell = $(".line:eq("+ mapContainer.weapons[i].position.rowIndex +") .square:eq("+ mapContainer.weapons[i].position.colIndex +") .weapon");
         weaponCell.show();   
     }
 }
@@ -61,7 +53,7 @@ function hideWeapon() {
         var isPlayer1OnWeaponCell = Game.player1.position.isSamePosition(mapContainer.weapons[i].position);
         var isPlayer2OnWeaponCell = Game.player2.position.isSamePosition(mapContainer.weapons[i].position);
         if (isPlayer1OnWeaponCell || isPlayer2OnWeaponCell) {
-            var weaponCell = $(".line:eq("+ mapContainer.weapons[i].position.rowIndex +") .square:eq("+ mapContainer.weapons[i].position.colIndex +") .weapon")
+            var weaponCell = $(".line:eq("+ mapContainer.weapons[i].position.rowIndex +") .square:eq("+ mapContainer.weapons[i].position.colIndex +") .weapon");
             weaponCell.hide();
         }
     }

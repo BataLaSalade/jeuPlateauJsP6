@@ -13,6 +13,13 @@ var playerEnum = {
     red : 1
 }
 
+var $weapon = $("<div />", {
+    class : "weapon"
+});
+
+var weaponNames = ["Epée en bois","Baton", "Arc", "Epée", "Lance"];
+var weaponListUrl = ["./img/png/weapon_epeeBois.png","./img/png/weapon_baton.png", "./img/png/weapon_arc.png", "./img/png/weapon_epee.png", "./img/png/weapon_lance.png"];
+
 var bluePlayerImageWeapon = {
     woodenSword : "./img/png/BlueCharacter_epeeBois.png",
     staff : "./img/png/BlueCharacter_baton.png",
