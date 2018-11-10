@@ -68,3 +68,12 @@ var Scores = {
     bluePlayerDice : 0,
     redPlayerDice : 0
 }
+
+var cssConstants = {
+    borderDisableCell : "#85bb46 1px solid",
+    borderColorDisableCell : "#85bb46",
+    borderEnableCell : "#e8d952 1px solid",
+    borderColorEnableCell : "#e8d952",
+    borderWidth : "1px",
+    borderStyle : "solid"
+}

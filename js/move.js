@@ -18,7 +18,7 @@ function remove (player) {
 
 function removeEnableClass (position) {
     var cell = $(".line:eq("+ (position.rowIndex) +") .square:eq("+ (position.colIndex) +")");
-    cell.css("border-color", "#85bb46").removeClass("Enable");
+    cell.css("border-color", cssConstants.borderColorDisableCell).removeClass("Enable");
 }
 
 function move (player) {
@@ -39,7 +39,7 @@ function move (player) {
 }
 
 function cannotMove (player) {
-    var border = "#85bb46 1px solid";
+    var border = cssConstants.borderDisableCell;
     var cellAccess = "Disable";
     player.listOfPositionToMove.forEach(function(position){
         $(".line:eq("+ (position.rowIndex) +") .square:eq("+ (position.colIndex) +")").css("border", border).removeClass("Enable").addClass(cellAccess);

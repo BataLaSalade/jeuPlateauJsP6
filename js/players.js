@@ -99,7 +99,7 @@ function displayDisableCell (positionToMove, cellStatus, hasNoObjectOnTheWay, bo
     var border = border;
     var cellAccess = cellAccess;
     if (isDisable == true) {
-        var border = "#85bb46 1px solid";
+        var border = cssConstants.borderDisableCell;
         var cellAccess = "Disable";
         var hasNoObjectOnTheWay = false;
     }
@@ -108,7 +108,7 @@ function displayDisableCell (positionToMove, cellStatus, hasNoObjectOnTheWay, bo
 }
 
 function displayAvailableCellAroundPlayer (listObstacles, listPlayer, positionToMove, hasNoObjectOnTheWay) {
-    var border = "#e8d952 1px solid";
+    var border = cssConstants.borderEnableCell;
     var cellAccess = "Enable";
     var isDisable = false;
     var positionToMove = positionToMove;
