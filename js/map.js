@@ -1,21 +1,3 @@
-var $row = $("<div />", {
-    class: 'line'
-
-});
-var $square = $("<div />", {
-    class: 'square'
-});
-
-
-function getObejt(id) {
-    var armeEnBois;
-    listObstacle[0].forEach(arme => {
-        if(arme.id == id)
-            armeEnBois = arme;
-    });
-    return armeEnBois;
-}
-
 var map = {
     rows : 10,
     columns : 10,

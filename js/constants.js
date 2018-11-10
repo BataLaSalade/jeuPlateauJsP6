@@ -2,6 +2,14 @@ var $obstacle = $("<div />", {
     class : "obstacle"
 });
 
+var $row = $("<div />", {
+    class: 'line'
+
+});
+var $square = $("<div />", {
+    class: 'square'
+});
+
 var $player = $("<div />", {
     class : "player"
 });
