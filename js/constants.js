@@ -1,3 +1,7 @@
+var $obstacle = $("<div />", {
+    class : "obstacle"
+});
+
 var $player = $("<div />", {
     class : "player"
 });

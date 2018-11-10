@@ -1,7 +1,3 @@
-var $obstacle = $("<div />", {
-    class : "obstacle"
-});
-
 var Obstacle = {
     init: function (id, position){
         this.id = id;
@@ -19,14 +15,4 @@ function genListObstacle (nbObstacles) {
         listObstacle.push(currentObstacle);
     }
     return listObstacle;
-}
-
-// pour exemple
-function getArme(id) {
-    var armeEnBois;
-    listObstacle[0].forEach(arme => {
-        if(arme.id == id)
-            armeEnBois = arme;
-    });
-    return armeEnBois;
 }
