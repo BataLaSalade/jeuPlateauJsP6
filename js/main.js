@@ -14,21 +14,10 @@ var mapDisplayElements = {
     }
 }
 
-var blue = playerEnum.blue;
-var red = playerEnum.red;
-
 $(function ($) {
     map.genMap();
     createCellPositionObject(map.columns, map.rows);
-    console.log(mapCellPositions.length);
-    
     mapContainer.init();
-    console.log(mapContainer.obstacles);
-    console.log(mapContainer.players);
-    console.log(mapContainer.weapons);
-
     mapDisplayElements.init();
-
     playersRunDice();
-    
 });

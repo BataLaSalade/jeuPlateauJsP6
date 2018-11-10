@@ -47,6 +47,8 @@ function whoBegin(bluePlayerScoreDice, redPlayerScoreDice) {
     var bluePlayerMessage = GameMessages.bluePlayerBegin;
     var redPlayerMessage = GameMessages.redPlayerBegin;
     var bluePlayerBegin = bluePlayerScoreDice > redPlayerScoreDice;
+    var blue = playerEnum.blue;
+    var red = playerEnum.red;
     GameUI.textScoreRedDice.text(GameMessages.redPlayerScoreAdvert + redPlayerScoreDice);
     if (bluePlayerBegin) {
         Game.player1 = mapContainer.players[blue];
