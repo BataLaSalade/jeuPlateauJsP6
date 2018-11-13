@@ -1,6 +1,8 @@
 ///// ----- My var ----- /////
 $square : 50px;
 $childSize : 50px;
+$blue : #2c2e7d;
+$red : #e22b26;
 ///////////////////////////////
 
 
@@ -12,14 +14,14 @@ body {
 .line{
     width: 100%;
     height: $square;
-    background: #8bc34a;
+    //background: #8bc34a;
     display: flex;
     justify-content: center;
     .square{
         border: 1px solid #85bb46;
         width: $square;
         height: $square;
-        //background:#8bc34a;
+        background:#8bc34a;
         display: inline-block;
         z-index: 300;
         .obstacle{
@@ -41,3 +43,48 @@ body {
     }
 }
 
+.avatar{
+    #blueAvatar{
+        width: 75px;
+        height: 75px;
+        border-radius: 5px;
+        background-image: url(../img/png/blueAvatar.png);
+        background-color: $blue;
+        background-size: cover;
+    } 
+}
+
+#healthAndWeaponBluePlayer {
+    #bluePlayerWeapon{
+        width: 48px;
+        height: 48px;
+        margin-top: 5px;
+        border-radius: 5px;
+        background-image: url(../img/png/weapon_epeeBois.png);
+        background-color: rgba($color: #ffffff, $alpha: 0.5);
+        background-size: cover;
+    }
+}
+
+.avatar{
+    #redAvatar{
+        width: 75px;
+        height: 75px;
+        border-radius: 5px;
+        background-image: url(../img/png/redAvatar.png);
+        background-color: $red;
+        background-size: cover;
+    } 
+}
+
+#healthAndWeaponRedPlayer {
+    #redPlayerWeapon{
+        width: 48px;
+        height: 48px;
+        margin-top: 5px;
+        border-radius: 5px;
+        background-image: url(../img/png/weapon_epeeBois.png);
+        background-color: rgba($color: #ffffff, $alpha: 0.5);
+        background-size: cover;
+    }
+}
