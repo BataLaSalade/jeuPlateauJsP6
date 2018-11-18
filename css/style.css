@@ -1,5 +1,6 @@
 body {
-  background: lightgray; }
+  color: #ffffff;
+  opacity: 0.8; }
 
 .line {
   width: 100%;
@@ -30,6 +31,7 @@ body {
   width: 75px;
   height: 75px;
   border-radius: 5px;
+  border: 2px solid rgba(255, 255, 255, 0.8);
   background-image: url(../img/png/blueAvatar.png);
   background-color: #2c2e7d;
   background-size: cover; }
@@ -47,6 +49,7 @@ body {
   width: 75px;
   height: 75px;
   border-radius: 5px;
+  border: 2px solid rgba(255, 255, 255, 0.8);
   background-image: url(../img/png/redAvatar.png);
   background-color: #e22b26;
   background-size: cover; }

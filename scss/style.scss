@@ -7,7 +7,8 @@ $red : #e22b26;
 
 
 body {
-    background: lightgray;
+    color: #ffffff;
+    opacity: 0.8;
 }
 
 
@@ -48,6 +49,7 @@ body {
         width: 75px;
         height: 75px;
         border-radius: 5px;
+        border: 2px solid rgba($color: #ffffff, $alpha: 0.8);
         background-image: url(../img/png/blueAvatar.png);
         background-color: $blue;
         background-size: cover;
@@ -71,6 +73,7 @@ body {
         width: 75px;
         height: 75px;
         border-radius: 5px;
+        border: 2px solid rgba($color: #ffffff, $alpha: 0.8);
         background-image: url(../img/png/redAvatar.png);
         background-color: $red;
         background-size: cover;
