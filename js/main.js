@@ -19,12 +19,15 @@ $(function ($) {
     createCellPositionObject(map.columns, map.rows);
     mapContainer.init();
     mapDisplayElements.init();
-    //initInteraction();
-    playersRunDice();
+    
+    initInteraction();
+    //playersRunDice();
 });
 
-/*
+
 function initInteraction() {
-    $("#wrapper").on("click", ".Enable", movePlayer(e));
+    GameUI.modalRunDice.on('show.bs.modal', displayOnlyBluePlayerButton());
+    GameUI.buttonRunBlueDice.one('click', bluePlayerRunDice());
+    GameUI.buttonRunRedDice.on('click', redPlayerRunDice());
+    //$("#wrapper").on("click", ".Enable", movePlayer(e));
 }
-*/

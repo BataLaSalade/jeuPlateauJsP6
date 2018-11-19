@@ -9,38 +9,38 @@ var Game = {
     
 
 
-function playersRunDice() {
-    GameUI.modalRunDice.on('show.bs.modal', function () {
-        GameUI.buttonReady.hide();
-        GameUI.buttonRunRedDice.hide();
-        bluePlayerRunDice();
-        redPlayerRunDice();
-        GameUI.buttonOpenModalRunDice.hide();
-    });
+function displayOnlyBluePlayerButton() {
+    GameUI.buttonReady.hide();
+    GameUI.buttonRunRedDice.hide();
+    //bluePlayerRunDice();
+    //redPlayerRunDice();  
 }
 
 function bluePlayerRunDice() {
     var bluePlayerScoreDice = 0;
-    GameUI.buttonRunBlueDice.on('click', function () {
         bluePlayerScoreDice = getRandomIndex(1, 6);
         GameUI.textScoreBlueDice.text(GameMessages.bluePlayerScoreAdvert + bluePlayerScoreDice);
-        $(this).hide().off();
         Scores.bluePlayerDice = bluePlayerScoreDice;
-        GameUI.buttonRunRedDice.show();
-    });
+        console.log("score dé bleu = "+bluePlayerScoreDice)
+        //$(this).hide()
+        //GameUI.buttonRunRedDice.show();
+   
 }
 
 function redPlayerRunDice() {
-    GameUI.buttonRunRedDice.on('click', function () {
+    //GameUI.buttonRunBlueDice.hide();
+    //GameUI.buttonRunRedDice.show();
         var bluePlayerScoreDice = Scores.bluePlayerDice;
         var redPlayerScoreDice = getRandomIndex(1, 6);
+        console.log("score dé rouge = "+redPlayerScoreDice)
         if (bluePlayerScoreDice != redPlayerScoreDice) {
             whoBegin(bluePlayerScoreDice, redPlayerScoreDice);
-            playerCanMove();
+            //playerCanMove();
+            ///GameUI.buttonOpenModalRunDice.hide();
         } else {
             GameUI.textScoreRedDice.text(GameMessages.playersScoreEquals);
         }
-    });
+    
 }
 
 function whoBegin(bluePlayerScoreDice, redPlayerScoreDice) {
@@ -65,8 +65,8 @@ function whoBegin(bluePlayerScoreDice, redPlayerScoreDice) {
         console.log(redPlayerMessage);
         GameUI.textCurrentPlayer.text(Game.currentPlayer.characterName + GameMessages.yourTurn);
     };
-    GameUI.buttonRunRedDice.hide().off();
+    //GameUI.buttonRunRedDice.hide().off();
     Scores.redPlayerDice = redPlayerScoreDice;
-    GameUI.buttonReady.show();
+    //GameUI.buttonReady.show();
 
 }
