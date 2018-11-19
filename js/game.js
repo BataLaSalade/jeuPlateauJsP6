@@ -56,12 +56,14 @@ function whoBegin(bluePlayerScoreDice, redPlayerScoreDice) {
         Game.currentPlayer = Game.player1;
         GameUI.textModalRunDiceInstructions.text(bluePlayerMessage);
         console.log(bluePlayerMessage);
+        GameUI.textCurrentPlayer.text(Game.currentPlayer.characterName + GameMessages.yourTurn);
     } else {
         Game.player1 = mapContainer.players[red];
         Game.player2 = mapContainer.players[blue];
         Game.currentPlayer = Game.player1;
         GameUI.textModalRunDiceInstructions.text(redPlayerMessage);
         console.log(redPlayerMessage);
+        GameUI.textCurrentPlayer.text(Game.currentPlayer.characterName + GameMessages.yourTurn);
     };
     GameUI.buttonRunRedDice.hide().off();
     Scores.redPlayerDice = redPlayerScoreDice;

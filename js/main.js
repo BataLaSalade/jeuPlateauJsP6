@@ -19,5 +19,12 @@ $(function ($) {
     createCellPositionObject(map.columns, map.rows);
     mapContainer.init();
     mapDisplayElements.init();
+    //initInteraction();
     playersRunDice();
 });
+
+/*
+function initInteraction() {
+    $("#wrapper").on("click", ".Enable", movePlayer(e));
+}
+*/

@@ -74,7 +74,8 @@ var GameUI = {
     textScoreBlueDice : $('#scoreBlueDice'),
     textScoreRedDice : $('#scoreRedDice'),
     buttonAttack : $('#attack'),
-    buttonDefence : $('#defence')
+    buttonDefence : $('#defence'),
+    textCurrentPlayer : $('#infoPlayerHeader')
 }
 
 var GameMessages = {
@@ -82,7 +83,8 @@ var GameMessages = {
     redPlayerScoreAdvert : "Score Joueur Rouge : ",
     playersScoreEquals : "EGALITE ! Joueur Rouge : Relance le dé",
     bluePlayerBegin : "Le joueur Bleu commence, Bravo !",
-    redPlayerBegin : "Le joueur Rouge commence, Bravo !"
+    redPlayerBegin : "Le joueur Rouge commence, Bravo !",
+    yourTurn : " à toi de jouer !"
 }
 
 var Scores = {

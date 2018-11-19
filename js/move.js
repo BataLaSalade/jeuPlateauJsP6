@@ -59,6 +59,7 @@ function clickCount () {
     var isCurrentPlayerCloseToTarget = findPlayer();
     if (isCurrentPlayerCloseToTarget) {
         console.log("FIGHT");
+        //GameUI.textCurrentPlayer.text("");
         cannotMove(currentPlayer);
         hideWeapon();
         fight();
@@ -66,7 +67,8 @@ function clickCount () {
         cannotMove(currentPlayer);
         hideWeapon();
         Game.currentPlayer = (currentPlayer == Game.player1) ? Game.player2 : Game.player1;
-        Game.currentPlayer.createPositionToMove()
+        GameUI.textCurrentPlayer.text(Game.currentPlayer.characterName + GameMessages.yourTurn);
+        Game.currentPlayer.createPositionToMove();
         Game.clickCount = 0;
     }
 }
