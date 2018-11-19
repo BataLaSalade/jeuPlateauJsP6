@@ -61,6 +61,7 @@ function clickCount () {
         console.log("FIGHT");
         cannotMove(currentPlayer);
         hideWeapon();
+        fight();
     } else if (clickCount > 0) {
         cannotMove(currentPlayer);
         hideWeapon();

@@ -72,7 +72,9 @@ var GameUI = {
     buttonReady : $('#ready'),
     textModalRunDiceInstructions : $('#instructions'),
     textScoreBlueDice : $('#scoreBlueDice'),
-    textScoreRedDice : $('#scoreRedDice')
+    textScoreRedDice : $('#scoreRedDice'),
+    buttonAttack : $('#attack'),
+    buttonDefence : $('#defence')
 }
 
 var GameMessages = {

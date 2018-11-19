@@ -9,6 +9,7 @@ var Player = {
         this.imageUrl = url != "" ? url : "./img/png/BlueCharacter_epeeBois.png";
         this.listOfPositionToMove = [];
         this.canMove = false;
+        this.defence = 1;
     },
 
     createPositionToMove : function () {
