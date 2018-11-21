@@ -47,7 +47,7 @@ function attack () {
 }
 
 function defend () {
-    var currentPlayer = Game.currentPlayer;
-    var target = getTarget();
+    Game.currentPlayer.defence = 2
+    var damage = Game.currentPlayer.weapon.damage * Game.currentPlayer.defence;
 }
 
