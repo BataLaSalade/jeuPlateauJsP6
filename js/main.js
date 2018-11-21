@@ -19,6 +19,7 @@ $(function ($) {
     createCellPositionObject(map.columns, map.rows);
     mapContainer.init();
     mapDisplayElements.init();
+    hideFightButtons();
     
     initInteraction();
     //playersRunDice();
@@ -26,46 +27,9 @@ $(function ($) {
 
 
 function initInteraction() {
-    GameUI.modalRunDice.on('show.bs.modal', function(){
-        GameUI.buttonReady.hide();
-        GameUI.buttonRunRedDice.hide();
-    });
-    GameUI.buttonRunBlueDice.one('click', function(){
-        var bluePlayerScoreDice = 0;
-        bluePlayerScoreDice = getRandomIndex(1, 6);
-        GameUI.textScoreBlueDice.text(GameMessages.bluePlayerScoreAdvert + bluePlayerScoreDice);
-        Scores.bluePlayerDice = bluePlayerScoreDice;
-        console.log("score dé bleu = "+ bluePlayerScoreDice)
-        $(this).hide()
-        GameUI.buttonRunRedDice.show();
-    });
-    GameUI.buttonRunRedDice.on('click', function(){
-        var bluePlayerScoreDice = Scores.bluePlayerDice;
-        var redPlayerScoreDice = getRandomIndex(1, 6);
-        console.log("score dé rouge = "+redPlayerScoreDice)
-        if (bluePlayerScoreDice != redPlayerScoreDice) {
-            whoBegin(bluePlayerScoreDice, redPlayerScoreDice);
-            GameUI.buttonRunRedDice.hide();
-            GameUI.buttonReady.show();
-            GameUI.buttonOpenModalRunDice.hide();
-            Game.currentPlayer.createPositionToMove();
-            
-        } else {
-            GameUI.textScoreRedDice.text(GameMessages.playersScoreEquals);
-        }
-    });
-    $("#wrapper").on("click", ".Enable", function(e) {
-        player = Game.currentPlayer;
-        remove(Game.currentPlayer);
-        var colIndexNextMove = Number($(e.target).attr("colindex"));
-        var rowIndexNextMove = Number($(e.target).attr("rowindex"));
-        Game.currentPlayer.position.setPosition(colIndexNextMove, rowIndexNextMove);
-        Game.currentPlayer.createPositionToMove();
-        moveToCell(Game.currentPlayer, $player, "player",0);
-        showAllWeapon();
-        if ($(e.target).hasClass("weapon")) {
-            managePlayerWeapon(Game.currentPlayer);
-        }
-        clickCount ();
-    });
+    GameUI.modalRunDice.on('show.bs.modal', displayButtonInModalRunDice);
+    GameUI.buttonRunBlueDice.one('click', buttonRunBlueDiceAction);
+    GameUI.buttonRunRedDice.on('click', buttonRunRedDiceAction);
+    GameUI.map.on('click', '.Enable', move);
+    GameUI.buttonAttack.on('click', attack);
 }

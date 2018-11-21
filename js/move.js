@@ -20,28 +20,26 @@ function removeEnableClass (position) {
     var cell = $(".line:eq("+ (position.rowIndex) +") .square:eq("+ (position.colIndex) +")");
     cell.css("border-color", cssConstants.borderColorDisableCell).removeClass("Enable");
 }
-/*
-function move (player) {
-    $("#wrapper").on("click", ".Enable", function(e) {
-        player = Game.currentPlayer;
-        remove(player);
-        var colIndexNextMove = Number($(e.target).attr("colindex"));
-        var rowIndexNextMove = Number($(e.target).attr("rowindex"));
-        player.position.setPosition(colIndexNextMove, rowIndexNextMove);
-        player.createPositionToMove();
-        moveToCell(player, $player, "player",0);
-        showAllWeapon();
-        if ($(e.target).hasClass("weapon")) {
-            managePlayerWeapon(player);
-        }
-        clickCount ();
-    });
+
+function move(e) {
+    remove(Game.currentPlayer);
+    var colIndexNextMove = Number($(e.target).attr("colindex"));
+    var rowIndexNextMove = Number($(e.target).attr("rowindex"));
+    Game.currentPlayer.position.setPosition(colIndexNextMove, rowIndexNextMove);
+    Game.currentPlayer.createPositionToMove();
+    moveToCell(Game.currentPlayer, $player, "player",0);
+    showAllWeapon();
+    if ($(e.target).hasClass("weapon")) {
+        managePlayerWeapon(Game.currentPlayer);
+    }
+    clickCount ();
+    fight();
 }
-*/
-function cannotMove (player) {
+
+function cannotMove () {
     var border = cssConstants.borderDisableCell;
     var cellAccess = "Disable";
-    player.listOfPositionToMove.forEach(function(position){
+    Game.currentPlayer.listOfPositionToMove.forEach(function(position){
         $(".line:eq("+ (position.rowIndex) +") .square:eq("+ (position.colIndex) +")").css("border", border).removeClass("Enable").addClass(cellAccess);
     });
 }
@@ -53,21 +51,14 @@ function playerCanMove () {
 
 function clickCount () {
     Game.clickCount++;
-    var clickCount = Game.clickCount;
-    var currentPlayer = Game.currentPlayer;
-    var isCurrentPlayerCloseToTarget = findPlayer();
-    if (isCurrentPlayerCloseToTarget) {
-        console.log("FIGHT");
-        //GameUI.textCurrentPlayer.text("");
-        cannotMove(currentPlayer);
+    if (Game.clickCount > 0) {
+        cannotMove();
         hideWeapon();
-        fight();
-    } else if (clickCount > 0) {
-        cannotMove(currentPlayer);
-        hideWeapon();
-        Game.currentPlayer = (currentPlayer == Game.player1) ? Game.player2 : Game.player1;
+        switchCurrentPlayer();
+        switchTarget();
         GameUI.textCurrentPlayer.text(Game.currentPlayer.characterName + GameMessages.yourTurn);
         Game.currentPlayer.createPositionToMove();
         Game.clickCount = 0;
     }
 }
+

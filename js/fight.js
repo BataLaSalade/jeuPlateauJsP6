@@ -1,50 +1,47 @@
-function fight () {
+function fight() {
+    var isCurrentPlayerCloseToTarget = Game.currentPlayer.position.isPlayerAround(Game.target.position);
+    if (isCurrentPlayerCloseToTarget) {
+        console.log("FIGHT");
+        cannotMove();
+        hideWeapon();
+        showFightButtons();
+    }
+}
+
+function hideFightButtons() {
+    GameUI.buttonAttack.hide();
+    GameUI.buttonDefence.hide();
+}
+
+function showFightButtons() {
+    GameUI.buttonAttack.show();
+    GameUI.buttonDefence.show();
+}
+
+function switchPlayerAfterFightAction() {
+    switchCurrentPlayer();
+    switchTarget();
+    GameUI.textCurrentPlayer.text(Game.currentPlayer.characterName + GameMessages.yourTurn)
+    console.log("attack changement joueur");
+    console.log(Game.currentPlayer.characterName + GameMessages.yourTurn);
     Game.clickCount = 0;
-    //Attaquer
-    attack();
-    //Defendre
-    //GameUI.buttonDefence.on('click', defend());
-
-    
-        
-    
-    
-}
-
-function switchTarget() {
-    var target = (Game.currentPlayer == Game.player1) ? Game.player2 : Game.player1;
-    Game.target = target;
-}
-
-function switchCurrentPlayer() {
-    var currentPlayer = (Game.currentPlayer == Game.player1) ? Game.player2 : Game.player1;
-    Game.currentPlayer = currentPlayer;
 }
 
 function attack () {
     var damage = Game.currentPlayer.weapon.damage * Game.currentPlayer.defence;  
-    if (Game.target.sante > 0) {
-        GameUI.buttonAttack.on('click', function() {
-            Game.target.sante -= damage;
-            console.log("Joueur actuel : ", Game.currentPlayer.characterName);
-            console.log("santé de la cible ", Game.target.characterName, " = " , Game.target.sante);
-            Game.clickCount++
-            if (Game.clickCount > 0) {
-                GameUI.textCurrentPlayer.text(Game.currentPlayer.characterName + GameMessages.yourTurn)
-                console.log("attack changement joueur")
-                switchCurrentPlayer();
-                switchTarget();
-                Game.clickCount = 0;
-            }
-            if (Game.target.sante <= 0) {
-                var message = Game.currentPlayer.characterName + " a gagné !"
-                GameUI.buttonAttack.hide()
-                GameUI.buttonDefence.hide()
-                console.log(message);
-            }
-            
-
-        });
+    if (Game.target.sante > 0 && Game.currentPlayer.sante > 0) {
+        Game.target.sante -= damage;
+        console.log("Joueur actuel : ", Game.currentPlayer.characterName);
+        console.log("santé de la cible ", Game.target.characterName, " = " , Game.target.sante);
+        Game.clickCount++
+    } 
+    if (Game.target.sante <= 0 || Game.currentPlayer.sante <= 0) {
+        var message = Game.currentPlayer.characterName + " a gagné !"
+        hideFightButtons();
+        console.log(message);
+        GameUI.textCurrentPlayer.text(message);
+    } else if (Game.clickCount > 0) {
+        switchPlayerAfterFightAction();
     }
     
 }
