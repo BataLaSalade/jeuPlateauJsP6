@@ -20,7 +20,7 @@ function removeEnableClass (position) {
     var cell = $(".line:eq("+ (position.rowIndex) +") .square:eq("+ (position.colIndex) +")");
     cell.css("border-color", cssConstants.borderColorDisableCell).removeClass("Enable");
 }
-
+/*
 function move (player) {
     $("#wrapper").on("click", ".Enable", function(e) {
         player = Game.currentPlayer;
@@ -37,7 +37,7 @@ function move (player) {
         clickCount ();
     });
 }
-
+*/
 function cannotMove (player) {
     var border = cssConstants.borderDisableCell;
     var cellAccess = "Disable";
@@ -47,9 +47,8 @@ function cannotMove (player) {
 }
 
 function playerCanMove () {
-    var currentPlayer = Game.currentPlayer;
-    currentPlayer.createPositionToMove(); 
-    move(currentPlayer);
+    Game.currentPlayer.createPositionToMove(); 
+    move(Game.currentPlayer);
 }
 
 function clickCount () {

@@ -7,10 +7,12 @@ $red : #e22b26;
 
 
 body {
-    color: #ffffff;
-    opacity: 0.8;
+    color: rgba($color: #ffffff, $alpha: 0.8);
 }
 
+.modal {
+    color: rgba($color: #000000, $alpha: 0.8);
+}
 
 .line{
     width: 100%;
