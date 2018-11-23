@@ -76,7 +76,9 @@ var GameUI = {
     textScoreRedDice: $('#scoreRedDice'),
     buttonAttack: $('#attack'),
     buttonDefence: $('#defence'),
-    textCurrentPlayer: $('#infoPlayerHeader')
+    textCurrentPlayer: $('#infoPlayerHeader'),
+    bluePlayerProgressbar: $('#bluePlayerPV'),
+    redPlayerProgressbar: $('#redPlayerPV')
 }
 
 var GameMessages = {

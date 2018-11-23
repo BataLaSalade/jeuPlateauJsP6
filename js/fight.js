@@ -27,6 +27,16 @@ function switchPlayerAfterFightAction() {
     Game.clickCount = 0;
 }
 
+function setProgressBar(playerHealth) {
+    var relayAttribute = {};
+    var ariaValuenowAttr = "aria-valuenow";
+    var styleAttr = "style";
+    relayAttribute[ariaValuenowAttr] = String(playerHealth);
+    relayAttribute[styleAttr] = "width:"+String(playerHealth)+"%";
+    var target = (Game.currentPlayer == mapContainer.players[playerEnum.blue]) ? GameUI.bluePlayerProgressbar : GameUI.redPlayerProgressbar;
+    target.attr(relayAttribute);
+}
+
 function attack () {
     var damage = Game.currentPlayer.weapon.damage * Game.currentPlayer.defence;  
     if (Game.target.sante > 0 && Game.currentPlayer.sante > 0) {
@@ -34,6 +44,8 @@ function attack () {
         console.log("Joueur actuel : ", Game.currentPlayer.characterName);
         console.log("santé de la cible ", Game.target.characterName, " = " , Game.target.sante);
         Game.clickCount++
+        setProgressBar(Game.target.sante);
+        
     } 
     if (Game.target.sante <= 0 || Game.currentPlayer.sante <= 0) {
         var message = Game.currentPlayer.characterName + " a gagné !"
