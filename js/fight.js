@@ -27,28 +27,59 @@ function switchPlayerAfterFightAction() {
     Game.clickCount = 0;
 }
 
-function setProgressBar(playerHealth) {
+function setProgressBar(targetHealth, currentPlayerHealth) {
     var relayAttribute = {};
     var ariaValuenowAttr = "aria-valuenow";
     var styleAttr = "style";
-    relayAttribute[ariaValuenowAttr] = String(playerHealth);
-    relayAttribute[styleAttr] = "width:"+String(playerHealth)+"%";
-    var target = (Game.currentPlayer == mapContainer.players[playerEnum.blue]) ? GameUI.bluePlayerProgressbar : GameUI.redPlayerProgressbar;
-    target.attr(relayAttribute);
+    var playerLifeToSet = targetHealth
+    switch (playerLifeToSet) {
+        case targetHealth:
+            targetHealth = (targetHealth<=0) ? 0 : targetHealth;
+            relayAttribute[ariaValuenowAttr] = String(targetHealth);
+            relayAttribute[styleAttr] = "width:"+String(targetHealth)+"%";
+            var target = (Game.target == mapContainer.players[playerEnum.blue]) ? GameUI.bluePlayerProgressbar : GameUI.redPlayerProgressbar;
+            target.attr(relayAttribute);
+        case currentPlayerHealth:
+            currentPlayerHealth = (currentPlayerHealth<=0) ? 0 : currentPlayerHealth;
+            relayAttribute[ariaValuenowAttr] = String(currentPlayerHealth);
+            relayAttribute[styleAttr] = "width:"+String(currentPlayerHealth)+"%";
+            var currentPlayer = (Game.currentPlayer == mapContainer.players[playerEnum.blue]) ? GameUI.bluePlayerProgressbar : GameUI.redPlayerProgressbar;
+            currentPlayer.attr(relayAttribute);
+        default:
+            break;
+    } 
 }
 
 function attack () {
     var damage = Game.currentPlayer.weapon.damage / Game.target.defence;  
     if (Game.target.sante > 0 && Game.currentPlayer.sante > 0) {
-        Game.target.sante -= damage;
-        console.log("Joueur actuel : ", Game.currentPlayer.characterName);
-        console.log("santé de la cible ", Game.target.characterName, " = " , Game.target.sante);
+        if (Game.target.defence == 2) {
+            Game.target.sante -= damage;
+            Game.currentPlayer.sante -= damage*0.25;
+            console.log("*****")
+            console.log("Joueur actuel : ", Game.currentPlayer.characterName);
+            console.log("santé de ", Game.currentPlayer.characterName, " = " , Game.currentPlayer.sante);
+            console.log("Cible actuel : ", Game.target.characterName);
+            console.log("santé de la cible ", Game.target.characterName, " = " , Game.target.sante);
+            console.log("*****")
+            Game.target.defence =1;
+        } else {
+            Game.target.sante -= damage;
+            console.log("*****")
+            console.log("Joueur actuel : ", Game.currentPlayer.characterName);
+            console.log("santé de la cible ", Game.target.characterName, " = " , Game.target.sante);
+            console.log("*****")
+        }
+        
+        
         Game.clickCount++;
-        setProgressBar(Game.target.sante);
+        setProgressBar(Game.target.sante, Game.currentPlayer.sante);
         
     } 
     if (Game.target.sante <= 0 || Game.currentPlayer.sante <= 0) {
-        var message = Game.currentPlayer.characterName + " a gagné !";
+        var troll = Game.currentPlayer.characterName + " a gagné ! mais comme c'est un bleu, il perd automatiquement la partie. De toute façon les Rouges sont les meilleurs !";
+        var redPlayerWin = Game.currentPlayer.characterName + " a gagné !"
+        var message = (Game.currentPlayer == mapContainer.players[playerEnum.blue]) ? troll : redPlayerWin;
         hideFightButtons();
         console.log(message);
         GameUI.textCurrentPlayer.text(message);
