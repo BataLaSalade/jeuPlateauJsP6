@@ -105,5 +105,7 @@ var cssConstants = {
     borderEnableCell: "#e8d952 1px solid",
     borderColorEnableCell: "#e8d952",
     borderWidth: "1px",
-    borderStyle: "solid"
+    borderStyle: "solid",
+    backgroundColor: "#ffffff",
+    bkgOpacity: 0.5
 }

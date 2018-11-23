@@ -99,6 +99,8 @@ function displayDisableCell (positionToMove, cellStatus, hasNoObjectOnTheWay, bo
     var hasNoObjectOnTheWay = hasNoObjectOnTheWay;
     var border = border;
     var cellAccess = cellAccess;
+    var backgroundColor = cssConstants.backgroundColor;
+    var bkgOpacity = cssConstants.bkgOpacity;
     if (isDisable == true) {
         var border = cssConstants.borderDisableCell;
         var cellAccess = "Disable";
@@ -110,12 +112,14 @@ function displayDisableCell (positionToMove, cellStatus, hasNoObjectOnTheWay, bo
 
 function displayAvailableCellAroundPlayer (listObstacles, listPlayer, positionToMove, hasNoObjectOnTheWay) {
     var border = cssConstants.borderEnableCell;
+    //var backgroundColor = cssConstants.backgroundColor;
+    //var bkgOpacity = cssConstants.bkgOpacity;
     var cellAccess = "Enable";
     var isDisable = false;
     var positionToMove = positionToMove;
     var hasNoObjectOnTheWay = hasNoObjectOnTheWay;
     listObstacles.forEach(function(obstacle){
-        isDisable = doesAtLeastOneObjectOnPosition (positionToMove, obstacle, isDisable)
+        isDisable = doesAtLeastOneObjectOnPosition (positionToMove, obstacle, isDisable);
     });
     displayDisableCell (positionToMove, isDisable, hasNoObjectOnTheWay, border, cellAccess);
     listPlayer.forEach(function(player){
