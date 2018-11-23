@@ -37,14 +37,18 @@ function setProgressBar(targetHealth, currentPlayerHealth) {
             targetHealth = (targetHealth<=0) ? 0 : targetHealth;
             relayAttribute[ariaValuenowAttr] = String(targetHealth);
             relayAttribute[styleAttr] = "width:"+String(targetHealth)+"%";
-            var target = (Game.target == mapContainer.players[playerEnum.blue]) ? GameUI.bluePlayerProgressbar : GameUI.redPlayerProgressbar;
-            target.attr(relayAttribute);
+            var targetProgressbar = (Game.target == mapContainer.players[playerEnum.blue]) ? GameUI.bluePlayerProgressbar : GameUI.redPlayerProgressbar;
+            targetProgressbar.attr(relayAttribute);
+            var targetPVLabel = (Game.target == mapContainer.players[playerEnum.blue]) ? GameUI.bluePlayerPVLabel : GameUI.redPlayerPVLabel;
+            targetPVLabel.text(targetHealth + " PV");
         case currentPlayerHealth:
             currentPlayerHealth = (currentPlayerHealth<=0) ? 0 : currentPlayerHealth;
             relayAttribute[ariaValuenowAttr] = String(currentPlayerHealth);
             relayAttribute[styleAttr] = "width:"+String(currentPlayerHealth)+"%";
-            var currentPlayer = (Game.currentPlayer == mapContainer.players[playerEnum.blue]) ? GameUI.bluePlayerProgressbar : GameUI.redPlayerProgressbar;
-            currentPlayer.attr(relayAttribute);
+            var currentPlayerProgressbar = (Game.currentPlayer == mapContainer.players[playerEnum.blue]) ? GameUI.bluePlayerProgressbar : GameUI.redPlayerProgressbar;
+            currentPlayerProgressbar.attr(relayAttribute);
+            var currentPlayerPVLabel = (Game.currentPlayer == mapContainer.players[playerEnum.blue]) ? GameUI.bluePlayerPVLabel : GameUI.redPlayerPVLabel;
+            currentPlayerPVLabel.text(currentPlayerHealth + " PV");
         default:
             break;
     } 
@@ -70,11 +74,8 @@ function attack () {
             console.log("santé de la cible ", Game.target.characterName, " = " , Game.target.sante);
             console.log("*****")
         }
-        
-        
         Game.clickCount++;
         setProgressBar(Game.target.sante, Game.currentPlayer.sante);
-        
     } 
     if (Game.target.sante <= 0 || Game.currentPlayer.sante <= 0) {
         var troll = Game.currentPlayer.characterName + " a gagné ! mais comme c'est un bleu, il perd automatiquement la partie. De toute façon les Rouges sont les meilleurs !";
@@ -86,7 +87,6 @@ function attack () {
     } else if (Game.clickCount > 0) {
         switchPlayerAfterFightAction();
     }
-    
 }
 
 function defend () {

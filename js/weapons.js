@@ -41,6 +41,11 @@ function managePlayerWeapon(player) {
     mapContainer.weapons.splice(indexToRemove, 1);
 }
 
+function displayWeaponIcon(player) {
+    var iconToSet = (player == mapContainer.players[playerEnum.blue]) ? GameUI.bluePlayerWeaponIcon : GameUI.redPlayerWeaponIcon;
+    iconToSet.css("background-image", "url("+ player.inventory[0].imageUrl +")");
+}
+
 function showAllWeapon() {
     for(var i = 0; i < mapContainer.weapons.length; i++) {
         var weaponCell = $(".line:eq("+ mapContainer.weapons[i].position.rowIndex +") .square:eq("+ mapContainer.weapons[i].position.colIndex +") .weapon");
@@ -58,3 +63,4 @@ function hideWeapon() {
         }
     }
 }
+

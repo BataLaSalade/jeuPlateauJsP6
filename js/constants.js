@@ -78,7 +78,11 @@ var GameUI = {
     buttonDefence: $('#defence'),
     textCurrentPlayer: $('#infoPlayerHeader'),
     bluePlayerProgressbar: $('#bluePlayerPV'),
-    redPlayerProgressbar: $('#redPlayerPV')
+    redPlayerProgressbar: $('#redPlayerPV'),
+    bluePlayerWeaponIcon: $('#bluePlayerWeapon'),
+    redPlayerWeaponIcon: $('#redPlayerWeapon'),
+    bluePlayerPVLabel: $('#bluePlayerPVLabel'),
+    redPlayerPVLabel: $('#redPlayerPVLabel')
 }
 
 var GameMessages = {

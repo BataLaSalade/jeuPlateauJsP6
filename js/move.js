@@ -31,6 +31,7 @@ function move(e) {
     showAllWeapon();
     if ($(e.target).hasClass("weapon")) {
         managePlayerWeapon(Game.currentPlayer);
+        displayWeaponIcon(Game.currentPlayer);
     }
     clickCount ();
     fight();

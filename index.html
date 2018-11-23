@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Jeu Plateau</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Luckiest+Guy" rel="stylesheet">
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" type="text/css" media="screen" href="css/style.css" />
     
@@ -45,8 +46,8 @@
                 </div>
                 <div class="modal-body">
                     <p id="instructions">Le joueur qui obtient le meilleur score commence.</p>
-                    <p id="scoreBlueDice">Joueur bleu : (score)</p>
-                    <p id="scoreRedDice">Joueur rouge : (score)</p>
+                    <p id="scoreBlueDice">Joueur bleu : </p>
+                    <p id="scoreRedDice">Joueur rouge : </p>
                 </div>
                 <div class="modal-footer justify-content-center">
                     <button type="button" id="runBlueDice" class="btn btn-primary">Joueur bleu : Lancer le dé</button>
@@ -88,9 +89,10 @@
                         </div>
                         <div class="col" id="healthAndWeaponBluePlayer">
                             <div class="progress">
-                                <div class="progress-bar progress-bar-striped bg-danger" id="bluePlayerPV" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">100%</div>
+                                <div class="progress-bar progress-bar-striped bg-danger" id="bluePlayerPV" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                             <div class="weapon" id="bluePlayerWeapon"></div>
+                            <div class="pvLabel" id="bluePlayerPVLabel">100 PV</div>
                         </div>
                 </div>
             </div>
@@ -102,17 +104,18 @@
                     </div>
                     <div class="col" id="healthAndWeaponRedPlayer">
                         <div class="progress">
-                            <div class="progress-bar progress-bar-striped bg-danger" id="redPlayerPV" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">100%</div>
+                            <div class="progress-bar progress-bar-striped bg-danger" id="redPlayerPV" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                         <div class="weapon" id="redPlayerWeapon"></div>
+                        <div class="pvLabel" id="redPlayerPVLabel">100 PV</div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="container-fluid" id="infoPlayer">
             <div class="row justify-content-center mt-3" id="playerAction">
-                    <button type="button" id="attack" class="btn btn-danger ml-3">Attaquer</button>
-                    <button type="button" id="defence" class="btn btn-success ml-3">Defendre</button>
+                <button type="button" id="attack" class="btn btn-danger ml-3">Attaquer</button>
+                <button type="button" id="defence" class="btn btn-success ml-3">Defendre</button>
             </div>
         </div>
     </div>
