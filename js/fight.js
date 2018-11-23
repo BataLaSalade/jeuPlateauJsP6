@@ -38,17 +38,17 @@ function setProgressBar(playerHealth) {
 }
 
 function attack () {
-    var damage = Game.currentPlayer.weapon.damage * Game.currentPlayer.defence;  
+    var damage = Game.currentPlayer.weapon.damage / Game.target.defence;  
     if (Game.target.sante > 0 && Game.currentPlayer.sante > 0) {
         Game.target.sante -= damage;
         console.log("Joueur actuel : ", Game.currentPlayer.characterName);
         console.log("santé de la cible ", Game.target.characterName, " = " , Game.target.sante);
-        Game.clickCount++
+        Game.clickCount++;
         setProgressBar(Game.target.sante);
         
     } 
     if (Game.target.sante <= 0 || Game.currentPlayer.sante <= 0) {
-        var message = Game.currentPlayer.characterName + " a gagné !"
+        var message = Game.currentPlayer.characterName + " a gagné !";
         hideFightButtons();
         console.log(message);
         GameUI.textCurrentPlayer.text(message);
@@ -59,7 +59,19 @@ function attack () {
 }
 
 function defend () {
-    Game.currentPlayer.defence = 2
-    var damage = Game.currentPlayer.weapon.damage * Game.currentPlayer.defence;
+    if (Game.target.sante > 0 && Game.currentPlayer.sante > 0) {
+        Game.currentPlayer.defence = 2;
+        console.log("Joueur actuel : ", Game.currentPlayer.characterName);
+        console.log("a augmenté sa défense = ", Game.currentPlayer.defence);
+        Game.clickCount++;   
+    } 
+    if (Game.target.sante <= 0 || Game.currentPlayer.sante <= 0) {
+        var message = Game.currentPlayer.characterName + " a gagné !"
+        hideFightButtons();
+        console.log(message);
+        GameUI.textCurrentPlayer.text(message);
+    } else if (Game.clickCount > 0) {
+        switchPlayerAfterFightAction();
+    }
 }
 

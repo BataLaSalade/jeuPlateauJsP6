@@ -32,4 +32,5 @@ function initInteraction() {
     GameUI.buttonRunRedDice.on('click', buttonRunRedDiceAction);
     GameUI.map.on('click', '.Enable', move);
     GameUI.buttonAttack.on('click', attack);
+    GameUI.buttonDefence.on('click', defend);
 }
