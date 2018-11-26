@@ -1,9 +1,19 @@
 ///// ----- My var ----- /////
 $square : 50px;
+$squareSmall:30px;
 $childSize : 50px;
 $blue : #2c2e7d;
 $red : #e22b26;
+
 ///////////////////////////////
+@media (min-width: 576px) {
+    .line {
+        height: $squareSmall;
+        .square {
+            width: $squareSmall;
+        }
+    }
+}
 
 
 body {
@@ -12,6 +22,11 @@ body {
 
 .modal {
     color: rgba($color: #000000, $alpha: 0.8);
+}
+
+img#logo {
+    width:330px;
+    height: 50px;
 }
 
 .line{
