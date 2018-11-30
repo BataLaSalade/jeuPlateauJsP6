@@ -47,7 +47,6 @@ var Position = {
     }
 }
 
-
 var mapCellPositions = [];
 function createCellPositionObject(nbCol, nbRow) {
     for (var i = 0; i < nbCol; i++) {
