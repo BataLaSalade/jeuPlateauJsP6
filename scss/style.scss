@@ -61,7 +61,7 @@ img#logo {
     }
 }
 
-.avatar{
+
     #blueAvatar{
         width: 75px;
         height: 75px;
@@ -70,8 +70,10 @@ img#logo {
         background-image: url(../img/png/blueAvatar.png);
         background-color: $blue;
         background-size: cover;
+        margin-right: 0px;
+        margin-left: auto;
     } 
-}
+
 
 .pvLabel {
     width: 48px;
@@ -98,8 +100,10 @@ img#logo {
     }
 }
 
-.avatar{
+
     #redAvatar{
+        margin-right: 0px;
+        margin-left: auto;
         width: 75px;
         height: 75px;
         border-radius: 5px;
@@ -108,7 +112,7 @@ img#logo {
         background-color: $red;
         background-size: cover;
     } 
-}
+
 
 #healthAndWeaponRedPlayer {
     #redPlayerWeapon{

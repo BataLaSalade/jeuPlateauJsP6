@@ -38,14 +38,16 @@ img#logo {
       height: 50px;
       z-index: 100; }
 
-.avatar #blueAvatar {
+#blueAvatar {
   width: 75px;
   height: 75px;
   border-radius: 5px;
   border: 2px solid rgba(255, 255, 255, 0.8);
   background-image: url(../img/png/blueAvatar.png);
   background-color: #2c2e7d;
-  background-size: cover; }
+  background-size: cover;
+  margin-right: 0px;
+  margin-left: auto; }
 
 .pvLabel {
   width: 48px;
@@ -68,7 +70,9 @@ img#logo {
   background-color: rgba(255, 255, 255, 0.5);
   background-size: cover; }
 
-.avatar #redAvatar {
+#redAvatar {
+  margin-right: 0px;
+  margin-left: auto;
   width: 75px;
   height: 75px;
   border-radius: 5px;
