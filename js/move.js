@@ -18,7 +18,7 @@ function remove (player) {
 
 function removeEnableClass (position) {
     var cell = $(".line:eq("+ (position.rowIndex) +") .square:eq("+ (position.colIndex) +")");
-    cell.css("border-color", cssConstants.borderColorDisableCell).removeClass("Enable");
+    cell.css("background-color", cssConstants.backgroundColorDisableCell).removeClass("Enable");
 }
 
 function move(e) {
@@ -38,10 +38,11 @@ function move(e) {
 }
 
 function cannotMove () {
-    var border = cssConstants.borderDisableCell;
+    //var border = cssConstants.borderDisableCell;
+    var backgroundColor = cssConstants.backgroundColorDisableCell
     var cellAccess = "Disable";
     Game.currentPlayer.listOfPositionToMove.forEach(function(position){
-        $(".line:eq("+ (position.rowIndex) +") .square:eq("+ (position.colIndex) +")").css("border", border).removeClass("Enable").addClass(cellAccess);
+        $(".line:eq("+ (position.rowIndex) +") .square:eq("+ (position.colIndex) +")").css("background-color", backgroundColor).removeClass("Enable").addClass(cellAccess);
     });
 }
 

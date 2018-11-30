@@ -94,13 +94,11 @@ function doesAtLeastOneObjectOnPosition (positionToMove, objectToFind, cellStatu
     return isDisable
 }
 
-function displayDisableCell (positionToMove, cellStatus, hasNoObjectOnTheWay, border, cellAccess) {
+/*function displayDisableCell (positionToMove, cellStatus, hasNoObjectOnTheWay, border, cellAccess) {
     var isDisable = cellStatus;
     var hasNoObjectOnTheWay = hasNoObjectOnTheWay;
     var border = border;
     var cellAccess = cellAccess;
-    var backgroundColor = cssConstants.backgroundColor;
-    var bkgOpacity = cssConstants.bkgOpacity;
     if (isDisable == true) {
         var border = cssConstants.borderDisableCell;
         var cellAccess = "Disable";
@@ -108,11 +106,24 @@ function displayDisableCell (positionToMove, cellStatus, hasNoObjectOnTheWay, bo
     }
     $(".line:eq("+ (positionToMove.rowIndex) +") .square:eq("+ (positionToMove.colIndex) +")").css("border", border).removeClass("Enable");
     $(".line:eq("+ (positionToMove.rowIndex) +") .square:eq("+ (positionToMove.colIndex) +")").css("border", border).addClass(cellAccess);
+}*/
+function displayDisableCell (positionToMove, cellStatus, hasNoObjectOnTheWay, backgroundColor, cellAccess) {
+    var isDisable = cellStatus;
+    var hasNoObjectOnTheWay = hasNoObjectOnTheWay;
+    var backgroundColor = backgroundColor;
+    var cellAccess = cellAccess;
+    if (isDisable == true) {
+        var backgroundColor = cssConstants.backgroundColorDisableCell;
+        var cellAccess = "Disable";
+        var hasNoObjectOnTheWay = false;
+    }
+    $(".line:eq("+ (positionToMove.rowIndex) +") .square:eq("+ (positionToMove.colIndex) +")").css("background-color", backgroundColor).removeClass("Enable");
+    $(".line:eq("+ (positionToMove.rowIndex) +") .square:eq("+ (positionToMove.colIndex) +")").css("background-color", backgroundColor).addClass(cellAccess);
 }
 
 function displayAvailableCellAroundPlayer (listObstacles, listPlayer, positionToMove, hasNoObjectOnTheWay) {
-    var border = cssConstants.borderEnableCell;
-    //var backgroundColor = cssConstants.backgroundColor;
+    //var border = cssConstants.borderEnableCell;
+    var backgroundColor = cssConstants.backgroundColorEnableCell;
     //var bkgOpacity = cssConstants.bkgOpacity;
     var cellAccess = "Enable";
     var isDisable = false;
@@ -121,11 +132,11 @@ function displayAvailableCellAroundPlayer (listObstacles, listPlayer, positionTo
     listObstacles.forEach(function(obstacle){
         isDisable = doesAtLeastOneObjectOnPosition (positionToMove, obstacle, isDisable);
     });
-    displayDisableCell (positionToMove, isDisable, hasNoObjectOnTheWay, border, cellAccess);
+    displayDisableCell (positionToMove, isDisable, hasNoObjectOnTheWay, backgroundColor, cellAccess);
     listPlayer.forEach(function(player){
         isDisable = doesAtLeastOneObjectOnPosition (positionToMove, player, isDisable)
     });
-    displayDisableCell (positionToMove, isDisable, hasNoObjectOnTheWay, border, cellAccess);
+    displayDisableCell (positionToMove, isDisable, hasNoObjectOnTheWay, backgroundColor, cellAccess);
     return isDisable;
 }
 
