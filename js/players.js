@@ -94,19 +94,6 @@ function doesAtLeastOneObjectOnPosition (positionToMove, objectToFind, cellStatu
     return isDisable
 }
 
-/*function displayDisableCell (positionToMove, cellStatus, hasNoObjectOnTheWay, border, cellAccess) {
-    var isDisable = cellStatus;
-    var hasNoObjectOnTheWay = hasNoObjectOnTheWay;
-    var border = border;
-    var cellAccess = cellAccess;
-    if (isDisable == true) {
-        var border = cssConstants.borderDisableCell;
-        var cellAccess = "Disable";
-        var hasNoObjectOnTheWay = false;
-    }
-    $(".line:eq("+ (positionToMove.rowIndex) +") .square:eq("+ (positionToMove.colIndex) +")").css("border", border).removeClass("Enable");
-    $(".line:eq("+ (positionToMove.rowIndex) +") .square:eq("+ (positionToMove.colIndex) +")").css("border", border).addClass(cellAccess);
-}*/
 function displayDisableCell (positionToMove, cellStatus, hasNoObjectOnTheWay, backgroundColor, cellAccess) {
     var isDisable = cellStatus;
     var hasNoObjectOnTheWay = hasNoObjectOnTheWay;
@@ -122,9 +109,7 @@ function displayDisableCell (positionToMove, cellStatus, hasNoObjectOnTheWay, ba
 }
 
 function displayAvailableCellAroundPlayer (listObstacles, listPlayer, positionToMove, hasNoObjectOnTheWay) {
-    //var border = cssConstants.borderEnableCell;
     var backgroundColor = cssConstants.backgroundColorEnableCell;
-    //var bkgOpacity = cssConstants.bkgOpacity;
     var cellAccess = "Enable";
     var isDisable = false;
     var positionToMove = positionToMove;
@@ -142,7 +127,6 @@ function displayAvailableCellAroundPlayer (listObstacles, listPlayer, positionTo
 
  function findPlayer () {
     var currentPlayer = Game.currentPlayer;
-    var directions = ["R","L","T","B"];
     var isPlayerAround = false;
     var target = (currentPlayer == Game.player1) ? Game.player2 : Game.player1;
     isPlayerAround = currentPlayer.position.isPlayerAround(target.position);
