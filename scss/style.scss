@@ -8,8 +8,6 @@ $red : #e22b26;
 
 ///////////////////////////////
 
-
-
 body {
     color: rgba($color: #ffffff, $alpha: 0.8);
 }
@@ -26,7 +24,6 @@ img#logo {
 .line{
     width: 100vw;
     height:4vw;
-    //background: #8bc34a;
     display: flex;
     justify-content: center;
     .square{
@@ -41,7 +38,6 @@ img#logo {
             height: 4vw ;
             z-index: 2;
         }
-        
         .player{
             background-size: cover;
             height: 4vw;
@@ -92,19 +88,17 @@ img#logo {
     }
 }
 
-
-    #redAvatar{
-        margin-right: 0px;
-        margin-left: auto;
-        width: 75px;
-        height: 75px;
-        border-radius: 5px;
-        border: 2px solid rgba($color: #ffffff, $alpha: 0.8);
-        background-image: url(../img/png/redAvatar.png);
-        background-color: $red;
-        background-size: cover;
-    } 
-
+#redAvatar{
+    margin-right: 0px;
+    margin-left: auto;
+    width: 75px;
+    height: 75px;
+    border-radius: 5px;
+    border: 2px solid rgba($color: #ffffff, $alpha: 0.8);
+    background-image: url(../img/png/redAvatar.png);
+    background-color: $red;
+    background-size: cover;
+} 
 
 #healthAndWeaponRedPlayer {
     #redPlayerWeapon{
