@@ -14,18 +14,6 @@ var mapDisplayElements = {
     }
 }
 
-$(function ($) {
-    map.genMap();
-    createCellPositionObject(map.columns, map.rows);
-    mapContainer.init();
-    mapDisplayElements.init();
-    hideFightButtons();
-    
-    initInteraction();
-    //playersRunDice();
-});
-
-
 function initInteraction() {
     GameUI.modalRunDice.on('show.bs.modal', displayButtonInModalRunDice);
     GameUI.buttonRunBlueDice.one('click', buttonRunBlueDiceAction);
@@ -34,3 +22,15 @@ function initInteraction() {
     GameUI.buttonAttack.on('click', attack);
     GameUI.buttonDefence.on('click', defend);
 }
+
+$(function ($) {
+    map.genMap();
+    createCellPositionObject(map.columns, map.rows);
+    mapContainer.init();
+    mapDisplayElements.init();
+    hideFightButtons();
+    initInteraction();
+});
+
+
+

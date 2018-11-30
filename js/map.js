@@ -6,7 +6,6 @@ var map = {
     nbWeapons : 5,
     display : function (mapObjects, container, attribute) {
         mapObjects.forEach(function(mapElement, index) {
-            console.log(attribute);
             var typeObject = attribute;
             var colIndex = "colIndex";
             var rowIndex = "rowIndex";
@@ -17,9 +16,6 @@ var map = {
             var currentCell = $(".line:eq("+ mapElement.position.rowIndex +") .square:eq("+ mapElement.position.colIndex +")");
             currentCell.append(container.clone().css("background-image", "url("+ mapElement.imageUrl +")").attr(relayAttribute));
         })
-        var checkNumberEmpty = $(".square:empty").length;
-        var checkNumberFull = $(".square").contents().length;
-        console.log ("Nb cell vide : " + checkNumberEmpty +"\nNb cell pleine : " + checkNumberFull);
     },
     genMap : function (){
         for (var i = 0; i < this.rows; i++) {
