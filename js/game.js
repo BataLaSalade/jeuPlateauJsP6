@@ -1,9 +1,5 @@
 var Game = {
     clickCount : 0
-    //player1
-    //player2
-    //currentPlayer
-    //target
 }
 
 function whoBegin(bluePlayerScoreDice, redPlayerScoreDice) {
@@ -14,7 +10,6 @@ function whoBegin(bluePlayerScoreDice, redPlayerScoreDice) {
     Game.player1 = (bluePlayerBegin) ? mapContainer.players[blue] : mapContainer.players[red];
     Game.player2 = (bluePlayerBegin) ? mapContainer.players[red] : mapContainer.players[blue];
     GameUI.textModalRunDiceInstructions.text((bluePlayerBegin) ? GameMessages.bluePlayerBegin : GameMessages.redPlayerBegin);
-    console.log((bluePlayerBegin) ? GameMessages.bluePlayerBegin : GameMessages.redPlayerBegin);
     Game.currentPlayer = Game.player1;
     Game.target = Game.player2;
     var message = (bluePlayerBegin) ? (Game.currentPlayer.characterName + GameMessages.yourTurn) : (Game.currentPlayer.characterName + GameMessages.yourTurn);
@@ -32,7 +27,6 @@ function buttonRunBlueDiceAction() {
     bluePlayerScoreDice = getRandomIndex(1, 6);
     GameUI.textScoreBlueDice.text(GameMessages.bluePlayerScoreAdvert + bluePlayerScoreDice);
     Scores.bluePlayerDice = bluePlayerScoreDice;
-    console.log("score dé bleu = "+ bluePlayerScoreDice)
     $(this).hide()
     GameUI.buttonRunRedDice.show();
 }
@@ -40,7 +34,6 @@ function buttonRunBlueDiceAction() {
 function buttonRunRedDiceAction() {
     var bluePlayerScoreDice = Scores.bluePlayerDice;
     var redPlayerScoreDice = getRandomIndex(1, 6);
-    console.log("score dé rouge = "+redPlayerScoreDice)
     if (bluePlayerScoreDice != redPlayerScoreDice) {
         whoBegin(bluePlayerScoreDice, redPlayerScoreDice);
         GameUI.buttonRunRedDice.hide();
@@ -56,8 +49,6 @@ function buttonRunRedDiceAction() {
 function switchCurrentPlayer() {
     Game.currentPlayer = (Game.currentPlayer == Game.player1) ? Game.player2 : Game.player1;
 }
-
-
 
 function switchTarget() {
     Game.target = (Game.currentPlayer == Game.player1) ? Game.player2 : Game.player1;
