@@ -55,9 +55,6 @@ img#logo {
     }
 }
 
-
-
-
 .pvLabel {
     width: 48px;
     height: 48px;
@@ -119,4 +116,8 @@ img#logo {
         background-color: rgba($color: #ffffff, $alpha: 0.5);
         background-size: cover;
     }
+}
+
+.progress {
+    background-color: grey;
 }
