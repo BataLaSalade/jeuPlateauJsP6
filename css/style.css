@@ -10,27 +10,27 @@ img#logo {
 
 .line {
   width: 100vw;
-  height: 5vw;
+  height: 4vw;
   display: flex;
   justify-content: center; }
   .line .square {
     border: 1px solid #85bb46;
-    width: 5vw;
+    width: 4vw;
     height: auto;
     background: #8bc34a;
     display: inline-block;
     z-index: 300; }
     .line .square .obstacle {
       background-size: cover;
-      height: 50px;
+      height: 4vw;
       z-index: 2; }
     .line .square .player {
       background-size: cover;
-      height: 50px;
+      height: 4vw;
       z-index: 500; }
     .line .square .weapon {
       background-size: cover;
-      height: 50px;
+      height: 4vw;
       z-index: 100; }
 
 .pvLabel {
