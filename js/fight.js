@@ -38,7 +38,7 @@ function setProgressBar(targetHealth, currentPlayerHealth) {
             relayAttribute[ariaValuenowAttr] = String(targetHealth);
             relayAttribute[styleAttr] = "width:"+String(targetHealth)+"%";
             var targetProgressbar = (Game.target == mapContainer.players[playerEnum.blue]) ? GameUI.bluePlayerProgressbar : GameUI.redPlayerProgressbar;
-            targetProgressbar.attr(relayAttribute);
+            targetProgressbar.attr(relayAttribute).text(targetHealth + " PV");
             var targetPVLabel = (Game.target == mapContainer.players[playerEnum.blue]) ? GameUI.bluePlayerPVLabel : GameUI.redPlayerPVLabel;
             targetPVLabel.text(targetHealth + " PV");
         case currentPlayerHealth:
@@ -46,7 +46,7 @@ function setProgressBar(targetHealth, currentPlayerHealth) {
             relayAttribute[ariaValuenowAttr] = String(currentPlayerHealth);
             relayAttribute[styleAttr] = "width:"+String(currentPlayerHealth)+"%";
             var currentPlayerProgressbar = (Game.currentPlayer == mapContainer.players[playerEnum.blue]) ? GameUI.bluePlayerProgressbar : GameUI.redPlayerProgressbar;
-            currentPlayerProgressbar.attr(relayAttribute);
+            currentPlayerProgressbar.attr(relayAttribute).text(currentPlayerHealth + " PV");
             var currentPlayerPVLabel = (Game.currentPlayer == mapContainer.players[playerEnum.blue]) ? GameUI.bluePlayerPVLabel : GameUI.redPlayerPVLabel;
             currentPlayerPVLabel.text(currentPlayerHealth + " PV");
         default:
