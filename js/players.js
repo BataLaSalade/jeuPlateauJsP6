@@ -40,23 +40,18 @@ var Player = {
         var currentWeaponId = this.weapon.id;
         switch (currentWeaponId) {
             case weaponIdEnum.woodenSword:
-                console.log(this.weapon);
                 this.imageUrl = playerEnumImage.woodenSword;
                 return this.imageUrl;
             case weaponIdEnum.staff:
-                console.log(this.weapon);
                 this.imageUrl = playerEnumImage.staff;
                 return this.imageUrl;
             case weaponIdEnum.bow:
-                console.log(this.weapon);
                 this.imageUrl = playerEnumImage.bow;
                 return this.imageUrl;
             case weaponIdEnum.sword:
-                console.log(this.weapon);
                 this.imageUrl = playerEnumImage.sword;
                 return this.imageUrl;
             case weaponIdEnum.spear:
-                console.log(this.weapon);
                 this.imageUrl = playerEnumImage.spear;
                 return this.imageUrl;
             default:
@@ -131,8 +126,5 @@ function displayAvailableCellAroundPlayer (listObstacles, listPlayer, positionTo
     var target = (currentPlayer == Game.player1) ? Game.player2 : Game.player1;
     isPlayerAround = currentPlayer.position.isPlayerAround(target.position);
     Game.target = target;
-    if (isPlayerAround) {
-        console.log("Cible trouvé : ", Game.target);
-    }
     return isPlayerAround;
 }
