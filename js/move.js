@@ -38,7 +38,6 @@ function move(e) {
 }
 
 function cannotMove () {
-    //var border = cssConstants.borderDisableCell;
     var backgroundColor = cssConstants.backgroundColorDisableCell
     var cellAccess = "Disable";
     Game.currentPlayer.listOfPositionToMove.forEach(function(position){
