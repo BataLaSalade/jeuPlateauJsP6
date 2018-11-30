@@ -24,15 +24,15 @@ img#logo {
 }
 
 .line{
-    width: 100%;
-    height: $square;
+    width: 100vw;
+    height:5vw;
     //background: #8bc34a;
     display: flex;
     justify-content: center;
     .square{
         border: 1px solid #85bb46;
-        width: $square;
-        height: $square;
+        width: 5vw;
+        height: auto;
         background:#8bc34a;
         display: inline-block;
         z-index: 300;
