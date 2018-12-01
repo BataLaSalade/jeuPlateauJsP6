@@ -54,14 +54,17 @@ function setProgressForPlayer(playerHealth,GameTargetOrCurrentPlayer ) {
 function setProgressColor(player) {
     var progressbar = (player == mapContainer.players[playerEnum.blue]) ? GameUI.bluePlayerProgressbar : GameUI.redPlayerProgressbar;
     var playerHealth = (player.sante)/100;
+    var isStillAlive = true;
     var isMidLife = playerHealth > 0.33 && playerHealth <= 0.66;
     var isLowLife = playerHealth <= 0.33;
-    switch (playerHealth) {
+    switch (isStillAlive) {
         case isMidLife:
-            progressbar.removeClass("bg-success").addClass("bg-warning");
+            progressbar.removeClass("bg-success");
+            progressbar.addClass("bg-warning");
             break;
         case isLowLife:
-            progressbar.removeClass("bg-warning").addClass("bg-danger");
+            progressbar.removeClass("bg-warning");
+            progressbar.addClass("bg-danger");
             break;
         default:
             break;
