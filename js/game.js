@@ -53,3 +53,23 @@ function switchCurrentPlayer() {
 function switchTarget() {
     Game.target = (Game.currentPlayer == Game.player1) ? Game.player2 : Game.player1;
 }
+
+function hightLightCurrentPlayer() {
+    var isCurrentPlayerBlue = true;
+    var isBlue = (Game.currentPlayer == mapContainer.players[playerEnum.blue]);
+    var isRed = (Game.currentPlayer == mapContainer.players[playerEnum.red]);
+    var cellCurrentPlayer = $(".line:eq("+ Game.currentPlayer.position.rowIndex +") .square:eq("+ Game.currentPlayer.position.colIndex +")");
+    var cellTarget = $(".line:eq("+ Game.target.position.rowIndex +") .square:eq("+ Game.target.position.colIndex +")");
+    switch (isCurrentPlayerBlue) {
+        case isBlue:
+        cellCurrentPlayer.css("background-color", cssConstants.bluePlayerTurn);
+        cellTarget.css("background-color", cssConstants.backgroundColorDisableCell);
+            break;
+        case isRed:
+        cellCurrentPlayer.css("background-color", cssConstants.redPlayerTurn);
+        cellTarget.css("background-color", cssConstants.backgroundColorDisableCell);
+            break;
+        default:
+            break;
+    }
+}

@@ -108,5 +108,7 @@ var cssConstants = {
     borderStyle: "solid",
     backgroundColorEnableCell: "#aed581",
     backgroundColorDisableCell: "#8bc34a",
-    bkgOpacity: 0.5
+    bkgOpacity: 0.5,
+    bluePlayerTurn: "#626799",
+    redPlayerTurn: "#db8383"
 }

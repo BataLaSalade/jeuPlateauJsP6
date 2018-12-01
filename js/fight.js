@@ -90,6 +90,7 @@ function attack () {
         GameUI.textCurrentPlayer.text(message);
     } else if (Game.clickCount > 0) {
         switchPlayerAfterFightAction();
+        hightLightCurrentPlayer();
     }
 }
 
@@ -104,6 +105,7 @@ function defend () {
         GameUI.textCurrentPlayer.text(message);
     } else if (Game.clickCount > 0) {
         switchPlayerAfterFightAction();
+        hightLightCurrentPlayer();
     }
 }
 
