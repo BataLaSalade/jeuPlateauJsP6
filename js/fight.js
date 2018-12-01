@@ -29,8 +29,10 @@ function setProgressBar(targetHealth, currentPlayerHealth) {
     switch (playerLifeToSet) {
         case targetHealth:
             setProgressForPlayer(targetHealth, Game.target);
+            setProgressColor(Game.target)
         case currentPlayerHealth:
             setProgressForPlayer(currentPlayerHealth, Game.currentPlayer);
+            setProgressColor(Game.currentPlayer)
         default:
             break;
     } 
@@ -47,6 +49,23 @@ function setProgressForPlayer(playerHealth,GameTargetOrCurrentPlayer ) {
     Progressbar.attr(relayAttribute).text(playerHealth + " PV");
     var playerPVLabel = (GameTargetOrCurrentPlayer == mapContainer.players[playerEnum.blue]) ? GameUI.bluePlayerPVLabel : GameUI.redPlayerPVLabel;
     playerPVLabel.text(playerHealth + " PV");
+}
+
+function setProgressColor(player) {
+    var progressbar = (player == mapContainer.players[playerEnum.blue]) ? GameUI.bluePlayerProgressbar : GameUI.redPlayerProgressbar;
+    var playerHealth = (player.sante)/100;
+    var isMidLife = playerHealth > 0.33 && playerHealth <= 0.66;
+    var isLowLife = playerHealth <= 0.33;
+    switch (playerHealth) {
+        case isMidLife:
+            progressbar.removeClass("bg-success").addClass("bg-warning");
+            break;
+        case isLowLife:
+            progressbar.removeClass("bg-warning").addClass("bg-danger");
+            break;
+        default:
+            break;
+    }
 }
 
 function attack () {
